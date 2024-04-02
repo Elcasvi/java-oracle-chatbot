@@ -1,0 +1,20 @@
+# Local Terraform directories
+**/.terraform/*
+
+# State files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+*.log
+crash.log
+crash.*.log
+
+# Sensitive data (tfvars files)
+*.tfvars
+*.tfvars.json
+
+# Optional: Ignore additional files
+# Add other patterns here to exclude specific files or directories from Git
+# For example, IDE specific configuration files
+.vscode/
