@@ -8,20 +8,11 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <packaging>pom</packaging>
     <groupId>net.sanchezapps</groupId>
-    <artifactId>chatbot</artifactId>
+    <artifactId>api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>chatbot</name>
-    <description>chatbot</description>
-    <modules>
-        <module>microservices/tasks-service</module>
-        <module>microservices/users-service</module>
-        <module>microservices/composite-service</module>
-        <module>api</module>
-        <module>spring-cloud/config-server</module>
-        <module>spring-cloud/eureka-server</module>
-    </modules>
+    <name>api</name>
+    <description>api</description>
     <properties>
         <java.version>17</java.version>
     </properties>
