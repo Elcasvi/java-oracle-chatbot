@@ -8,6 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompositeControllerImpl implements CompositeController {
     @Override
     public void getComposite() {
-
     }
 }
