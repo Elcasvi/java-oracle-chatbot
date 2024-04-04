@@ -5,7 +5,7 @@ import net.sanchezapps.api.core.tasks.Task;
 import java.util.List;
 
 public class User{
-    private int id;
+    private Long id;
     private String name;
     private String email;
     private String password;
@@ -15,7 +15,7 @@ public class User{
     public User() {
     }
 
-    public User(String email, int id, String name, String password, Role role, List<Task> tasks) {
+    public User(String email, Long id, String name, String password, Role role, List<Task> tasks) {
         this.email = email;
         this.id = id;
         this.name = name;
@@ -32,11 +32,11 @@ public class User{
         this.email = email;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

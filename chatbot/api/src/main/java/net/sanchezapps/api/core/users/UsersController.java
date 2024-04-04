@@ -5,14 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface UsersController {
-    @GetMapping
-    List<User> getAllUsers();
-    @GetMapping("/{id}")
-    User getUserById(@PathVariable int id);
-    @PostMapping
-    User createUser(@RequestBody User user);
-    @PutMapping("/{id}")
-    User updateUser(@PathVariable int id, @RequestBody User user);
-    @DeleteMapping("/{id}")
-    void deleteUser(@PathVariable int id);
+    @GetMapping(value = "/users")
+    List<User> getAll();
+
+    @GetMapping(value = "/users/{userId}")
+    User getById(@PathVariable("userId") Long userId); // Consider using Long for user ID
+
+    // Use dedicated endpoint for login
+    @PostMapping(value = "/login")
+    User login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password);
+
+    // Consider separate endpoint for searching by email (if needed)
+    @GetMapping(value = "/users/search/byEmail")
+     User getByEmail(@RequestParam(value = "email") String email);
 }

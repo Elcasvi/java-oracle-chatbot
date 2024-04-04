@@ -1,4 +1,4 @@
-package net.sanchezapps.compositeservice.config;
+package net.sanchezapps.tasksservice.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
