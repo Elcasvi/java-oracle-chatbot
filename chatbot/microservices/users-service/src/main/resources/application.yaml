@@ -15,13 +15,13 @@ api:
 
 spring:
   datasource:
-    driverClassName: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=C:/Java/Spring/micro-services/java-oracle-chatbot/chatbot/ATP_Wallet
-    username: USERS_DB
-    password: kJFa3QYQJqK1nfs
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
+    username: TASKS_DB
+    password: VUeXKEsXEnr8cZW
+
   jpa:
     database: ORACLE
-    database-platform: org.hibernate.dialect.Oracle12cDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
