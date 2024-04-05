@@ -1,4 +1,4 @@
-package net.sanchezapps.tasksservice;
+package net.sanchezapps.tasksservice.services;
 
 import net.sanchezapps.api.core.tasks.Task;
 import net.sanchezapps.api.core.tasks.TaskPriority;
