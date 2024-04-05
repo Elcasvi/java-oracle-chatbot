@@ -8,8 +8,20 @@ springdoc:
   pathsToMatch: /**
 
 api:
-
   common:
     version: 1.0.0
     title: Sample API
     description: Description of the API...
+
+spring:
+  datasource:
+    driverClassName: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=C:/Java/Spring/micro-services/java-oracle-chatbot/chatbot/ATP_Wallet
+    username: USERS_DB
+    password: kJFa3QYQJqK1nfs
+  jpa:
+    database: ORACLE
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
