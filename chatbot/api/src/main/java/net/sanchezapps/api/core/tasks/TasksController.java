@@ -19,10 +19,13 @@ public interface TasksController {
     List<Task> getByPriority(@RequestParam TaskPriority priority);
 
     @GetMapping(value = "/users/{userId}/tasks")
-    List<Task> getAllByUserId(@PathVariable("userId") int userId);
+    List<Task> getAllByUserId(@PathVariable("userId") Long userId);
 
     @GetMapping(value = "/users/{userId}/tasks/filter/byPriority")
-    List<Task> getAllByUserIdAndPriority(@PathVariable("userId") int userId, @RequestParam TaskPriority priority);
+    List<Task> getAllByUserIdAndPriority(@PathVariable("userId") Long userId, @RequestParam TaskPriority priority);
+
+    @GetMapping(value = "/users/{userId}/tasks/filter/byState")
+    List<Task> getAllByUserIdAndState(@PathVariable("userId") Long userId, @RequestParam TaskState state);
 
     @PostMapping(value = "/task")
     void create(@RequestBody Task task);
