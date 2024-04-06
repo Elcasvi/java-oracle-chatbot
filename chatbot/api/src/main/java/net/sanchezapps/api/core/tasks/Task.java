@@ -11,10 +11,10 @@ import java.util.Date;
 @ToString
 public class Task {
     private Long id;
-    private Long userId;
     private String name;
     private String description;
     private Date lastUpdated;
     private TaskPriority priority;
     private TaskState state;
+    private Long userId;
 }

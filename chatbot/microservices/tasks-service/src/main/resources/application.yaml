@@ -8,19 +8,19 @@ springdoc:
   pathsToMatch: /**
 
 api:
-
   common:
     version: 1.0.0
     title: Sample API
     description: Description of the API...
 
 spring:
+  application:
+    name: tasks-service
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
     username: TASKS_DB
     password: VUeXKEsXEnr8cZW
-
   jpa:
     database: ORACLE
     hibernate:

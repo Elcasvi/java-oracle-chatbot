@@ -14,14 +14,16 @@ api:
     description: Description of the API...
 
 spring:
+  application:
+    name: users-service
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
-    username: TASKS_DB
-    password: VUeXKEsXEnr8cZW
-
+    username: USERS_DB
+    password: kJFa3QYQJqK1nfs
   jpa:
     database: ORACLE
     hibernate:
       ddl-auto: update
     show-sql: true
+
