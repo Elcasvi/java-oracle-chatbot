@@ -16,12 +16,12 @@ import java.util.Optional;
 public class TasksControllerImpl implements TasksController {
     private final TasksService service;
     private final TaskMapper mapper;
+
     @Autowired
-    public TasksControllerImpl(TasksService service, TaskMapper mapper) {
+    public TasksControllerImpl(TasksService service,TaskMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }
-
 
     @Override
     public List<Task> getAll() {
@@ -35,16 +35,6 @@ public class TasksControllerImpl implements TasksController {
             return mapper.entityToApi(taskEntity.get());
         }
         return null;
-    }
-
-    @Override
-    public List<Task> getByState(TaskState state) {
-        return List.of();
-    }
-
-    @Override
-    public List<Task> getByPriority(TaskPriority priority) {
-        return List.of();
     }
 
     @Override

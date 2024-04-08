@@ -3,7 +3,7 @@ package net.sanchezapps.api.core.users;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RequestMapping(value = "/api")
 public interface UsersController {
     @GetMapping(value = "/users")
     List<User> getAll();

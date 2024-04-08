@@ -16,7 +16,6 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "TASKS", indexes = {
-        @Index(name = "idx_taskentity_user_id", columnList = "USER_ID"),
         @Index(name = "idx_taskentity_priority_state", columnList = "priority, state")
 })
 public class TaskEntity {
