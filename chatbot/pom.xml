@@ -21,7 +21,7 @@
 
     <modules>
         <module>tasks-service</module>
-        <module>microservices/users-service</module>
+        <module>users-service</module>
         <module>microservices/composite-service</module>
         <module>api</module>
         <module>spring-cloud/config-server</module>

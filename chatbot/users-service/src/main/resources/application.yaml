@@ -27,3 +27,10 @@ spring:
       ddl-auto: update
     show-sql: true
 
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+server:
+  port: 8080
