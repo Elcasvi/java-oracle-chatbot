@@ -1,5 +1,6 @@
 package net.sanchezapps.usersservice.services;
 
+
 import net.sanchezapps.usersservice.persistence.UserEntity;
 import net.sanchezapps.usersservice.persistence.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,9 @@ public class UsersService {
     public Optional<UserEntity>getByEmail(String email)
     {
         return repository.findByEmail(email);
+    }
+
+    public UserEntity register(UserEntity user) {
+        return repository.save(user);
     }
 }

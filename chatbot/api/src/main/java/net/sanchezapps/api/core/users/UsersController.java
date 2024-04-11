@@ -1,21 +1,26 @@
 package net.sanchezapps.api.core.users;
 
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 @RequestMapping(value = "/api")
 public interface UsersController {
     @GetMapping(value = "/users")
-    List<User> getAll();
+    Flux<User> getAll();
 
     @GetMapping(value = "/users/{userId}")
-    User getById(@PathVariable("userId") Long userId); // Consider using Long for user ID
+    Mono<User> getById(@PathVariable("userId") Long userId);
 
     // Use dedicated endpoint for login
     @PostMapping(value = "/login")
-    User login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password);
+    Mono<User> login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password);
+
+    @PostMapping(value = "/users")
+    Mono<User> create(@RequestBody User user);
 
     // Consider separate endpoint for searching by email (if needed)
     @GetMapping(value = "/users/search/byEmail")
-     User getByEmail(@RequestParam(value = "email") String email);
+    Mono<User> getByEmail(@RequestParam(value = "email") String email);
 }
