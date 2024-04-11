@@ -1,3 +1,6 @@
+server:
+  port: 7000
+
 springdoc:
   swagger-ui.path: /openapi/swagger-ui.html
   api-docs.path: /openapi/v3/api-docs
@@ -23,4 +26,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+server:
+  port: 8080
