@@ -1,38 +1,116 @@
 package net.sanchezapps.usersservice.services;
 
 
+import net.sanchezapps.api.core.tasks.Task;
+import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.UserEntity;
+import net.sanchezapps.usersservice.persistence.UserMapper;
 import net.sanchezapps.usersservice.persistence.UsersRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
 
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.logging.Level.FINE;
+
+
 @Service
 public class UsersService {
+    private final String TASKS_SERVICE_URL="http://tasks-service";
+
+    private static final Logger LOG = LoggerFactory.getLogger(UsersService.class);
     private final UsersRepository repository;
+    private final WebClient webClient;
+    private final UserMapper mapper;
+    private final Scheduler jdbcScheduler;
     @Autowired
-    public UsersService(UsersRepository repository) {
+    public UsersService(UsersRepository repository, WebClient.Builder webClientBuilder, UserMapper mapper, @Qualifier("jdbcScheduler") Scheduler jdbcScheduler) {
         this.repository = repository;
+        this.webClient=webClientBuilder.build();
+        this.mapper = mapper;
+        this.jdbcScheduler = jdbcScheduler;
     }
-    public List<UserEntity>getAll(){
-        return repository.findAll();
+    public Flux<User>getAll(){
+        return Mono.fromCallable(()->{
+            List<UserEntity>entityList=repository.findAll();
+            List<User>userList=mapper.entityListToApiList(entityList);
+            //TODO: Get all tasks of a user
+            userList.forEach(userEntity -> {
+                String url=TASKS_SERVICE_URL+"/users/"+userEntity.getId()+"/tasks";
+                List<Task> taskList = webClient.get()
+                        .uri(url)
+                        .retrieve()
+                        .bodyToFlux(Task.class)
+                        .log(LOG.getName(), FINE)
+                        .onErrorResume(error -> Flux.empty())
+                        .collectList()
+                        .block();
+                userEntity.setTasks(taskList);
+            });
+            return userList;
+        }).flatMapMany(Flux::fromIterable).subscribeOn(jdbcScheduler);
     }
-    public Optional<UserEntity> getById(Long userId)
+    public Mono<User> getById(Long userId)
     {
-        return repository.findById(userId);
+        return Mono.fromCallable(()->{
+            Optional<UserEntity> userEntity=repository.findById(userId);
+            return internalOptionalGetUser(userEntity);
+        }).subscribeOn(jdbcScheduler);
     }
-    public Optional<UserEntity>getByEmailAndPassword(String email, String password)
+    public Mono<User>getByEmailAndPassword(String email, String password)
     {
-        return repository.findByEmailAndPassword(email,password);
-    }
-    public Optional<UserEntity>getByEmail(String email)
-    {
-        return repository.findByEmail(email);
+        return Mono.fromCallable(()->{
+            Optional<UserEntity> userEntity=repository.findByEmailAndPassword(email,password);
+            return internalOptionalGetUser(userEntity);
+        }).subscribeOn(jdbcScheduler);
     }
 
-    public UserEntity register(UserEntity user) {
-        return repository.save(user);
+    public Mono<User> getByEmail(String email)
+    {
+        return Mono.fromCallable(()->{
+            Optional<UserEntity> userEntity=repository.findByEmail(email);
+            return internalOptionalGetUser(userEntity);
+        }).subscribeOn(jdbcScheduler);
+    }
+
+    public Mono<User> register(User user) {
+        return Mono.fromCallable(()->{
+            UserEntity userEntity=repository.save(mapper.apiToEntity(user));
+            User userApi= mapper.entityToApi( userEntity);
+            String url=TASKS_SERVICE_URL+"/users/"+userApi.getId()+"/tasks";
+            return populateUserTasks(url, userApi);
+
+        }).subscribeOn(jdbcScheduler);
+    }
+
+
+    private User internalOptionalGetUser(Optional<UserEntity> userEntity) {
+        if(userEntity.isPresent()) {
+            User userApi= mapper.entityToApi( userEntity.get());
+            String url=TASKS_SERVICE_URL+"/users/"+userApi.getId()+"/tasks";
+            return populateUserTasks(url, userApi);
+        }
+        return null;
+    }
+
+    private User populateUserTasks(String url, User userApi) {
+        List<Task> taskList = webClient.get()
+                .uri(url)
+                .retrieve()
+                .bodyToFlux(Task.class)
+                .log(LOG.getName(), FINE)
+                .onErrorResume(error -> Flux.empty())
+                .collectList()
+                .block();
+        userApi.setTasks(taskList);
+        return userApi;
     }
 }
