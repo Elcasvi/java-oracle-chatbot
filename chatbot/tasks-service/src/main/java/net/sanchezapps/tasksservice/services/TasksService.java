@@ -31,6 +31,10 @@ public class TasksService {
         }
         return Optional.empty();
     }
+    public List<TaskEntity>getAll()
+    {
+        return repository.findAll();
+    }
     public List<TaskEntity> getAllByUserId(Long userId) {
         String url = USERS_SERVICE_URL + "/users/" + userId;
         return repository.findAllByUserId(userId);
@@ -42,14 +46,15 @@ public class TasksService {
         return repository.findAllByUserIdAndPriority(userId,priority);
     }
 
-    public void create(TaskEntity task) {
-        repository.save(task);
+    public TaskEntity register(TaskEntity task) {
+        return repository.save(task);
     }
 
-    public void update(Long taskId, TaskEntity task) {
+    public TaskEntity update(Long taskId, TaskEntity task) {
         if (exists(taskId)) {
-            repository.save(task);
+            return repository.save(task);
         }
+        return null;
     }
 
     public void delete(Long taskId) {
