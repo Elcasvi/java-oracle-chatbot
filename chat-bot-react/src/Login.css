@@ -1,0 +1,40 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-form {
+    display: grid;
+    grid-template-columns: auto; /* Una columna */
+    gap: 10px; /* Espacio entre elementos */
+  }
+  
+  .form-group {
+    display: contents; /* Para que los elementos se comporten como si no hubiera un contenedor */
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-size: 20px; /* Cambia el tamaño de fuente aquí */
+  }
+  
+  input {
+    font-family: Arial, sans-serif; /* Cambia el tipo de letra de los inputs */
+    font-size: 14px; /* Cambia el tamaño de fuente de los inputs */
+    border-radius: 5px; /* Redondea los bordes del input */
+    border: 1px solid #ccc; /* Añade un borde al input */
+    padding: 8px; /* Añade espacio interno al input */
+  }
+  
+  button {
+    font-family: Arial, sans-serif; /* Cambia el tipo de letra del botón */
+    font-size: 16px; /* Cambia el tamaño de fuente del botón */
+    border-radius: 5px; /* Redondea los bordes del botón */
+    border: none; /* Quita el borde del botón */
+    background-color: #007bff; /* Cambia el color de fondo del botón */
+    color: #fff; /* Cambia el color del texto del botón */
+    padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  }
+  
