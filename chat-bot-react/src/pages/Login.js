@@ -1,9 +1,15 @@
 import React from 'react';
 import '../Login.css';
-
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  return (
+    const navigate = useNavigate();
+
+    function sendLoginRequest(event) {
+        navigate("/homePage");
+    }
+
+    return (
     <div className="login-container">
       <h2>Login</h2>
       <form className="login-form">
@@ -15,7 +21,7 @@ function Login() {
           <label htmlFor="password">Contraseña</label>
           <input type="password" id="password" name="password" />
         </div>
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit" onClick={(event)=>sendLoginRequest(event)}>Iniciar Sesión</button>
       </form>
     </div>
   );
