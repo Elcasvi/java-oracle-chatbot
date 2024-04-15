@@ -4,8 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-@RequestMapping(value = "/api")
+
 public interface UsersController {
     @GetMapping(value = "/users")
     Flux<User> getAll();
@@ -13,7 +12,9 @@ public interface UsersController {
     @GetMapping(value = "/users/{userId}")
     Mono<User> getById(@PathVariable("userId") Long userId);
 
-    // Use dedicated endpoint for login
+    @GetMapping(value = "/users/exists/{userId}")
+    Mono<Boolean> existsById(@PathVariable("userId") Long userId);
+
     @PostMapping(value = "/login")
     Mono<User> login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password);
 

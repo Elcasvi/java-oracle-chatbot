@@ -27,6 +27,11 @@ public class UsersControllerImpl implements UsersController {
     }
 
     @Override
+    public Mono<Boolean> existsById(Long userId) {
+        return service.existsById(userId);
+    }
+
+    @Override
     public Mono<User> login(String email, String password) {
         return service.getByEmailAndPassword(email,password);
     }
