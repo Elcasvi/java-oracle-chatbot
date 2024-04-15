@@ -1,6 +1,5 @@
 package net.sanchezapps.usersservice.services;
 
-
 import net.sanchezapps.api.core.tasks.Task;
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.UserEntity;
@@ -42,9 +41,8 @@ public class UsersService {
         return Mono.fromCallable(()->{
             List<UserEntity>entityList=repository.findAll();
             List<User>userList=mapper.entityListToApiList(entityList);
-            //TODO: Get all tasks of a user
-            userList.forEach(userEntity -> {
-                String url=TASKS_SERVICE_URL+"/users/"+userEntity.getId()+"/tasks";
+            userList.forEach(user -> {
+                String url=TASKS_SERVICE_URL+"/users/"+user.getId()+"/tasks";
                 List<Task> taskList = webClient.get()
                         .uri(url)
                         .retrieve()
@@ -53,7 +51,7 @@ public class UsersService {
                         .onErrorResume(error -> Flux.empty())
                         .collectList()
                         .block();
-                userEntity.setTasks(taskList);
+                user.setTasks(taskList);
             });
             return userList;
         }).flatMapMany(Flux::fromIterable).subscribeOn(jdbcScheduler);
@@ -64,6 +62,9 @@ public class UsersService {
             Optional<UserEntity> userEntity=repository.findById(userId);
             return internalOptionalGetUser(userEntity);
         }).subscribeOn(jdbcScheduler);
+    }
+    public Mono<Boolean> existsById(Long userId) {
+        return Mono.fromCallable(()-> repository.findById(userId).isPresent()).subscribeOn(jdbcScheduler);
     }
     public Mono<User>getByEmailAndPassword(String email, String password)
     {
@@ -87,7 +88,6 @@ public class UsersService {
             User userApi= mapper.entityToApi( userEntity);
             String url=TASKS_SERVICE_URL+"/users/"+userApi.getId()+"/tasks";
             return populateUserTasks(url, userApi);
-
         }).subscribeOn(jdbcScheduler);
     }
 
@@ -98,7 +98,7 @@ public class UsersService {
             String url=TASKS_SERVICE_URL+"/users/"+userApi.getId()+"/tasks";
             return populateUserTasks(url, userApi);
         }
-        return null;
+        throw new RuntimeException("User not found");
     }
 
     private User populateUserTasks(String url, User userApi) {
@@ -113,4 +113,6 @@ public class UsersService {
         userApi.setTasks(taskList);
         return userApi;
     }
+
+
 }
