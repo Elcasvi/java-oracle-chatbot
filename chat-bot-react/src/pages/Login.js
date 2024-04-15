@@ -1,5 +1,6 @@
 import React from 'react';
-import './Login.css'; // Asegúrate de tener un archivo Login.css con tus estilos
+import '../Login.css';
+import HomePage from "./HomePage";
 
 function Login() {
   return (
@@ -16,6 +17,7 @@ function Login() {
         </div>
         <button type="submit">Iniciar Sesión</button>
       </form>
+        <HomePage/>
     </div>
   );
 }
