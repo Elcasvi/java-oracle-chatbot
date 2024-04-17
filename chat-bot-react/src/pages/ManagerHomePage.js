@@ -1,8 +1,20 @@
+import DevCardManagerView from "../components/devCardManagerView";
+import "../styles/devCardManagerViewStyle.css"
 export default function ManagerHomePage()
 {
     return(
-        <div>
+        <>
             <h1>Manager Home Page</h1>
-        </div>
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+            <DevCardManagerView />
+        </>
     );
 };
