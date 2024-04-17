@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tasks-service
+  template:
+    metadata:
+      labels:
+        app: tasks-service
+    spec:
+      containers:
+        - name: chatbot-task
+          image: chatbot-task:latest
+          ports:
+            - containerPort: 80
