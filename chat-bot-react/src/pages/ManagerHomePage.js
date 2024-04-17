@@ -1,20 +1,15 @@
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css"
-export default function ManagerHomePage()
-{
-    return(
+import React from 'react';
+import { UserModel } from "../util/UserModel"; // Importa UserModel desde donde sea que esté ubicado
+
+export default function ManagerHomePage() {
+    return (
         <>
             <h1>Manager Home Page</h1>
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
-            <DevCardManagerView />
+            {UserModel.map(user => (
+                <DevCardManagerView key={user.id} user={user} />
+            ))}
         </>
     );
 };
