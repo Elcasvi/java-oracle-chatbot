@@ -5,6 +5,7 @@ import net.sanchezapps.api.core.tasks.TaskPriority;
 import net.sanchezapps.api.core.tasks.TaskState;
 import net.sanchezapps.api.core.tasks.TasksController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 public class TasksControllerImpl implements TasksController {
 
     private final TasksService service;
