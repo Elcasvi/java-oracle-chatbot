@@ -13,7 +13,7 @@ spec:
         app: tasks-service
     spec:
       containers:
-        - name: chatbot-task
-          image: chatbot-task:latest
+        - name: tasks-service
+          image: spring/tasks-service:latest
           ports:
             - containerPort: 80

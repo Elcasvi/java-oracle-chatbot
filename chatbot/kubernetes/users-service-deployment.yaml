@@ -13,7 +13,7 @@ spec:
         app: users-service
     spec:
       containers:
-        - name: chatbot-user
-          image: chatbot-user:latest
+        - name: users-service
+          image: spring/users-service
           ports:
             - containerPort: 80
