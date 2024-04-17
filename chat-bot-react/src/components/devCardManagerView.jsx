@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TaskModal from './taskModal';
 
 function DevCardManagerView({ user }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <article className='dev-card-manager'>
             <header className="dev-card-manger-header">
@@ -14,10 +25,13 @@ function DevCardManagerView({ user }) {
             </header>
 
             <div className='dev-card-manager-button'>
-                <button className="dev-card-manager-showMore">Ver Más</button>
+                <button className="dev-card-manager-showMore" onClick={openModal}>Ver Más</button>
             </div>
+
+            {isModalOpen && <TaskModal tasks={user.tasks} onClose={closeModal} />}
         </article>
     );
 }
 
 export default DevCardManagerView;
+

@@ -116,5 +116,50 @@ export const UserModel = [
             }
         ]
     },
+    {
+        id: 2,
+        name: "Emilio Tejeda",
+        email: "Emilio.Tejeda@example.com",
+        password: "another_secure_password",
+        role: "Aguador",
+        tasks: [
+            {
+                id: 3,
+                name: "Design homepage",
+                description: "Create a new design for the homepage",
+                lastUpdated: "2024-04-20T08:06:00.000Z",
+                priority: "HIGH",
+                state: "IN PROGRESS",
+                userId: 2
+            },
+            {
+                id: 4,
+                name: "Design logo",
+                description: "Create a new logo for the company",
+                lastUpdated: "2024-04-25T08:06:00.000Z",
+                priority: "MEDIUM",
+                state: "TODO",
+                userId: 2
+            },
+            {
+                id: 4,
+                name: "Design logo",
+                description: "Create a new logo for the company",
+                lastUpdated: "2024-04-25T08:06:00.000Z",
+                priority: "MEDIUM",
+                state: "TODO",
+                userId: 2
+            },
+            {
+                id: 4,
+                name: "Design logo",
+                description: "Create a new logo for the company",
+                lastUpdated: "2024-04-25T08:06:00.000Z",
+                priority: "MEDIUM",
+                state: "TODO",
+                userId: 2
+            }
+        ]
+    },
     // Agrega más usuarios aquí si lo deseas
 ];
