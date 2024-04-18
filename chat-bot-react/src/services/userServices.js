@@ -1,10 +1,14 @@
+import axios from "axios";
+
 export class userServices {
-    baseUrl = "http://localhost:8001/api";
+    baseUrl = "http://localhost:7001";
   
     getAll() {
-      return fetch(this.baseUrl + "/users")
-        .then(response => response.json())
-        .then(data => data.data);
+        return axios.get(this.baseUrl+"/users").then(res=>{
+            return res.data
+        })
+
     }
+
   }
   
