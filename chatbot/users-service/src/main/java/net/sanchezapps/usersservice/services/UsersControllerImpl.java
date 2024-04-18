@@ -10,7 +10,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@CrossOrigin("http://localhost:3000/")
 public class UsersControllerImpl implements UsersController {
     private final UsersService service;
     @Autowired
