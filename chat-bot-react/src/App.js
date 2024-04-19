@@ -4,24 +4,25 @@ import {BrowserRouter as Router,Routes,Route}from "react-router-dom"
 import HomePage from "./pages/HomePage";
 import EditTask from "./pages/EditTask";
 import PruebaUser from "./pages/PruebaUser";
+import ManagerHomePage from './pages/ManagerHomePage';
 
 function App() {
   return (
     
       <Router>
           <Routes>
-              <Route path="/" element={<Login/>}/>
+              {/*<Route path="/" element={<Login/>}/>*/}
               <Route path="/homePage" element={<ManagerHomePage/>}/>
               <Route path="/task/:id" element={<EditTask/>}/>
-              {/* <Route path="/homePage" element={<HomePage/>}/> */}
+              {/* <Route path="/homePage" element={<HomePage/>}/>*/}
           </Routes>
       </Router>
-
-      /*
+    
+   /*
       <>
         <PruebaUser />
       </>
-       */
+      */
   );
 }
 

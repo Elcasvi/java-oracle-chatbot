@@ -11,6 +11,7 @@ export default class PruebaUser extends Component{
   componentDidMount(){
     this.userServices.getAll().then(data => {
       console.log(data)
+      //data.data
     })
   }
 
