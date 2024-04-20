@@ -9,11 +9,12 @@ export default class userServices {
         })
     };
 
-    login(){
-        return axios.post(this.baseUrl+"/login").then(res=>{
-            return res.data
-        })
-    };
+    login(email, password) {
+        return axios.post(this.baseUrl + '/login', {
+          email: email,
+          password: password
+        }).then(res => res.data);
+    }
 
     getById(userId){
         return axios.get(this.baseUrl+"/users/${userId}").then(res=>{
