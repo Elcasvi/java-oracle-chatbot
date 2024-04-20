@@ -14,15 +14,16 @@ function App() {
               {/*<Route path="/" element={<Login/>}/>*/}
               <Route path="/homePage" element={<ManagerHomePage/>}/>
               <Route path="/task/:id" element={<EditTask/>}/>
-              {/* <Route path="/homePage" element={<HomePage/>}/>*/}
+              {/*<Route path="/homePage" element={<HomePage/>}/>*/}
           </Routes>
       </Router>
     
-   /*
+   
+  /*
       <>
         <PruebaUser />
       </>
-      */
+  */
   );
 }
 

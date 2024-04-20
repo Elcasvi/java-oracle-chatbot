@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export class userServices {
+export default class userServices {
     baseUrl = "http://localhost:8001";
   
     getAll() {
