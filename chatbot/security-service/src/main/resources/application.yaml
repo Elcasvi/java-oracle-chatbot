@@ -1,0 +1,9 @@
+server:
+  port: 7003
+
+---
+spring:
+  profiles:
+    active: docker
+server:
+  port: 80

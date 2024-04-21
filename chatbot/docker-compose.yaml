@@ -14,3 +14,10 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8001:80"
+  security:
+    build: security-service
+    mem_limit: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8002:80"

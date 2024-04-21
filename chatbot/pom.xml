@@ -22,6 +22,7 @@
     <modules>
         <module>tasks-service</module>
         <module>users-service</module>
+        <module>security-service</module>
         <module>api</module>
         <module>spring-cloud/config-server</module>
         <module>spring-cloud/gateway</module>
