@@ -2,6 +2,7 @@ version: '2.1'
 services:
   task:
     build: tasks-service
+    image: spring/tasks-service
     mem_limit: 512m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
@@ -9,6 +10,7 @@ services:
       - "8000:80"
   user:
     build: users-service
+    image: spring/users-service
     mem_limit: 512m
     environment:
       - SPRING_PROFILES_ACTIVE=docker

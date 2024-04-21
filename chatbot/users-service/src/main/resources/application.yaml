@@ -29,10 +29,12 @@ spring:
     show-sql: true
 
 ---
-spring:
-  config:
-    activate:
-      on-profile: docker
 server:
   port: 80
 
+spring:
+  application:
+    name: users-service
+  config:
+    activate:
+      on-profile: docker

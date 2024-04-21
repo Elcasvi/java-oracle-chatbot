@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: RELEASE-NAME-dev-env
+spec:
+  rules:
+    - host: "minikube.me"
+      http:
+        paths:
+          - path: /tasks  # Path prefix for tasks-service
+            pathType: Prefix
+            backend:
+              service:
+                name: tasks-service  # Matches Kubernetes service
+                port:
+                  number: 80
+          - path: /users  # Path prefix for users-service
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service  # Matches Kubernetes service
+                port:
+                  number: 80
+
