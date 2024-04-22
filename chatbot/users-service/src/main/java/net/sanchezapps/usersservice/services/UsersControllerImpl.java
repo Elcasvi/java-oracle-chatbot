@@ -47,4 +47,9 @@ public class UsersControllerImpl implements UsersController {
     public Mono<User> getByEmail(String email) {
        return service.getByEmail(email);
     }
+
+
+    //Endpoint DELETE NOSTROS
+
+    //Endpoint DELETE ENTREGA
 }

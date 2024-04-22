@@ -23,4 +23,8 @@ public interface UsersController {
     // Consider separate endpoint for searching by email (if needed)
     @GetMapping(value = "/users/search/byEmail")
     Mono<User> getByEmail(@RequestParam(value = "email") String email);
+
+    //Endpoint DELETE NOSTROS
+
+    //Endpoint DELETE ENTREGA
 }

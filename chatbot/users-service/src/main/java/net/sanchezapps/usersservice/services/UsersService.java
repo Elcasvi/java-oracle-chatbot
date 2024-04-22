@@ -113,5 +113,8 @@ public class UsersService {
         return userApi;
     }
 
+    //Endpoint DELETE NOSTROS
+    
+    //Endpoint DELETE ENTREGA
 
 }
