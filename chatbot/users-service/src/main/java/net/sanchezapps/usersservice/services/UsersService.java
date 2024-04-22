@@ -20,7 +20,6 @@ import java.util.Optional;
 
 import static java.util.logging.Level.FINE;
 
-
 @Service
 public class UsersService {
     private final String TASKS_SERVICE_URL="http://tasks-service";
@@ -114,5 +113,8 @@ public class UsersService {
         return userApi;
     }
 
+    //Endpoint DELETE NOSTROS
+    
+    //Endpoint DELETE ENTREGA
 
 }

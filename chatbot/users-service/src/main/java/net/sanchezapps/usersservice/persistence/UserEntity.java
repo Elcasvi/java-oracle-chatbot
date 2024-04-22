@@ -1,10 +1,7 @@
 package net.sanchezapps.usersservice.persistence;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import net.sanchezapps.api.core.users.Role;
 
 @NoArgsConstructor
@@ -12,6 +9,7 @@ import net.sanchezapps.api.core.users.Role;
 @Setter
 @Getter
 @Entity
+@ToString
 @Table(name = "USERS")
 public class UserEntity {
     @Id
