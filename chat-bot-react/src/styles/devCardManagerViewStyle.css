@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center; /* Centrar el componente horizontalmente */
-    margin-top: 50px; /* Espacio superior */
+    margin-top: 15px; /* Espacio superior */
     color: #fff;
     font-size: .8rem;
 }
@@ -86,3 +86,45 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.icon-filter-container {
+    text-align: center;
+    left: 58.5%;
+    max-width: fit-content;
+}
+
+/* En tu archivo CSS */
+.icon-filter-container {
+    position: relative; /* Cambia a posición relativa */
+    cursor: pointer;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: calc(10%+10px); /* Aparece debajo del icono */
+    left: 65%; /* Centrado horizontal */
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 120px; /* Establece un ancho mínimo */
+}
+
+.filter-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-dropdown li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.filter-dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
