@@ -30,12 +30,8 @@ spring:
 
 
 ---
+spring:
+  profiles:
+    active: docker
 server:
   port: 80
-
-spring:
-  application:
-    name: tasks-service
-  config:
-    activate:
-      on-profile: docker

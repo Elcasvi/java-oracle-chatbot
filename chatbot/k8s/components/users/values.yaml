@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: chatbot-user
+  repository: users-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -40,12 +40,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
-
-environment:
-  - name: SPRING_PROFILES_ACTIVE
-    value: docker
 
 ingress:
   enabled: false

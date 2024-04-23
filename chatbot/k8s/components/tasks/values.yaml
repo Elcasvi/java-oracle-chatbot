@@ -5,14 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: chatbot-task
+  repository: tasks-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
-
-env:
-  normal:
-    SPRING_PROFILES_ACTIVE: docker
 
 imagePullSecrets: []
 nameOverride: ""
@@ -44,7 +40,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 ingress:
