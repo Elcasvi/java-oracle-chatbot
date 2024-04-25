@@ -23,6 +23,7 @@ import static java.util.logging.Level.FINE;
 @Service
 public class UsersService {
     private final String TASKS_SERVICE_URL="http://tasks-service";
+    private final String SECURITY_SERVICE_URL="http://security-service";
 
     private static final Logger LOG = LoggerFactory.getLogger(UsersService.class);
     private final UsersRepository repository;
@@ -68,7 +69,8 @@ public class UsersService {
     public Mono<User>getByEmailAndPassword(String email, String password)
     {
         return Mono.fromCallable(()->{
-            Optional<UserEntity> userEntity=repository.findByEmailAndPassword(email,password);
+            String hashedPassword=hashString(password);
+            Optional<UserEntity> userEntity=repository.findByEmailAndPassword(email,hashedPassword);
             return internalOptionalGetUser(userEntity);
         }).subscribeOn(jdbcScheduler);
     }
@@ -83,6 +85,8 @@ public class UsersService {
 
     public Mono<User> register(User user) {
         return Mono.fromCallable(()->{
+            String hashedPassword=hashString(user.getPassword());
+            user.setPassword(hashedPassword);
             UserEntity userEntity=repository.save(mapper.apiToEntity(user));
             User userApi= mapper.entityToApi( userEntity);
             String url=TASKS_SERVICE_URL+"/users/"+userApi.getId()+"/tasks";
@@ -111,6 +115,16 @@ public class UsersService {
                 .block();
         userApi.setTasks(taskList);
         return userApi;
+    }
+    private String hashString(String stringToHash)
+    {
+        String securityUrl=SECURITY_SERVICE_URL+"/hashString?stringToHash="+stringToHash;
+        return webClient.post()
+                .uri(securityUrl)
+                .retrieve()
+                .bodyToMono(String.class).log(LOG.getName(), FINE)
+                .onErrorResume(error -> Mono.empty())
+                .block();
     }
 
     //Endpoint DELETE NOSTROS

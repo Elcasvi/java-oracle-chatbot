@@ -1,6 +1,22 @@
 server:
   port: 7003
 
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: net.sanchezapps.securityservice
+  pathsToMatch: /**
+
+api:
+  common:
+    version: 1.0.0
+    title: Sample API
+    description: Description of the API...
+
+spring:
+  application:
+    name: security-service
+
 ---
 spring:
   profiles:
