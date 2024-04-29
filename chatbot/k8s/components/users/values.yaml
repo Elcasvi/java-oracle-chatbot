@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: users-service
+  repository: chatbotaz.azurecr.io/users-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -40,7 +40,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:
