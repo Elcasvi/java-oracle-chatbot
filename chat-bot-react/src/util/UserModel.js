@@ -143,7 +143,7 @@ export const UserModel = [
             },
             {
                 id: 4,
-                name: "Design logo",
+                name: "No deberia aparecer",
                 description: "Create a new logo for the company",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
                 priority: "MEDIUM",

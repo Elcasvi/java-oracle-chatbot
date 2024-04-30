@@ -16,6 +16,7 @@ function DevCardManagerView({ user }) {
 
             <div className='dev-card-manager-button'>
                 <Link to={`/tasks/${user.id}`} className="dev-card-manager-showMore">Ver Más</Link>
+                {/* <button className="dev-card-manager-showMore">Ver Más</button> */}
             </div>
         </article>
     );

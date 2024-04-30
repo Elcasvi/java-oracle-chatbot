@@ -3,6 +3,7 @@ import "../styles/devCardManagerViewStyle.css";
 import React, { useState } from 'react';
 import { UserModel } from "../util/UserModel";
 import FilterDropdown from "../components/filterDropdown";
+import { Link } from "react-router-dom";
 
 export default function ManagerHomePage() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -44,8 +45,11 @@ export default function ManagerHomePage() {
             )}
         </div>
             {UserModel.map(user => (
-                <DevCardManagerView key={user.id} user={user} />
+                <Link key={user.id} to={`/manager-view-task/${user.id}`}>
+                    <DevCardManagerView user={user} />
+                </Link>
             ))}
+
         </>
     );
 };
