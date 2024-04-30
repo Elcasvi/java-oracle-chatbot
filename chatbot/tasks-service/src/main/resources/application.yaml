@@ -21,7 +21,7 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
     username: TASKS_DB
-    password: VUeXKEsXEnr8cZW
+    password: 0zjPF83YwFx8Ge7
   jpa:
     database: ORACLE
     hibernate:
