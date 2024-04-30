@@ -20,7 +20,7 @@ public class SecurityService {
         return Mono.fromCallable(()-> {
             String hash1=DigestUtils.sha256Hex(string1);
             String hash2=DigestUtils.sha256Hex(string2);
-            return string1.equals(string2);
+            return hash1.equals(hash2);
         });
     }
 }

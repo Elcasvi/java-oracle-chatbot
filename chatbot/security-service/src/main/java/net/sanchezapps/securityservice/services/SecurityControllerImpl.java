@@ -14,6 +14,7 @@ public class SecurityControllerImpl implements SecurityController {
 
     @Override
     public Mono<String> hashString(String stringToHash) {
+        System.out.println("Inside hashString");
         return service.hashString(stringToHash);
     }
 

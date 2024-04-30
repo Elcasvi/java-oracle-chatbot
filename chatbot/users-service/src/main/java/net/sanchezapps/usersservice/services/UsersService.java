@@ -24,6 +24,7 @@ import static java.util.logging.Level.FINE;
 public class UsersService {
     private final String TASKS_SERVICE_URL="http://tasks-service";
     private final String SECURITY_SERVICE_URL="http://security-service";
+    //private final String SECURITY_SERVICE_URL="http://localhost:8002";
 
     private static final Logger LOG = LoggerFactory.getLogger(UsersService.class);
     private final UsersRepository repository;
@@ -123,7 +124,9 @@ public class UsersService {
                 .uri(securityUrl)
                 .retrieve()
                 .bodyToMono(String.class).log(LOG.getName(), FINE)
-                .onErrorResume(error -> Mono.empty())
+                .onErrorResume(error -> {
+                    System.out.println(error);
+                    return Mono.empty();})
                 .block();
     }
 
