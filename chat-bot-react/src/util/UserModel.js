@@ -147,7 +147,7 @@ export const UserModel = [
                 description: "Create a new logo for the company",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
                 priority: "MEDIUM",
-                state: "TODO",
+                state: "DONE",
                 userId: 2
             },
             {
