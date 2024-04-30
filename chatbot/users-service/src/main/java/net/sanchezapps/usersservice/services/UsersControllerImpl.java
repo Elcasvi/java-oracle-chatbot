@@ -49,8 +49,11 @@ public class UsersControllerImpl implements UsersController {
        return service.getByEmail(email);
     }
 
-
     //Endpoint DELETE NOSTROS
+    @Override
+    public void delete(Long userId) {
+        service.delete(userId);
+    }
 
     //Endpoint DELETE ENTREGA
 }

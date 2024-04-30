@@ -113,7 +113,16 @@ public class UsersService {
         return userApi;
     }
 
+    private boolean exists(Long userId){
+        return repository.existsById(userId);
+    }
+
     //Endpoint DELETE NOSTROS
+    public void delete(Long userId) {
+        if(exists(userId)){
+            repository.deleteById(userId);
+        }
+    }
     
     //Endpoint DELETE ENTREGA
 
