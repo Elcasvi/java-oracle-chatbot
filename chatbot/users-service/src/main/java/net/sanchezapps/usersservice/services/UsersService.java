@@ -125,5 +125,10 @@ public class UsersService {
     }
     
     //Endpoint DELETE ENTREGA
+    public User suspend(Long userId) {
+        if(exists(userId)){
+            
+        }
+    }
 
 }

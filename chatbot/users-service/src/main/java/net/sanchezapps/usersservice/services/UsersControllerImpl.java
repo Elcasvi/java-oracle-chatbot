@@ -55,10 +55,9 @@ public class UsersControllerImpl implements UsersController {
         service.delete(userId);
     }
 
+    //Endpoint DELETE ENTREGA
     @Override
     public Mono<User> suspend() {
         return null;
     }
-
-    //Endpoint DELETE ENTREGA
 }

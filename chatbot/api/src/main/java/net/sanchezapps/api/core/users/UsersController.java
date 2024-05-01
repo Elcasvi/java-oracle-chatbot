@@ -25,10 +25,10 @@ public interface UsersController {
     Mono<User> getByEmail(@RequestParam(value = "email") String email);
 
     //Endpoint DELETE NOSTROS
-    @GetMapping(value = "/users/delete")
+    @DeleteMapping(value = "/users/delete")
     void delete(Long userId);
 
     //Endpoint DELETE ENTREGA
-    @GetMapping(value = "/users/suspend")
+    @PutMapping(value = "/users/suspend")
     Mono<User> suspend();
 }
