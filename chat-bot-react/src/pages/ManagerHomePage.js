@@ -16,7 +16,7 @@ export default function ManagerHomePage() {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Num Tasks (Asc)', 'Num Tasks (Desc)', 'Fecha (Mas Reciente)', 'Fecha (Mas Antiguo)']; // Tus opciones aquí
+    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -26,6 +26,20 @@ export default function ManagerHomePage() {
         setSelectedOption(option);
         setIsDropdownOpen(false);
     };
+
+    // Función para ordenar los usuarios según la opción seleccionada
+    const sortUsers = (option) => {
+        switch (option) {
+            case 'Nombre (A-Z)':
+                return UserModel.slice().sort((a, b) => a.name.localeCompare(b.name));
+            case 'Nombre (Z-A)':
+                return UserModel.slice().sort((a, b) => b.name.localeCompare(a.name));
+            default:
+                return UserModel; // Por defecto, no se realiza ningún ordenamiento
+        }
+    };
+
+    const sortedUsers = selectedOption ? sortUsers(selectedOption) : users;
 
     return (
         <>
@@ -52,7 +66,7 @@ export default function ManagerHomePage() {
                 <p>Seleccionaste la opción: {selectedOption}</p>
             )}
         </div>
-            {users.map(user => (
+        {sortedUsers.map(user => (
                 <DevCardManagerView key={user.id} user={user} />
             ))}
         </>
