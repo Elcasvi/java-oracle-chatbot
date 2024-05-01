@@ -2,9 +2,81 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+    margin: 20px; 
+    padding-left: 30px;
 }
+
 .options-container {
     display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacio superior para separar el botón del resto del contenido */
+}
+
+.small-button {
+    padding: 5px 10px; /* Ajusta el padding para hacer el botón más pequeño */
+    font-size: 14px; /* Ajusta el tamaño de fuente */
+    margin: 10px;
+    width: 150px;
+    height: 35px;
+}
+
+.add-button {
+    padding: 5px 10px; /* Ajusta el padding para hacer el botón más pequeño */
+    font-size: 14px; /* Ajusta el tamaño de fuente */
+    margin: 10px;
+    width: 100px;
+    height: 35px;
+}
+
+.status-dropdown {
+    display: flex;
+    flex-direction: column; /* Para colocar los elementos en columnas */
+    align-items: center; /* Para centrar horizontalmente */
+    margin-left: 50px;
+}
+
+
+.status-label {
+    
+    margin: 5px; /* Espacio entre el texto "Status" y el select */
+}
+
+.status-select {
+    width: 100%; /* Para que el select ocupe todo el ancho disponible */
+}
+
+.modal-content {
+    display: flex;
     flex-direction: column;
-    align-content: center;
+    justify-content: center; /* Para centrar verticalmente los elementos */
+    align-items: center; 
+   
+}
+.close {
+    align-self: flex-end; /* Para que el botón de cerrar esté a la derecha */
+}
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Espacio entre las filas */
+}
+
+.input-row input,
+.input-row select {
+    margin-right: 10px; /* Espacio entre los elementos en una fila */
+}
+
+.input-row select {
+    width: 150px;
+    height: 30px;
+    margin: 10px; /* Para que el select ocupe todo el espacio disponible */
+}
+
+.custom-icon {
+    color: #b34545;
+
+    width: 35px; /* Ajusta el ancho del icono */
+    height: 35px; /* Ajusta la altura del icono */
+    margin-left: 900px; /* Mueve el icono hacia la derecha */
+    margin-top: 10px; /* Mueve el icono hacia abajo */
 }
