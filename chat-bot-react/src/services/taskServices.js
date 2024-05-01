@@ -6,11 +6,11 @@ const api = axios.create({
     baseURL: API_BASE_URL,
 });
 
-export class taskServices{
+export default class taskServices{
 
-    async getAllByUserId() {
+    async getAllByUserId(userId) {
         try {
-            const response = await api.get("/tasks/{usersId}/tasks");
+            const response = await api.get(`/tasks/${userId}/tasks`);
             return response.data;
         } catch (error) {
             console.error("Error fetching all tasks:", error);

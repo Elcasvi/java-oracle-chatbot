@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserModel } from '../util/UserModel';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
+import taskServices from '../services/taskServices';
 
-function ManagerViewTaskDeveloper() {
+export default function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
 
+    const [ tasks, setTasks ] = useState([]);
+
+    useEffect(() => {
+        const taskService = new taskServices();
+        taskService.getAllByUserId(userId).then(setTasks).catch(console.error);
+    }, []);
+
     // Buscar el usuario correspondiente en UserModel utilizando el userId
-    const selectedUser = UserModel.find(user => user.id === parseInt(userId));
+    const selectedUser = tasks.find(user => user.id === parseInt(userId));
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Prioridad (Low-High)', 'Prioridad (High-Low)'];
@@ -85,4 +93,3 @@ function ManagerViewTaskDeveloper() {
     );
 }
 
-export default ManagerViewTaskDeveloper;
