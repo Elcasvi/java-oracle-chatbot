@@ -6,13 +6,13 @@ replicaCount: 1
 
 image:
   #repository: chatbotaz.azurecr.io/users-service
-  #repository: users-service
-  image: qro.ocir.io/ax7vdftklenx/chatbot:users-service
+  repository: qro.ocir.io/ax7vdftklenx/chatbot/users-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: imagePullSecrets
 nameOverride: ""
 fullnameOverride: ""
 
@@ -42,8 +42,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer
-  #type: ClusterIP
+  #type: LoadBalancer
+  type: ClusterIP
   port: 80
 
 ingress:
