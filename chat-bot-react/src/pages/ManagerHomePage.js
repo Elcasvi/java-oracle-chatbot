@@ -52,7 +52,7 @@ export default function ManagerHomePage() {
                 <p>Seleccionaste la opción: {selectedOption}</p>
             )}
         </div>
-            {UserModel.map(user => (
+            {users.map(user => (
                 <DevCardManagerView key={user.id} user={user} />
             ))}
         </>
