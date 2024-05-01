@@ -160,13 +160,4 @@ public class UsersService {
         return repository.existsById(userId);
     }
 
-    //Endpoint DELETE NOSTROS
-    public void delete(Long userId) {
-        if(exists(userId)){
-            repository.deleteById(userId);
-        }
-    }
-    
-    //Endpoint DELETE ENTREGA
-
 }
