@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import TaskModal from './taskModal';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function DevCardManagerView({ user }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
     return (
         <article className='dev-card-manager'>
             <header className="dev-card-manger-header">
-                <img className="dev-card-manger-icon"
-                    alt="Dev Icon"
-                    src="https://unavatar.io/user"></img>
+                <Link to={`/tasks/${user.id}`}>
+                    <img className="dev-card-manger-icon"
+                        alt="Dev Icon"
+                        src="https://unavatar.io/user"></img>
+                </Link>
                 <div className="dev-card-manager-name">
                     <strong>{user.name}</strong>
                     <span className="dev-card-manager-numTask">Numero de Task Asignadas: {user.tasks.length}</span>
@@ -25,13 +17,12 @@ function DevCardManagerView({ user }) {
             </header>
 
             <div className='dev-card-manager-button'>
-                <button className="dev-card-manager-showMore" onClick={openModal}>Ver Más</button>
+                <div>
+                    <Link to={`/tasks/${user.id}`} className="dev-card-manager-showMore">Ver Más</Link>
+                </div>
             </div>
-
-            {isModalOpen && <TaskModal tasks={user.tasks} onClose={closeModal} />}
         </article>
     );
 }
 
 export default DevCardManagerView;
-
