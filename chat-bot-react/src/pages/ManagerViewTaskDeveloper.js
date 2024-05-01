@@ -4,23 +4,47 @@ import { UserModel } from '../util/UserModel';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
 import taskServices from '../services/taskServices';
+import userServices from '../services/userServices';
+
+const userService = new userServices();
 
 export default function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
 
-    const [ tasks, setTasks ] = useState([]);
+    /*
+    const [ user, setUser ] = useState();
+    useEffect( () => {
+        const fetchUser = async () => {
+            try {
+              const usuario = await userService.getById(userId);
+              setUser(usuario);
+              console.log("Usuario react ", user);
+            } catch (error) {
+              console.error("Error fetching user: ", error);
+            }
+          };
+        
+          console.log(userId);
+          if (userId) {
+            fetchUser();
+          } 
+    }, [userId])*/
+
+    const [ users, setUsers ] = useState([]);
+
+    useEffect(() => {
+        const userService = new userServices();
+        userService.getAll().then(setUsers).catch(console.error);
+      }, []);
 
     // Buscar el usuario correspondiente en UserModel utilizando el userId
-    const selectedUser = tasks.find(user => user.id === parseInt(userId));
+    const selectedUser = users.find(user => user.id === parseInt(userId));
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Prioridad (Low-High)', 'Prioridad (High-Low)'];
 
-    useEffect(() => {
-        const taskService = new taskServices();
-        taskService.getall().then(setTasks).catch(console.error);
-        console.log(tasks)
-    }, [])
+    
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -32,7 +56,7 @@ export default function ManagerViewTaskDeveloper() {
     };
 
     if (!selectedUser) {
-        return <div>User not found</div>;
+        return <div>Loading...</div>;
     }
     // Función para ordenar las tareas según la opción seleccionada
     const sortTasks = (tasks, option) => {
