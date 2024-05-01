@@ -7,7 +7,7 @@ import FilterDropdown from "../components/filterDropdown";
 export default function ManagerHomePage() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Num Tasks (Asc)', 'Num Tasks (Desc)', 'Fecha (Mas Reciente)', 'Fecha (Mas Antiguo)']; // Tus opciones aquí
+    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
