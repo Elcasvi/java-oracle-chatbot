@@ -10,16 +10,17 @@ export default function ManagerViewTaskDeveloper() {
 
     const [ tasks, setTasks ] = useState([]);
 
-    useEffect(() => {
-        const taskService = new taskServices();
-        taskService.getAllByUserId(userId).then(setTasks).catch(console.error);
-    }, []);
-
     // Buscar el usuario correspondiente en UserModel utilizando el userId
     const selectedUser = tasks.find(user => user.id === parseInt(userId));
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Prioridad (Low-High)', 'Prioridad (High-Low)'];
+
+    useEffect(() => {
+        const taskService = new taskServices();
+        taskService.getall().then(setTasks).catch(console.error);
+        console.log(tasks)
+    }, [])
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
