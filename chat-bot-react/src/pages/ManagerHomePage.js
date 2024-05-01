@@ -18,6 +18,20 @@ export default function ManagerHomePage() {
         setIsDropdownOpen(false);
     };
 
+    // Función para ordenar los usuarios según la opción seleccionada
+    const sortUsers = (option) => {
+        switch (option) {
+            case 'Nombre (A-Z)':
+                return UserModel.slice().sort((a, b) => a.name.localeCompare(b.name));
+            case 'Nombre (Z-A)':
+                return UserModel.slice().sort((a, b) => b.name.localeCompare(a.name));
+            default:
+                return UserModel; // Por defecto, no se realiza ningún ordenamiento
+        }
+    };
+
+    const sortedUsers = selectedOption ? sortUsers(selectedOption) : UserModel;
+
     return (
         <>
         <div className="manager-home-page">
@@ -43,7 +57,7 @@ export default function ManagerHomePage() {
                 <p>Seleccionaste la opción: {selectedOption}</p>
             )}
         </div>
-            {UserModel.map(user => (
+        {sortedUsers.map(user => (
                 <DevCardManagerView key={user.id} user={user} />
             ))}
         </>

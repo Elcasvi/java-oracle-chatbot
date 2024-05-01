@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TaskModal from './taskModal'; // Importar el componente TaskModal
 
-function TaskCard({ user }) {
+function TaskCard({ tasks }) {
     const [selectedTask, setSelectedTask] = useState(null); // Estado para la tarea seleccionada
 
     const getCircleColor = (state) => {
@@ -27,7 +27,7 @@ function TaskCard({ user }) {
 
     return (
         <div>
-            {user.tasks.map(task => ( // Iterar sobre las tareas del usuario
+            {tasks && tasks.map(task => ( // Verificar que tasks no sea undefined antes de mapearlo
                 <article className='dev-card-manager' key={task.id}>
                     <header className="dev-card-manger-header">
                         <div
