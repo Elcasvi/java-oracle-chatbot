@@ -31,11 +31,11 @@ export default function ManagerHomePage() {
     const sortUsers = (option) => {
         switch (option) {
             case 'Nombre (A-Z)':
-                return UserModel.slice().sort((a, b) => a.name.localeCompare(b.name));
+                return users.slice().sort((a, b) => a.name.localeCompare(b.name));
             case 'Nombre (Z-A)':
-                return UserModel.slice().sort((a, b) => b.name.localeCompare(a.name));
+                return users.slice().sort((a, b) => b.name.localeCompare(a.name));
             default:
-                return UserModel; // Por defecto, no se realiza ningún ordenamiento
+                return users; // Por defecto, no se realiza ningún ordenamiento
         }
     };
 
