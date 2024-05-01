@@ -4,11 +4,13 @@ import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.api.core.users.UsersController;
 import net.sanchezapps.usersservice.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class UsersControllerImpl implements UsersController {
     private final UsersService service;
     @Autowired
@@ -33,6 +35,7 @@ public class UsersControllerImpl implements UsersController {
 
     @Override
     public Mono<User> login(String email, String password) {
+        System.out.println(email+"/"+password);
         return service.getByEmailAndPassword(email,password);
     }
 
@@ -45,4 +48,9 @@ public class UsersControllerImpl implements UsersController {
     public Mono<User> getByEmail(String email) {
        return service.getByEmail(email);
     }
+
+
+    //Endpoint DELETE NOSTROS
+
+    //Endpoint DELETE ENTREGA
 }

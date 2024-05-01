@@ -21,32 +21,17 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
     username: TASKS_DB
-    password: VUeXKEsXEnr8cZW
+    password: 0zjPF83YwFx8Ge7
   jpa:
     database: ORACLE
     hibernate:
       ddl-auto: update
     show-sql: true
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    registryFetchIntervalSeconds: 5
-  instance:
-    leaseRenewalIntervalInSeconds: 5
-    leaseExpirationDurationInSeconds: 5
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: docker
+  profiles:
+    active: docker
 server:
-  port: 8080
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka:8761/eureka/
+  port: 80

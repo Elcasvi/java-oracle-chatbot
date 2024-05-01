@@ -1,0 +1,28 @@
+oci session authenticate
+DEFAULT
+oci session refresh --profile DEFAULT
+
+terraform commands:
+terraform init
+terraform fmt
+terraform plan
+terraform validate
+terraform apply
+terraform show
+terraform destroy
+
+terraform links:
+vcn terraform:
+https://developer.hashicorp.com/terraform/tutorials/oci-get-started
+
+object storage terraform:
+https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/objectstorage_bucket
+
+Autonomous database terraform:
+https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/database_autonomous_database
+
+Conatiner registry terraform:
+https://blogs.oracle.com/developers/post/using-terraform-to-create-container-instances-in-oracle-cloud-infrastructure
+
+OKE Cluster terraform:
+https://docs.oracle.com/es-ww/iaas/developer-tutorials/tutorials/tf-cluster/01-summary.htm

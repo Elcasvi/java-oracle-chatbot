@@ -23,7 +23,7 @@ public class UserMapper {
         userEntity.setId(user.getId());
         userEntity.setName(user.getName());
         userEntity.setEmail(user.getEmail());
-        userEntity.setPassword(userEntity.getPassword());
+        userEntity.setPassword(user.getPassword());
         userEntity.setRole(user.getRole());
         return userEntity;
     }

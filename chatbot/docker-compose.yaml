@@ -2,20 +2,25 @@ version: '2.1'
 services:
   task:
     build: tasks-service
+    image: tasks-service
     mem_limit: 512m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
-      - "8000:8080"
+      - "8000:80"
   user:
     build: users-service
+    image: users-service
     mem_limit: 512m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
-      - "8001:8080"
-  eureka:
-    build: eureka-server
+      - "8001:80"
+  security:
+    build: security-service
+    image: security-service
     mem_limit: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
-      - "8761:8761"
+      - "8002:80"
