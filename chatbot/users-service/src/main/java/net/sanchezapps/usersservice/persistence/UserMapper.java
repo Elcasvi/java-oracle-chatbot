@@ -15,6 +15,7 @@ public class UserMapper {
         user.setEmail(userEntity.getEmail());
         user.setPassword(userEntity.getPassword());
         user.setRole(userEntity.getRole());
+        user.setStatus(userEntity.getStatus());
         return user;
     }
 
@@ -25,6 +26,7 @@ public class UserMapper {
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(user.getPassword());
         userEntity.setRole(user.getRole());
+        userEntity.setStatus(user.getStatus());
         return userEntity;
     }
 

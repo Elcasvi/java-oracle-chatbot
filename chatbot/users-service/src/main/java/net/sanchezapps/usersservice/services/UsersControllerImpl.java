@@ -49,8 +49,16 @@ public class UsersControllerImpl implements UsersController {
        return service.getByEmail(email);
     }
 
-
     //Endpoint DELETE NOSTROS
+    @Override
+    public void delete(Long userId) {
+        service.delete(userId);
+    }
+
+    @Override
+    public Mono<User> suspend() {
+        return null;
+    }
 
     //Endpoint DELETE ENTREGA
 }

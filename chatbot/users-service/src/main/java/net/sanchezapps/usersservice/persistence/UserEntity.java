@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import net.sanchezapps.api.core.users.Role;
+import net.sanchezapps.api.core.users.Status;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,4 +32,5 @@ public class UserEntity {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private Status status;
 }
