@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TaskModal from './taskModal'; // Importar el componente TaskModal
 
 function TaskCard({ user }) {
+    const [selectedTask, setSelectedTask] = useState(null); // Estado para la tarea seleccionada
+
     const getCircleColor = (state) => {
         switch (state) {
             case 'DONE':
@@ -14,6 +17,14 @@ function TaskCard({ user }) {
         }
     };
 
+    const handleTaskClick = (task) => {
+        setSelectedTask(task);
+    };
+
+    const closeModal = () => {
+        setSelectedTask(null);
+    };
+
     return (
         <div>
             {user.tasks.map(task => ( // Iterar sobre las tareas del usuario
@@ -24,6 +35,7 @@ function TaskCard({ user }) {
                             style={{
                                 backgroundColor: getCircleColor(task.state)
                             }}
+                            onClick={() => handleTaskClick(task)} // Manejador de clic para mostrar el modal
                         >
                             {/* Mostrar el círculo con el color adecuado */}
                         </div>
@@ -34,10 +46,13 @@ function TaskCard({ user }) {
                     </header>
 
                     <div className='dev-card-manager-button'>
-                        <button className="dev-card-manager-showMore">Ver Más</button>
+                        <button className="dev-card-manager-showMore" onClick={() => handleTaskClick(task)}>Ver Más</button>
                     </div>
                 </article>
             ))}
+
+            {/* Integrar el componente TaskModal */}
+            <TaskModal task={selectedTask} closeModal={closeModal} />
         </div>
     );
 }
