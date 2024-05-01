@@ -15,7 +15,7 @@ public interface UsersController {
     Mono<Boolean> existsById(@PathVariable("userId") Long userId);
 
     @PostMapping(value = "/login")
-    Mono<User> login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password);
+    Mono<Boolean> login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password);
 
     @PostMapping(value = "/users")
     Mono<User> create(@RequestBody User user);
@@ -29,6 +29,6 @@ public interface UsersController {
     void delete(Long userId);
 
     //Endpoint DELETE ENTREGA
-    @PutMapping(value = "/users/suspend")
-    Mono<User> suspend();
+    @PutMapping(value = "/users/suspend/{userId}")
+    Mono<User> suspend(@PathVariable("userId")Long userId);
 }

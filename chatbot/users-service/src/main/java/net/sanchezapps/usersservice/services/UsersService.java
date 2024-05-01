@@ -1,6 +1,7 @@
 package net.sanchezapps.usersservice.services;
 
 import net.sanchezapps.api.core.tasks.Task;
+import net.sanchezapps.api.core.users.Status;
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.UserEntity;
 import net.sanchezapps.usersservice.persistence.UserMapper;
@@ -67,12 +68,16 @@ public class UsersService {
     public Mono<Boolean> existsById(Long userId) {
         return Mono.fromCallable(()-> repository.findById(userId).isPresent()).subscribeOn(jdbcScheduler);
     }
-    public Mono<User>getByEmailAndPassword(String email, String password)
+    public Mono<Boolean>getByEmailAndPassword(String email, String password)
     {
         return Mono.fromCallable(()->{
             String hashedPassword=hashString(password);
             Optional<UserEntity> userEntity=repository.findByEmailAndPassword(email,hashedPassword);
-            return internalOptionalGetUser(userEntity);
+            if(userEntity.isPresent())
+            {
+                return true;
+            }
+            return false;
         }).subscribeOn(jdbcScheduler);
     }
 
@@ -96,6 +101,39 @@ public class UsersService {
     }
 
 
+    //Endpoint DELETE NOSTROS
+    public void delete(Long userId) {
+        if(exists(userId)){
+            repository.deleteById(userId);
+        }
+    }
+
+    //Endpoint DELETE ENTREGA
+    public Mono<User> suspend(Long userId) {
+        if (exists(userId)) {
+            return Mono.fromCallable(()->{
+                UserEntity retrievedUserEntity=repository.findById(userId).get();
+                retrievedUserEntity.setStatus(Status.SUSPEND);
+                UserEntity newUserEntity=repository.save(retrievedUserEntity);
+                return mapper.entityToApi(newUserEntity);
+            });
+        }
+        return null;
+    }
+
+    private String hashString(String stringToHash)
+    {
+        String securityUrl=SECURITY_SERVICE_URL+"/hashString?stringToHash="+stringToHash;
+        return webClient.post()
+                .uri(securityUrl)
+                .retrieve()
+                .bodyToMono(String.class).log(LOG.getName(), FINE)
+                .onErrorResume(error -> {
+                    System.out.println(error);
+                    return Mono.empty();})
+                .block();
+    }
+
     private User internalOptionalGetUser(Optional<UserEntity> userEntity) {
         if(userEntity.isPresent()) {
             User userApi= mapper.entityToApi( userEntity.get());
@@ -117,35 +155,8 @@ public class UsersService {
         userApi.setTasks(taskList);
         return userApi;
     }
-    private String hashString(String stringToHash)
-    {
-        String securityUrl=SECURITY_SERVICE_URL+"/hashString?stringToHash="+stringToHash;
-        return webClient.post()
-                .uri(securityUrl)
-                .retrieve()
-                .bodyToMono(String.class).log(LOG.getName(), FINE)
-                .onErrorResume(error -> {
-                    System.out.println(error);
-                    return Mono.empty();})
-                .block();
-    }
 
     private boolean exists(Long userId){
         return repository.existsById(userId);
     }
-
-    //Endpoint DELETE NOSTROS
-    public void delete(Long userId) {
-        if(exists(userId)){
-            repository.deleteById(userId);
-        }
-    }
-    
-    //Endpoint DELETE ENTREGA
-    public Mono<User> suspend(Long userId) {
-        if (exists(userId)) {
-            ;
-        }
-    }
-
 }
