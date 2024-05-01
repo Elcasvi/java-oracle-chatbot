@@ -80,3 +80,18 @@
     margin-left: 900px; /* Mueve el icono hacia la derecha */
     margin-top: 10px; /* Mueve el icono hacia abajo */
 }
+
+.icon-dropdown-container {
+    position: relative;
+    right: 120px; /* Mueve el icono 20px hacia la derecha */
+    top: 0px; /* Mueve el icono 10px hacia abajo */
+    display: inline-block; 
+}
+
+.dropdown {
+    position: absolute; /* Establece la posición absoluta para el dropdown */
+    top: calc(100% + 5px); 
+    left: 58.5%;/* Coloca el punto de referencia del dropdown en el centro horizontal */
+    
+    
+}
