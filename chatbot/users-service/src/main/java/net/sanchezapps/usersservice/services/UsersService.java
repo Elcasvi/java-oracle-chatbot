@@ -67,12 +67,16 @@ public class UsersService {
     public Mono<Boolean> existsById(Long userId) {
         return Mono.fromCallable(()-> repository.findById(userId).isPresent()).subscribeOn(jdbcScheduler);
     }
-    public Mono<User>getByEmailAndPassword(String email, String password)
+    public Mono<Boolean>getByEmailAndPassword(String email, String password)
     {
         return Mono.fromCallable(()->{
             String hashedPassword=hashString(password);
             Optional<UserEntity> userEntity=repository.findByEmailAndPassword(email,hashedPassword);
-            return internalOptionalGetUser(userEntity);
+            if(userEntity.isPresent())
+            {
+                return true;
+            }
+            return false;
         }).subscribeOn(jdbcScheduler);
     }
 

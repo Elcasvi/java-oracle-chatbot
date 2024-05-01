@@ -34,8 +34,7 @@ public class UsersControllerImpl implements UsersController {
     }
 
     @Override
-    public Mono<User> login(String email, String password) {
-        System.out.println(email+"/"+password);
+    public Mono<Boolean> login(String email, String password) {
         return service.getByEmailAndPassword(email,password);
     }
 

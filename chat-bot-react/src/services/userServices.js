@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:62102";
+const API_BASE_URL = "http://127.0.0.1:51263";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -28,6 +28,15 @@ export default class userServices {
         }
     }
     
+    async getByEmail(email) {
+        try {
+            const response = await api.get(`/users/search/byEmail?email=${encodeURIComponent(email)}`);
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching user:", error);
+            throw error; 
+        }
+    }
 
     async getById(userId) {
         try {

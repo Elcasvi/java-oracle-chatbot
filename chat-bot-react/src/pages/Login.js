@@ -20,9 +20,19 @@ function Login() {
     function sendLoginRequest(event) {
       event.preventDefault();
       const userService = new userServices();
-      userService.login(email, password).then(data => {
-          console.log(data);
-          navigate('/homePage')
+      userService.login(email, password).then(exist => {
+          console.log(exist);
+          if(exist){
+            userService.getByEmail(email).then(data => {
+              if(data.role === "MANAGER"){
+                navigate('/homePage')
+              }else if (data.role === "DEVELOPER"){
+                navigate('/homePage')
+              }else{
+                console.error("No existe rol")
+              }
+            });
+          }
       });
     }
 
