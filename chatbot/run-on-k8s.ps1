@@ -1,4 +1,5 @@
-$microserviceDir = "C:\Java\Spring\micro-services\java-oracle-chatbot\chatbot"
+#$microserviceDir = "C:\Java\Spring\micro-services\java-oracle-chatbot\chatbot"
+$microserviceDir = (Get-Location).Path
 Set-Location $microserviceDir
 
 Write-Host "Runing mvn clean"
@@ -16,7 +17,8 @@ if($LASTEXITCODE -ne 0){
 }
 
 
-$k8sDir="C:\Java\Spring\micro-services\java-oracle-chatbot\chatbot\k8s\components"
+#$k8sDir="C:\Java\Spring\micro-services\java-oracle-chatbot\chatbot\k8s\components"
+$K8sDir = (Get-Location).Path + '\k8s\components'
 Set-Location $k8sDir
 
 Write-Host "context defined as default"
