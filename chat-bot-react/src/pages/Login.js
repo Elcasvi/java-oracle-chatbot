@@ -18,14 +18,22 @@ function Login() {
     const navigate = useNavigate();
 
     function sendLoginRequest(event) {
-        event.preventDefault();
-        //navigate("/homePage");
-        console.log("Email: " + email);
-        console.log("Password: " + password);
-        const userService = new userServices();
-        userService.login(email,password).then(data => {
-          console.log(data);
-        });
+      event.preventDefault();
+      const userService = new userServices();
+      userService.login(email, password).then(exist => {
+          console.log(exist);
+          if(exist){
+            userService.getByEmail(email).then(data => {
+              if(data.role === "MANAGER"){
+                navigate('/homePage')
+              }else if (data.role === "DEVELOPER"){
+                navigate('/homePage')
+              }else{
+                console.error("No existe rol")
+              }
+            });
+          }
+      });
     }
 
     return (

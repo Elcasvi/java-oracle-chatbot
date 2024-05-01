@@ -1,21 +1,22 @@
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserModel } from "../util/UserModel";
 import FilterDropdown from "../components/filterDropdown";
+import userServices from "../services/userServices";
 
 export default function ManagerHomePage() {
-    /*
+    
     const [ users, setUsers ] = useState([]);
 
     useEffect(() => {
         const userService = new userServices();
         userService.getAll().then(setUsers).catch(console.error);
-      }, []); */
+      }, []); 
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Num Tasks (Asc)', 'Num Tasks (Desc)', 'Fecha (Mas Reciente)', 'Fecha (Mas Antiguo)']; // Tus opciones aquí
+    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -25,6 +26,20 @@ export default function ManagerHomePage() {
         setSelectedOption(option);
         setIsDropdownOpen(false);
     };
+
+    // Función para ordenar los usuarios según la opción seleccionada
+    const sortUsers = (option) => {
+        switch (option) {
+            case 'Nombre (A-Z)':
+                return users.slice().sort((a, b) => a.name.localeCompare(b.name));
+            case 'Nombre (Z-A)':
+                return users.slice().sort((a, b) => b.name.localeCompare(a.name));
+            default:
+                return users; // Por defecto, no se realiza ningún ordenamiento
+        }
+    };
+
+    const sortedUsers = selectedOption ? sortUsers(selectedOption) : users;
 
     return (
         <>
@@ -51,7 +66,7 @@ export default function ManagerHomePage() {
                 <p>Seleccionaste la opción: {selectedOption}</p>
             )}
         </div>
-            {UserModel.map(user => (
+        {sortedUsers.map(user => (
                 <DevCardManagerView key={user.id} user={user} />
             ))}
         </>

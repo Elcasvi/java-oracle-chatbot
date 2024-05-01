@@ -52,18 +52,9 @@ export const UserModel = [
                 userId: 2
             },
             {
-                id: 4,
-                name: "Design logo",
-                description: "Create a new logo for the company",
-                lastUpdated: "2024-04-25T08:06:00.000Z",
-                priority: "MEDIUM",
-                state: "TODO",
-                userId: 2
-            },
-            {
-                id: 4,
-                name: "Design logo",
-                description: "Create a new logo for the company",
+                id: 5,
+                name: "Design banner",
+                description: "Create a new banner for the website",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
                 priority: "MEDIUM",
                 state: "TODO",
@@ -79,40 +70,31 @@ export const UserModel = [
         role: "Designer",
         tasks: [
             {
-                id: 3,
+                id: 6,
                 name: "Design homepage",
                 description: "Create a new design for the homepage",
                 lastUpdated: "2024-04-20T08:06:00.000Z",
                 priority: "HIGH",
                 state: "IN PROGRESS",
-                userId: 2
+                userId: 3
             },
             {
-                id: 4,
+                id: 7,
                 name: "Design logo",
                 description: "Create a new logo for the company",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
                 priority: "MEDIUM",
                 state: "TODO",
-                userId: 2
+                userId: 3
             },
             {
-                id: 4,
-                name: "Design logo",
-                description: "Create a new logo for the company",
+                id: 8,
+                name: "Design business card",
+                description: "Create a new business card design",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
-                priority: "MEDIUM",
-                state: "TODO",
-                userId: 2
-            },
-            {
-                id: 4,
-                name: "Design logo",
-                description: "Create a new logo for the company",
-                lastUpdated: "2024-04-25T08:06:00.000Z",
-                priority: "MEDIUM",
-                state: "TODO",
-                userId: 2
+                priority: "LOW",
+                state: "DONE",
+                userId: 3
             }
         ]
     },
@@ -124,42 +106,33 @@ export const UserModel = [
         role: "Aguador",
         tasks: [
             {
-                id: 3,
-                name: "Design homepage",
-                description: "Create a new design for the homepage",
+                id: 9,
+                name: "Deliver packages",
+                description: "Deliver packages to customers",
                 lastUpdated: "2024-04-20T08:06:00.000Z",
                 priority: "HIGH",
                 state: "IN PROGRESS",
-                userId: 2
+                userId: 4
             },
             {
-                id: 4,
-                name: "Design logo",
-                description: "Create a new logo for the company",
+                id: 10,
+                name: "Pick up orders",
+                description: "Pick up orders from the warehouse",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
                 priority: "MEDIUM",
                 state: "TODO",
-                userId: 2
+                userId: 4
             },
             {
-                id: 4,
-                name: "No deberia aparecer",
-                description: "Create a new logo for the company",
+                id: 11,
+                name: "Water delivery",
+                description: "Deliver water to the specified locations",
                 lastUpdated: "2024-04-25T08:06:00.000Z",
-                priority: "MEDIUM",
+                priority: "LOW",
                 state: "DONE",
-                userId: 2
-            },
-            {
-                id: 4,
-                name: "Design logo",
-                description: "Create a new logo for the company",
-                lastUpdated: "2024-04-25T08:06:00.000Z",
-                priority: "MEDIUM",
-                state: "TODO",
-                userId: 2
+                userId: 4
             }
         ]
-    },
+    }
     // Agrega más usuarios aquí si lo deseas
 ];
