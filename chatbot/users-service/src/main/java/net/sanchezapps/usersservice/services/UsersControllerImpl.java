@@ -4,11 +4,13 @@ import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.api.core.users.UsersController;
 import net.sanchezapps.usersservice.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://stalwart-cupcake-93d44b.netlify.app/"})
 public class UsersControllerImpl implements UsersController {
     private final UsersService service;
     @Autowired

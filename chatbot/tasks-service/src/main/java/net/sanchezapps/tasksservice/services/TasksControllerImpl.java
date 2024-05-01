@@ -14,6 +14,7 @@ import java.io.IOException;
 
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://stalwart-cupcake-93d44b.netlify.app/"})
 public class TasksControllerImpl implements TasksController {
 
     private final TasksService service;
