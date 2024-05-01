@@ -14,7 +14,6 @@ import java.io.IOException;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class TasksControllerImpl implements TasksController {
 
     private final TasksService service;
