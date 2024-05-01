@@ -142,10 +142,5 @@ public class UsersService {
     }
     
     //Endpoint DELETE ENTREGA
-    public Mono<User> suspend(Long userId) {
-        if (exists(userId)) {
-            ;
-        }
-    }
 
 }

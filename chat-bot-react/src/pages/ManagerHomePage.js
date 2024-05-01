@@ -1,17 +1,18 @@
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserModel } from "../util/UserModel";
 import FilterDropdown from "../components/filterDropdown";
+import userServices from "../services/userServices";
 
 export default function ManagerHomePage() {
-    /*
+    
     const [ users, setUsers ] = useState([]);
 
     useEffect(() => {
         const userService = new userServices();
         userService.getAll().then(setUsers).catch(console.error);
-      }, []); */
+      }, []); 
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);

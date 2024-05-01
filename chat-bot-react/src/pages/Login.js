@@ -18,14 +18,12 @@ function Login() {
     const navigate = useNavigate();
 
     function sendLoginRequest(event) {
-        event.preventDefault();
-        //navigate("/homePage");
-        console.log("Email: " + email);
-        console.log("Password: " + password);
-        const userService = new userServices();
-        userService.login(email,password).then(data => {
+      event.preventDefault();
+      const userService = new userServices();
+      userService.login(email, password).then(data => {
           console.log(data);
-        });
+          navigate('/homePage')
+      });
     }
 
     return (
