@@ -5,8 +5,16 @@ import HomePage from "./pages/HomePage";
 import EditTask from "./pages/EditTask";
 import ManagerHomePage from './pages/ManagerHomePage';
 import ManagerViewTaskDeveloper from './pages/ManagerViewTaskDeveloper'; // Importa el componente ManagerViewTaskDeveloper
+import { useEffect } from 'react';
+
+const tele = window.Telegram.WebApp
 
 function App() {
+
+  useEffect(() => {
+    tele.ready();
+  })
+
   return (
     <Router>
       <Routes>

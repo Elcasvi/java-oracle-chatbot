@@ -29,6 +29,6 @@ public interface UsersController {
     void delete(Long userId);
 
     //Endpoint DELETE ENTREGA
-    @PutMapping(value = "/users/suspend")
-    Mono<User> suspend();
+    @PutMapping(value = "/users/suspend/{userId}")
+    Mono<User> suspend(@PathVariable("userId")Long userId);
 }
