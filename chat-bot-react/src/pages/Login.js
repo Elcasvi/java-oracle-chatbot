@@ -13,7 +13,7 @@ function Login() {
     <div className="login-container">
       <h2>Login</h2>
       <form className="login-form">
-        <div className="form-group">
+        <div className="form-group ">
           <label htmlFor="email">Correo Electrónico</label>
           <input type="email" id="email" name="email" />
         </div>

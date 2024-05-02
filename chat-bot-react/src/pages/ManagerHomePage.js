@@ -34,8 +34,8 @@ export default function ManagerHomePage() {
 
     return (
         <>
-        <div className="manager-home-page">
-            <h1>Manager Home Page</h1>
+        <div className="home-page-container">
+            <h2>Welcome ...</h2>
             <div className="icon-filter-container" onClick={toggleDropdown}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-adjustments-horizontal" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
