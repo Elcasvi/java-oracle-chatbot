@@ -5,7 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: security-service
+  #repository: security-service
+  repository: qro.ocir.io/ax7vdftklenx/chatbot/security-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -40,7 +41,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  #type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:

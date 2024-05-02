@@ -5,12 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: tasks-service
+  #repository: tasks-service
+  repository: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: ocirsecret
 nameOverride: ""
 fullnameOverride: ""
 
@@ -40,7 +42,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  #type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:
