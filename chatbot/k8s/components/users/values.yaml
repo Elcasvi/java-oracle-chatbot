@@ -48,6 +48,7 @@ service:
   port: 80
 
 ingress:
+  apiVersion: networking.k8s.io/v1
   enabled: true
   className: nginx
   annotations:
