@@ -15,11 +15,6 @@ function App() {
     tele.ready();
   })
 
-  const OnLogin = () =>{
-    tele.MainButton.text = "LOGIN IN :)"
-    tele.MainButton.show();
-  }
-
   return (
     <Router>
       <Routes>
