@@ -47,23 +47,23 @@ service:
   type: ClusterIP
   port: 80
 
-ingress:
-  apiVersion: networking.k8s.io/v1
-  enabled: true
-  className: nginx
-  annotations:
-     kubernetes.io/ingress.class: nginx
-  hosts:
-    - host: users.sanchezapps.net
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: users-service
-              port:
-                number: 80
-  tls: []
+#ingress:
+#  apiVersion: networking.k8s.io/v1
+#  enabled: true
+#  className: nginx
+#  annotations:
+#     kubernetes.io/ingress.class: nginx
+#  hosts:
+#    - host: users.sanchezapps.net
+#      paths:
+#        - path: /
+#          pathType: Prefix
+#          backend:
+#            service:
+#              name: users-service
+#              port:
+#                number: 80
+#  tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
