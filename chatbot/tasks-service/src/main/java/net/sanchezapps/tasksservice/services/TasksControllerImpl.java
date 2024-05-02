@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://stalwart-cupcake-93d44b.netlify.app/"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://chatbot.sanchezapps.net/"})
 public class TasksControllerImpl implements TasksController {
 
     private final TasksService service;
