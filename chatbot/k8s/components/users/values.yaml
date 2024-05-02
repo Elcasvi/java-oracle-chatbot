@@ -53,10 +53,15 @@ ingress:
   annotations:
      kubernetes.io/ingress.class: nginx
   hosts:
-    - host: sanchezapps.net
+    - host: users.sanchezapps.net
       paths:
         - path: /
           pathType: Prefix
+          backend:
+            service:
+              name: users-service
+              port:
+                number: 80
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
