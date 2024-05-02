@@ -9,6 +9,8 @@ spec:
   tls:
     - hosts:
         - okeusersservice.sanchezapps.net
+        - oketasksservice.sanchezapps.net
+        - okesecurityservice.sanchezapps.net
       secretName: oke-tls
   rules:
     - host: "okeusersservice.sanchezapps.net"
@@ -19,5 +21,25 @@ spec:
             backend:
               service:
                 name: users-service
+                port:
+                  number: 80
+    - host: "oketasksservice.sanchezapps.net"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: tasks-service
+                port:
+                  number: 80
+    - host: "okesecurityservice.sanchezapps.net"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: security-service
                 port:
                   number: 80
