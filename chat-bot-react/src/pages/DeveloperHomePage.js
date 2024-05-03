@@ -16,11 +16,10 @@ export default function DeveloperHomePage() {
     const location = useLocation();
     const email = location.state.email;
     const [ tasks, setTasks ] = useState([])
-    //const [ usuario, setUsuario ] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
-    const [taskPriority, setTaskPriority] = useState("");
+    const [taskPriority, setTaskPriority] = useState("HIGH");
 
     const options = ['Filter by Status', 'Filter by Priority','Filter by DueDate'];
 
@@ -38,12 +37,49 @@ export default function DeveloperHomePage() {
         setIsModalOpen(false);
     };
 
+    const handlePriority = (e) => {
+        setTaskPriority(e);
+    };
+
     const handleAddTask = () => {
         closeModal();
+        createTask();
     };
 
     const createTask = async () => {
-        
+        const user = await userService.getByEmail(email)
+        const userId = user.id;
+        const fecha = formatFecha();
+        console.log(fecha)
+        console.log(userId)
+        const newTask = {
+            id: 0,
+            name: taskName,
+            description: taskDescription,
+            lastUpdated: fecha,
+            priority: taskPriority,
+            state: "TODO",
+            userId: userId
+        }
+        const respuesta = await taskService.create(newTask);
+        //console.log(respuesta);
+        window.location.reload();
+    }
+
+    const formatFecha = () => {
+        var fechaActual = new Date();
+        // Obtener los componentes de la fecha y hora
+        var año = fechaActual.getFullYear();
+        var mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2); // Se agrega 1 porque los meses van de 0 a 11
+        var dia = ('0' + fechaActual.getDate()).slice(-2);
+        var horas = ('0' + fechaActual.getHours()).slice(-2);
+        var minutos = ('0' + fechaActual.getMinutes()).slice(-2);
+        var segundos = ('0' + fechaActual.getSeconds()).slice(-2);
+        var milisegundos = fechaActual.getMilliseconds();
+
+        // Formatear la fecha y hora en el formato deseado
+        var fechaFormateada = `${año}-${mes}-${dia}T${horas}:${minutos}:${segundos}.${milisegundos}Z`;
+        return fechaFormateada;
     }
 
     useEffect(() => {
@@ -109,7 +145,7 @@ export default function DeveloperHomePage() {
             {/* Select para la prioridad de la tarea */}
             <div className="input-row">
                 <span>Priority:  </span>
-                <select>
+                <select value={taskPriority} onChange={(e) => handlePriority(e.target.value)}>
                     <option value="HIGH">HIGH</option>
                     <option value="MEDIUM">MEDIUM</option>
                     <option value="LOW">LOW</option>
