@@ -123,7 +123,7 @@ export default function DeveloperHomePage() {
             <h1>Developer Home Page</h1>
             <div className="icon-dropdown-container">
             {/* Icono para abrir el dropdown */}
-            <div className="icon-dropdown" onClick={toggleDropdown}>
+            <div className="icon-filter-container" onClick={toggleDropdown}>
             <svg xmlns="http://www.w3.org/2000/svg" className="custom-icon" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
