@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import '../util/TaskModel'
 import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
+import FilterDropdown from "../components/filterDropdown";
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 export default function DeveloperHomePage() {
@@ -12,6 +13,14 @@ export default function DeveloperHomePage() {
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [taskPriority, setTaskPriority] = useState('');
+
+    const options = ['Filter by Status', 'Filter by Priority','Filter by DueDate'];
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -25,9 +34,13 @@ export default function DeveloperHomePage() {
         closeModal();
     };
 
+  
     return (
         <div className="home-page-container">
             <h1>Developer Home Page</h1>
+            <div className="icon-dropdown-container">
+            {/* Icono para abrir el dropdown */}
+            <div className="icon-dropdown" onClick={toggleDropdown}>
             <svg xmlns="http://www.w3.org/2000/svg" className="custom-icon" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -40,6 +53,16 @@ export default function DeveloperHomePage() {
                     <path d="M4 18l11 0" />
                     <path d="M19 18l1 0" />
             </svg>
+            
+            
+            {isDropdownOpen && (
+            <FilterDropdown options={options} className="dropdown"/>
+)}
+</div> 
+
+</div>
+
+            
             <AllTasks tasks={Tasks} />
 
             <div className='options-container'>
