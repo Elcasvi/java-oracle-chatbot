@@ -20,8 +20,7 @@ export default function DeveloperHomePage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
-    const [taskPriority, setTaskPriority] = useState('');
-    const [ flag, setFlag ] = useState(true)
+    const [taskPriority, setTaskPriority] = useState("MEDIUM");
 
     const options = ['Filter by Status', 'Filter by Priority','Filter by DueDate'];
 
@@ -47,11 +46,10 @@ export default function DeveloperHomePage() {
         //taskService
     }
 
-    const updateTask = async () => {
-        taskService.update()
-    }
-
     
+    const updateTask = () => {
+        
+    };
 
     useEffect(() => {
         const fetchUsuario = async () => {
@@ -65,6 +63,7 @@ export default function DeveloperHomePage() {
     return (
         <div className="home-page-container">
             <h1>Developer Home Page</h1>
+            {taskPriority}
             <div className="icon-dropdown-container">
             {/* Icono para abrir el dropdown */}
             <div className="icon-dropdown" onClick={toggleDropdown}>
@@ -116,11 +115,12 @@ export default function DeveloperHomePage() {
             {/* Select para la prioridad de la tarea */}
             <div className="input-row">
                 <span>Priority:  </span>
-                <select>
-                    <option value="Pending">HIGH</option>
-                    <option value="OnGoing">MEDIUM</option>
-                    <option value="Done">LOW</option>
+                <select name='prioridad' id='prioridad'>
+                    <option value="HIGH">HIGH</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="LOW">LOW</option>
                 </select>
+                
             </div>
 
             {/* Botón para agregar la tarea */}

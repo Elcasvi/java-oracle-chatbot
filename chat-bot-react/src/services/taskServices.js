@@ -34,9 +34,9 @@ export default class taskServices{
         }
     }
 
-    async update(state){
+    async update(task, idTask){
         try {
-            const response = await api.post(``, state);
+            const response = await api.put(`/task/${idTask}`, task);
             return response.data
         } catch (error) {
             console.error("Error fetching task", error)
