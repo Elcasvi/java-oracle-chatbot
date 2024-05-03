@@ -20,8 +20,9 @@ export default function DeveloperHomePage() {
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [taskPriority, setTaskPriority] = useState("HIGH");
+    const [filteredTasks, setFilteredTasks] = useState([]); 
 
-    const options = ['Filter by Status', 'Filter by Priority','Filter by DueDate'];
+    const options = ['Filter by Status', 'Filter by Priority'];
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -66,6 +67,31 @@ export default function DeveloperHomePage() {
         window.location.reload();
     }
 
+    const handleSelectOption = (option) => {
+        if (option === 'Filter by Status') {
+            const statusOrder = {
+                'ONGOING': 3,
+                'TODO': 2,
+                'DONE': 1
+            };
+            const sortedTasks = tasks.slice().sort((a, b) => {
+                return statusOrder[b.status] - statusOrder[a.status];
+            });
+            setFilteredTasks(sortedTasks);
+        } else if (option === 'Filter by Priority') {
+            const priorityOrder = {
+                'HIGH': 3,
+                'MEDIUM': 2,
+                'LOW': 1
+            };
+            const sortedTasks = tasks.slice().sort((a, b) => {
+                return priorityOrder[b.priority] - priorityOrder[a.priority];
+            });
+            setFilteredTasks(sortedTasks);
+        }
+        setIsDropdownOpen(false);
+    };
+
     const formatFecha = () => {
         var fechaActual = new Date();
         // Obtener los componentes de la fecha y hora
@@ -86,6 +112,7 @@ export default function DeveloperHomePage() {
         const fetchUsuario = async () => {
             const usuario = await userService.getByEmail(email)
             setTasks(usuario.tasks)
+            setFilteredTasks(usuario.tasks)
         }
         fetchUsuario()
     }, []);
@@ -112,14 +139,14 @@ export default function DeveloperHomePage() {
             
             
             {isDropdownOpen && (
-            <FilterDropdown options={options} className="dropdown"/>
+            <FilterDropdown options={options} onSelectOption={handleSelectOption}/>
 )}
 </div> 
 
 </div>
 
             
-            <AllTasks tasks={tasks} />
+            <AllTasks tasks={filteredTasks} />
 
             <div className='options-container'>
                  {/* Botón para abrir el modal */}
