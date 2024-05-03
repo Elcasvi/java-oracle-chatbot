@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../HomePage.css'
+import taskServices from '../services/taskServices';
+
+const taskService = new taskServices();
 
 function AllTasks({ tasks }) {
 
@@ -27,6 +30,22 @@ function AllTasks({ tasks }) {
                 return 'gray';
         }
     };
+
+    const updateTaskStatus = async (taskId, e) => {
+        const taskStatus = e;
+        const taskToUpdate = tasks.find(task => task.id === taskId);
+        taskToUpdate.state = taskStatus
+
+        const respuesta = await taskService.update(taskToUpdate,taskId);
+    } 
+
+    const updateTaskPriority = async (taskId,e) => {
+        const taskPriority = e
+        const taskToUpdate = tasks.find(task => task.id === taskId);
+
+        taskToUpdate.priority = taskPriority
+        const respuesta = await taskService.update(taskToUpdate,taskId);
+    }
 
     return (
         <div className="tasks-container">
@@ -58,21 +77,21 @@ function AllTasks({ tasks }) {
                                 <h3>Status: </h3>
                             </div>
                             <div className="status-select">
-                                <select>
-                                    <option value="Pending">Pending</option>
-                                    <option value="OnGoing">OnGoing</option>
-                                    <option value="Done">Done</option>
-                                </select>
+                            <select value={task.state} onChange={(e) => updateTaskStatus(task.id, e.target.value)}>
+                  <option value="TODO">To Do</option>
+                  <option value="IN_PROGRESS">In Progress</option>
+                  <option value="DONE">Done</option>
+                </select>
                             </div>
                             <div className="status-label">
                                 <h3>Priority: </h3>
                             </div>
                             <div className="status-select">
-                                <select>
-                                    <option value="Low">Low</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="High">High</option>
-                                </select>
+                            <select value={task.priority} onChange={(e) => updateTaskPriority(task.id, e.target.value)}>
+                                <option value="LOW">Low</option>
+                                <option value="MEDIUM">Medium</option>
+                                <option value="HIGH">High</option>
+                            </select>
                             </div>
                                                 </div>
                                                 
@@ -81,6 +100,6 @@ function AllTasks({ tasks }) {
                                     ))}
                                 </div>
                             );
-                        }
+}
 
 export default AllTasks;
