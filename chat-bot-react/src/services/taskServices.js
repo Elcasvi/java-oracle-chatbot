@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://oketasksservice.sanchezapps.net/";
+const API_BASE_URL = "https://oketasksservice.sanchezapps.net";
 //const API_BASE_URL = "http://127.0.0.1:62941";
 
 const api = axios.create({
