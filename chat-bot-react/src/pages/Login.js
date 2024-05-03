@@ -21,13 +21,13 @@ function Login() {
       event.preventDefault();
       const userService = new userServices();
       userService.login(email, password).then(exist => {
-          console.log(exist);
+          //console.log(exist);
           if(exist){
             userService.getByEmail(email).then(data => {
               if(data.role === "MANAGER"){
-                navigate('/homePage')
+                navigate('/homePageManager')
               }else if (data.role === "DEVELOPER"){
-                navigate('/homePage')
+                navigate('/homePageDeveloper', { state: { email: email } });
               }else{
                 console.error("No existe rol")
               }

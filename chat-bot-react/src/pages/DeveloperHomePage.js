@@ -1,18 +1,27 @@
 import '../HomePage.css'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../util/TaskModel'
 import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
 import FilterDropdown from "../components/filterDropdown";
+import taskServices from '../services/taskServices';
+import { useLocation } from 'react-router-dom';
+import userServices from '../services/userServices';
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+const userService = new userServices();
+const taskService = new taskServices();
+
 export default function DeveloperHomePage() {
-
-
+    const location = useLocation();
+    const email = location.state.email;
+    const [ tasks, setTasks ] = useState([])
+    //const [ usuario, setUsuario ] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [taskPriority, setTaskPriority] = useState('');
+    const [ flag, setFlag ] = useState(true)
 
     const options = ['Filter by Status', 'Filter by Priority','Filter by DueDate'];
 
@@ -33,6 +42,24 @@ export default function DeveloperHomePage() {
     const handleAddTask = () => {
         closeModal();
     };
+
+    const createTask = async () => {
+        //taskService
+    }
+
+    const updateTask = async () => {
+        taskService.update()
+    }
+
+    
+
+    useEffect(() => {
+        const fetchUsuario = async () => {
+            const usuario = await userService.getByEmail(email)
+            setTasks(usuario.tasks)
+        }
+        fetchUsuario()
+    }, []);
 
   
     return (
@@ -63,7 +90,7 @@ export default function DeveloperHomePage() {
 </div>
 
             
-            <AllTasks tasks={Tasks} />
+            <AllTasks tasks={tasks} />
 
             <div className='options-container'>
                  {/* Botón para abrir el modal */}
