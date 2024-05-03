@@ -47,8 +47,10 @@ export default function DeveloperHomePage() {
     }
 
     
-    const updateTask = () => {
-        
+    const updateTask = (e) => {
+        const valor = e.target.value
+        setTaskPriority(valor)
+        console.log(taskPriority)
     };
 
     useEffect(() => {
@@ -115,7 +117,7 @@ export default function DeveloperHomePage() {
             {/* Select para la prioridad de la tarea */}
             <div className="input-row">
                 <span>Priority:  </span>
-                <select name='prioridad' id='prioridad'>
+                <select value={taskPriority} onChange={updateTask}>
                     <option value="HIGH">HIGH</option>
                     <option value="MEDIUM">MEDIUM</option>
                     <option value="LOW">LOW</option>
