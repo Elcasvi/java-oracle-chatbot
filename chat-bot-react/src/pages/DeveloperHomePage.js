@@ -20,7 +20,7 @@ export default function DeveloperHomePage() {
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [taskPriority, setTaskPriority] = useState("HIGH");
-    const [filteredTasks, setFilteredTasks] = useState(Tasks); 
+    const [filteredTasks, setFilteredTasks] = useState([]); 
 
     const options = ['Filter by Status', 'Filter by Priority'];
 
@@ -74,7 +74,7 @@ export default function DeveloperHomePage() {
                 'TODO': 2,
                 'DONE': 1
             };
-            const sortedTasks = Tasks.slice().sort((a, b) => {
+            const sortedTasks = tasks.slice().sort((a, b) => {
                 return statusOrder[b.status] - statusOrder[a.status];
             });
             setFilteredTasks(sortedTasks);
@@ -84,14 +84,13 @@ export default function DeveloperHomePage() {
                 'MEDIUM': 2,
                 'LOW': 1
             };
-            const sortedTasks = Tasks.slice().sort((a, b) => {
+            const sortedTasks = tasks.slice().sort((a, b) => {
                 return priorityOrder[b.priority] - priorityOrder[a.priority];
             });
             setFilteredTasks(sortedTasks);
         }
         setIsDropdownOpen(false);
     };
-
 
     const formatFecha = () => {
         var fechaActual = new Date();
@@ -113,6 +112,7 @@ export default function DeveloperHomePage() {
         const fetchUsuario = async () => {
             const usuario = await userService.getByEmail(email)
             setTasks(usuario.tasks)
+            setFilteredTasks(usuario.tasks)
         }
         fetchUsuario()
     }, []);
@@ -139,7 +139,7 @@ export default function DeveloperHomePage() {
             
             
             {isDropdownOpen && (
-            <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+            <FilterDropdown options={options} onSelectOption={handleSelectOption}/>
 )}
 </div> 
 
