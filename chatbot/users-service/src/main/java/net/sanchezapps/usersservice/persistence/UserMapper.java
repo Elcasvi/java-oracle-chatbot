@@ -1,6 +1,7 @@
 package net.sanchezapps.usersservice.persistence;
 
 import net.sanchezapps.api.core.users.User;
+import net.sanchezapps.usersservice.persistence.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

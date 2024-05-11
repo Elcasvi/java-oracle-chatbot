@@ -3,7 +3,7 @@ package net.sanchezapps.usersservice.services;
 import net.sanchezapps.api.core.tasks.Task;
 import net.sanchezapps.api.core.users.Status;
 import net.sanchezapps.api.core.users.User;
-import net.sanchezapps.usersservice.persistence.UserEntity;
+import net.sanchezapps.usersservice.persistence.entities.UserEntity;
 import net.sanchezapps.usersservice.persistence.UserMapper;
 import net.sanchezapps.usersservice.persistence.UsersRepository;
 import org.slf4j.Logger;

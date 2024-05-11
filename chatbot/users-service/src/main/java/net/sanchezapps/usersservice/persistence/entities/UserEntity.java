@@ -1,4 +1,4 @@
-package net.sanchezapps.usersservice.persistence;
+package net.sanchezapps.usersservice.persistence.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import net.sanchezapps.api.core.users.Role;
 import net.sanchezapps.api.core.users.Status;
+
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,4 +35,9 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
     private Status status;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinTable(name = "USER_PROJECT_MAPPING", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private Set<ProjectEntity> projects;
 }
