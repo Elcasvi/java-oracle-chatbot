@@ -6,14 +6,13 @@ replicaCount: 1
 
 image:
   #repository: chatbotaz.azurecr.io/users-service
-  #repository: users-service
-  repository: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+  repository: users-service
+  #repository: qro.ocir.io/ax7vdftklenx/chatbot/users-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets:
-  - name: ocirsecret
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 

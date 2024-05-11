@@ -39,5 +39,6 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "USER_PROJECT_MAPPING", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
+    @ToString.Exclude
     private Set<ProjectEntity> projects;
 }
