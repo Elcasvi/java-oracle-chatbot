@@ -1,8 +1,9 @@
-package net.sanchezapps.usersservice.services;
+package net.sanchezapps.usersservice.controllers;
 
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.api.core.users.UsersController;
-import net.sanchezapps.usersservice.persistence.UserMapper;
+import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
+import net.sanchezapps.usersservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +13,10 @@ import reactor.core.publisher.Mono;
 @RestController
 @CrossOrigin(origins = {"https://chatbot.sanchezapps.net","http://localhost:3000"})
 public class UsersControllerImpl implements UsersController {
-    private final UsersService service;
+    private final UserService service;
     @Autowired
-    public UsersControllerImpl(UsersService usersService, UserMapper mapper) {
-        this.service = usersService;
+    public UsersControllerImpl(UserService userService, UserMapper mapper) {
+        this.service = userService;
     }
 
     @Override

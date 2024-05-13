@@ -1,4 +1,4 @@
-package net.sanchezapps.usersservice.persistence;
+package net.sanchezapps.usersservice.persistence.mappers;
 
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.entities.UserEntity;

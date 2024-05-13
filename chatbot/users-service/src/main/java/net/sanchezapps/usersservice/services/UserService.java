@@ -3,38 +3,45 @@ package net.sanchezapps.usersservice.services;
 import net.sanchezapps.api.core.tasks.Task;
 import net.sanchezapps.api.core.users.Status;
 import net.sanchezapps.api.core.users.User;
+import net.sanchezapps.usersservice.persistence.entities.ProjectEntity;
 import net.sanchezapps.usersservice.persistence.entities.UserEntity;
-import net.sanchezapps.usersservice.persistence.UserMapper;
-import net.sanchezapps.usersservice.persistence.UsersRepository;
+import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
+import net.sanchezapps.usersservice.persistence.repositories.ProjectRepository;
+import net.sanchezapps.usersservice.persistence.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.logging.Level.FINE;
 
 @Service
-public class UsersService {
+public class UserService {
     private final String TASKS_SERVICE_URL="http://tasks-service";
     private final String SECURITY_SERVICE_URL="http://security-service";
     //private final String SECURITY_SERVICE_URL="http://localhost:8002";
 
-    private static final Logger LOG = LoggerFactory.getLogger(UsersService.class);
-    private final UsersRepository repository;
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+    private final UserRepository repository;
+    private final ProjectRepository prepository;
     private final WebClient webClient;
     private final UserMapper mapper;
     private final Scheduler jdbcScheduler;
     @Autowired
-    public UsersService(UsersRepository repository, WebClient.Builder webClientBuilder, UserMapper mapper, @Qualifier("jdbcScheduler") Scheduler jdbcScheduler) {
+    public UserService(UserRepository repository, ProjectRepository prepository, WebClient.Builder webClientBuilder, UserMapper mapper, @Qualifier("jdbcScheduler") Scheduler jdbcScheduler) {
         this.repository = repository;
+        this.prepository = prepository;
         this.webClient=webClientBuilder.build();
         this.mapper = mapper;
         this.jdbcScheduler = jdbcScheduler;
@@ -136,6 +143,8 @@ public class UsersService {
 
     private User internalOptionalGetUser(Optional<UserEntity> userEntity) {
         if(userEntity.isPresent()) {
+            System.out.println("User projects: ");
+            System.out.println(userEntity.get().getProjects());
             User userApi= mapper.entityToApi( userEntity.get());
             String url=TASKS_SERVICE_URL+"/users/"+userApi.getId()+"/tasks";
             return populateUserTasks(url, userApi);
