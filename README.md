@@ -1,6 +1,4 @@
 # Oracle Java Bot
-## OCI DevOps Enabled
-
 ## Introduction
 
 Welcome to the Oracle Java Bot project! This project aims to enhance productivity for Oracle developers by providing a Telegram web app for managing todo lists. Leveraging Spring, React, and Telegram, the Oracle Java Bot integrates seamlessly with Oracle Cloud technologies such as Docker, Kubernetes (OKE), and Autonomous Database.
