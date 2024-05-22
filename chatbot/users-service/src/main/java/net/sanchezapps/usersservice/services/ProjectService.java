@@ -50,6 +50,16 @@ public class ProjectService {
         }).subscribeOn(jdbcScheduler);
     }
 
+    public void delete(Long projectId) {
+       if(repository.findById(projectId).isPresent())
+       {
+           repository.deleteById(projectId);
+       }
+       else
+       {
+           throw new RuntimeException("Project not found");
+       }
+    }
 
     private Project internalOptionalGetproject(Optional<ProjectEntity> projectEntity) {
         if(projectEntity.isPresent()) {

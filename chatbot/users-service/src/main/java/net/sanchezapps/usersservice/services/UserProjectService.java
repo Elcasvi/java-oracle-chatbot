@@ -1,5 +1,6 @@
 package net.sanchezapps.usersservice.services;
 
+import jakarta.transaction.Transactional;
 import net.sanchezapps.api.core.projects.Project;
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.entities.ProjectEntity;
@@ -9,7 +10,10 @@ import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
 import net.sanchezapps.usersservice.persistence.repositories.ProjectRepository;
 import net.sanchezapps.usersservice.persistence.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.interceptor.CacheOperationInvoker;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -72,5 +76,28 @@ public class UserProjectService {
         users.add(userEntity);
         projectEntity.setUsers(users);
         projectRepository.save(projectEntity);
+    }
+
+    @Transactional
+    public Mono<Project> deleteUserFromProject(Long projectId, Long userId) {
+        return Mono.fromCallable(() -> {
+            ProjectEntity projectEntity = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
+            UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+            if (projectEntity.getUsers().remove(userEntity)) {
+                if(userEntity.getProjects().remove(projectEntity))
+                {
+                    projectRepository.save(projectEntity);
+                    userRepository.save(userEntity);
+                }
+                else{
+                    System.out.println("Project not found in project's user list.");
+                }
+            }
+            else {
+                System.out.println("User not found in project's user list.");
+            }
+            return projectMapper.entityToApi(projectEntity);
+        });
     }
 }

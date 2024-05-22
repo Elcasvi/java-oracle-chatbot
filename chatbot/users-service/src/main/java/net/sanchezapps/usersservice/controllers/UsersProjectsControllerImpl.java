@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin(origins = {"https://chatbot.sanchezapps.net","http://localhost:3000"})
@@ -34,5 +35,10 @@ public class UsersProjectsControllerImpl implements UsersProjectsController {
     @Override
     public void assignUserToProject(Long userId, Long projectId) {
         service.assignUserToProject(userId,projectId);
+    }
+
+    @Override
+    public Mono<Project> deleteUserFromProject(Long projectId, Long UserId) {
+        return service.deleteUserFromProject(projectId,UserId);
     }
 }

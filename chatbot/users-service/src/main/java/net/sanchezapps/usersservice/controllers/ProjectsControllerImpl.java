@@ -41,6 +41,7 @@ public class ProjectsControllerImpl implements ProjectsController {
 
     @Override
     public void delete(Long projectId) {
-
+        service.delete(projectId);
     }
+
 }

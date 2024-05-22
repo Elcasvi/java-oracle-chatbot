@@ -13,6 +13,7 @@ public class ProjectMapper {
         Project project = new Project();
         project.setId(projectEntity.getId());
         project.setName(projectEntity.getName());
+        project.setManagerId(projectEntity.getManagerId());
         return project;
     }
 
@@ -20,6 +21,7 @@ public class ProjectMapper {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(project.getId());
         projectEntity.setName(project.getName());
+        projectEntity.setManagerId(project.getManagerId());
 
         return projectEntity;
     }

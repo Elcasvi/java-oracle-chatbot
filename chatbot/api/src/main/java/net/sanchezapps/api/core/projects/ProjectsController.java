@@ -1,6 +1,5 @@
 package net.sanchezapps.api.core.projects;
 
-import net.sanchezapps.api.core.users.User;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,4 +19,6 @@ public interface ProjectsController {
 
     @DeleteMapping(value = "/projects/delete/{projectId}")
     void delete(@PathVariable Long projectId);
+
+
 }

@@ -28,7 +28,7 @@ docker-compose build
 
 # Check for errors (optional)
 if ($LastExitCode -ne 0) {
-  Write-Error "Error during docker-compose build. Exiting..." -ForegroundColor Read
+  Write-Error "Error during docker-compose build. Exiting..." -ForegroundColor Red
   exit
 }
 
