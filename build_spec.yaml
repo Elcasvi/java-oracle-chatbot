@@ -123,13 +123,13 @@ steps:
 
 outputArtifacts:
   - name: users-service
-    type: DOCKER_IMAGE // This will upload docker image in local
+    type: DOCKER_IMAGE
     location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
 
   - name: tasks-service
-    type: DOCKER_IMAGE // This will upload docker image in local
+    type: DOCKER_IMAGE
     location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
 
   - name: security-service
-    type: DOCKER_IMAGE // This will upload docker image in local
+    type: DOCKER_IMAGE
     location: ro.ocir.io/ax7vdftklenx/chatbot/security-service
