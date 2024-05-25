@@ -94,7 +94,7 @@ steps:
     timeoutInSeconds: 60
     command: |
       echo install dockler-compse plugin
-      yum install docker-compose-plugin
+      sudo yum install docker-compose-plugin
       echo docker version
       docker version
       echo docker-compose version
