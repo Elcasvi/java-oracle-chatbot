@@ -89,12 +89,13 @@ steps:
       echo mvn package
       mvn package
       docker images
+
   - type: Command
     name: "Install docker-compose"
     timeoutInSeconds: 60
     command: |
-      echo install dockler-compse plugin
-      sudo yum install docker-compose-plugin
+      echo install docker-compse plugin
+      yum -y install docker-compose-plugin
       echo docker version
       docker version
       echo docker-compose version
