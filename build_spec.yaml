@@ -92,7 +92,7 @@ steps:
 
   - type: Command
     name: "Install docker-compose"
-  -     timeoutInSeconds: 60
+    timeoutInSeconds: 60
     command: |
       echo install docker-compse plugin
       sudo yum install -y python3 python3-devel
