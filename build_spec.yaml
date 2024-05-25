@@ -121,15 +121,15 @@ steps:
       echo images with tags are
       docker images
 
-  outputArtifacts:
-    - name: users-service
-    type: DOCKER_IMAGE // This will upload docker image in local
-    location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+outputArtifacts:
+  - name: users-service
+  type: DOCKER_IMAGE // This will upload docker image in local
+  location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
 
-    - name: tasks-service
-    type: DOCKER_IMAGE // This will upload docker image in local
-    location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+  - name: tasks-service
+  type: DOCKER_IMAGE // This will upload docker image in local
+  location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
 
-    - name: security-service
-    type: DOCKER_IMAGE // This will upload docker image in local
-    location: ro.ocir.io/ax7vdftklenx/chatbot/security-service
+  - name: security-service
+  type: DOCKER_IMAGE // This will upload docker image in local
+  location: ro.ocir.io/ax7vdftklenx/chatbot/security-service
