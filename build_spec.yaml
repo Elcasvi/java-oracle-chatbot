@@ -91,30 +91,25 @@ steps:
       mvn package
       docker images
 
-  - type: Command
-    name: "Install docker-compose"
-    timeoutInSeconds: 60
-    command: |
-      echo docker version
-      docker version
-      echo Installing docker-compose
-      
-      sudo yum update
-      sudo yum install docker-compose-plugin
-
-      echo docker-compose version
-      docker-compose version
 
   - type: Command
     name: "Build Docker Images"
     timeoutInSeconds: 60
     command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
-      echo running docker update `Working in pwd`
-      echo running docker-compose build
-      docker-compose build
-      echo images are
-      docker images
+      echo Building security-service image
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
+      docker build -t security-service .
+      cd ..
+
+      echo Building tasks-service image
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/tasks-service
+      docker build -t tasks-service .
+      cd ..
+
+      echo Building users-service image
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/users-service
+      docker build -t users-service .
+      cd ..
       
       echo tag images
       docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
