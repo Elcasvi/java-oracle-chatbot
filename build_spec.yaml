@@ -34,7 +34,7 @@ steps:
       echo OCIR_HOST is $OCIR_HOST
       export OCIR_STORAGE_NAMESPACE=$OCIR_STORAGE_NAMESPACE_VAULT
       echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
-      echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/${YOUR_INITIALS}/:latest
+      echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/a01640495@tec.mx/:latest
     onFailure:
       - type: Command
         timeoutInSeconds: 40
