@@ -26,7 +26,7 @@ steps:
       echo JAVA_HOME is
       echo $JAVA_HOME
       echo JAVA_VERSION is
-      echo java -version
+      echo $JAVA_VERSION
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
       echo Extracting export variables -Working in 'pwd'
       echo transferring the OCIR_HOST and OCIR_STORAGE_NAMESPACE variables to the workspace
@@ -74,7 +74,7 @@ steps:
       echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
       echo PRIMARY_SOURCE_DIR is ${PRIMARY_SOURCE_DIR}
       echo This is the java version, it should be java 17
-      java version
+      java -version
       echo This is the maven version
       mvn -v
     onFailure:
