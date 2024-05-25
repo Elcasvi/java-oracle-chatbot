@@ -46,7 +46,7 @@ steps:
     name: "Install local JDK17"
     timeoutInSeconds: 10000
     command: |
-      yum -y install ggraalvm-17-native-image
+      yum -y install graalvm-17-native-image
       export PATH=$JAVA_HOME/bin:$PATH
       echo path is
       echo $PATH
