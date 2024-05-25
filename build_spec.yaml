@@ -113,8 +113,3 @@ steps:
       docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
       echo images with tags are
       docker images
-
-outputArtifacts:
-  - name: build-logs
-    type: GENERIC_ARTIFACT
-    location: /workspace/logs/build-logs
