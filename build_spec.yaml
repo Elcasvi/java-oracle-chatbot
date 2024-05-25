@@ -27,7 +27,7 @@ steps:
       echo $JAVA_HOME
       echo JAVA_VERSION is
       echo $JAVA_VERSION
-      cd ${OCI_PRIMARY_SOURCE_DIR}
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
       echo Extracting export variables -Working in 'pwd'
       echo transferring the OCIR_HOST and OCIR_STORAGE_NAMESPACE variables to the workspace
       export OCIR_HOST=$OCIR_HOST_VALUT
@@ -88,7 +88,7 @@ steps:
     name: "Build and Package Services"
     timeoutInSeconds: 1200
     command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
       echo Running maven package `Working in pwd`
       echo mvn clean
       mvn clean
@@ -100,7 +100,7 @@ steps:
     name: "Build Docker Images"
     timeoutInSeconds: 60
     command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
       echo running docker update `Working in pwd`
       echo running docker-compose build
       docker-compose build
