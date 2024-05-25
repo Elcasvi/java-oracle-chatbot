@@ -99,8 +99,8 @@ steps:
       docker version
       echo Installing docker-compose
       
-      yum update
-      yum install docker-compose-plugin
+      sudo yum update
+      sudo yum install docker-compose-plugin
 
       echo docker-compose version
       docker-compose version
