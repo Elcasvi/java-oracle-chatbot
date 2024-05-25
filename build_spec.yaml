@@ -6,7 +6,7 @@ failImmediatelyOnError: true
 
 env:
   variables:
-    JAVA_HOME: "javahome"
+    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm-java17"
     JAVA_VERSION: "17"
   vaultVariables:
     OCIR_HOST_VALUT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaahf3fg56aijkgulajay5iqhaarc4ndk6f2wuz2z73li4q
@@ -36,34 +36,23 @@ steps:
       echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
       echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/a01640495@tec.mx/:latest
     onFailure:
-      - type: Command
+      type: Command
         timeoutInSeconds: 40
-        command: |
+      -         command: |
           echo "Failed to extract export variables"
 
   - type: Command
-    name: "Install local JDK17"
-    timeoutInSeconds: 10000
-    command: |
-      cd ~
-      mkdir InstalledSoftware
-      cd InstalledSoftware
-      wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-      tar xf *tar.gz*
-      rm *tar.gz*
-      ls -l
-      export JAVA_HOME=`echo n ~/InstalledSoftware/jdk-*`
+     name: "Install Oracle GraalVM for JDK 17"
+     timeoutInSeconds: 10000
+     command: |
+      yum -y install ggraalvm-17-native-image
       export PATH=$JAVA_HOME/bin:$PATH
-      echo path is
-      echo $PATH
-      echo JAVA_HOME is
-      echo $JAVA_HOME
     onFailure:
       - type: Command
         timeoutInSeconds: 40
         command: |
           echo "Failure in install local JDK17"
-
+                                               
   - type: Command
     name: "Confirm Variables and Version"
     timeOutInSeconds: 10
