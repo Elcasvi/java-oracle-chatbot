@@ -26,7 +26,7 @@ steps:
       echo JAVA_HOME is
       echo $JAVA_HOME
       echo JAVA_VERSION is
-      echo $JAVA_VERSION
+      echo java -version
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
       echo Extracting export variables -Working in 'pwd'
       echo transferring the OCIR_HOST and OCIR_STORAGE_NAMESPACE variables to the workspace
