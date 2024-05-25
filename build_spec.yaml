@@ -94,11 +94,14 @@ steps:
     name: "Install docker-compose"
     timeoutInSeconds: 60
     command: |
-      echo install docker-compse plugin
-      sudo yum install -y python3 python3-devel
-      sudo pip3 install docker-compose
       echo docker version
       docker version
+
+      DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+      mkdir -p $DOCKER_CONFIG/cli-plugins
+      curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+      chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+
       echo docker-compose version
       docker-compose version
 
