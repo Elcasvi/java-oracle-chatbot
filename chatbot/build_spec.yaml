@@ -1,0 +1,120 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+shell: bash
+failImmediatelyOnError: true
+
+env:
+  variables:
+    JAVA_HOME: "javahome"
+    JAVA_VERSION: "17"
+  vaultVariables:
+    OCIR_HOST_VALUT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaahf3fg56aijkgulajay5iqhaarc4ndk6f2wuz2z73li4q
+    OCIR_STORAGE_NAMESPACE_VAULT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaajyqtytzl57umlknxmwdi72ltmdtpq4zlz4o7evs2atwa
+  exportedVariables:
+    - OCIR_HOST
+    - OCIR_STORAGE_NAMESPACE
+
+steps:
+  - type: Command
+    name: "Extract export variables"
+    timeoutInSeconds: 60
+    failImmediatelyOnError: true
+    command: |
+      echo PATH is
+      echo $PATH
+      echo JAVA_HOME is
+      echo $JAVA_HOME
+      echo JAVA_VERSION is
+      echo $JAVA_VERSION
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      echo Extracting export variables -Working in 'pwd'
+      echo transferring the OCIR_HOST and OCIR_STORAGE_NAMESPACE variables to the workspace
+      export OCIR_HOST=$OCIR_HOST_VALUT
+      echo OCIR_HOST is $OCIR_HOST
+      export OCIR_STORAGE_NAMESPACE=$OCIR_STORAGE_NAMESPACE_VAULT
+      echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
+      echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/${YOUR_INITIALS}/:latest
+    onFailure:
+      - type: Command
+        timeoutInSeconds: 40
+        command: |
+          echo "Failed to extract export variables"
+
+  - type: Command
+    name: "Install local JDK17"
+    timeoutInSeconds: 10000
+    command: |
+      cd ~
+      mkdir InstalledSoftware
+      cd InstalledSoftware
+      wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+      tar xf *tar.gz*
+      rm *tar.gz*
+      ls -l
+      export JAVA_HOME=`echo n ~/InstalledSoftware/jdk-*`
+      export PATH=$JAVA_HOME/bin:$PATH
+      echo path is
+      echo $PATH
+      echo JAVA_HOME is
+      echo $JAVA_HOME
+    onFailure:
+      - type: Command
+        timeoutInSeconds: 40
+        command: |
+          echo "Failure in install local JDK17"
+
+  - type: Command
+    name: "Confirm Variables and Version"
+    timeOutInSeconds: 10
+    command: |
+      echo PATH is $PATH
+      echo JAVA_HOME is $JAVA_HOME
+      echo OCIR_HOST is $OCIR_HOST
+      echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
+      echo PRIMARY_SOURCE_DIR is ${PRIMARY_SOURCE_DIR}
+      echo This is the java version, it should be java 17
+      java version
+      echo This is the maven version
+      mvn -v
+    onFailure:
+      - type: Command
+        timeOutInSeconds: 40
+        Command: |
+          echo "Error in Confirm Variables and Version"
+          
+
+  - type: Command
+    name: "Build and Package Services"
+    timeoutInSeconds: 1200
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      echo Running maven package `Working in pwd`
+      echo mvn clean
+      mvn clean
+      echo mvn package
+      mvn package
+      docker images
+
+  - type: Command
+    name: "Build Docker Images"
+    timeoutInSeconds: 60
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      echo running docker update `Working in pwd`
+      echo running docker-compose build
+      docker-compose build
+      echo images are
+      docker images
+      
+      echo tag images
+      docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
+      docker tag tasks-service qro.ocir.io/ax7vdftklenx/chatbot/tasks-service:latest
+      docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
+      echo images with tags are
+      docker images
+
+outputArtifacts:
+  - name: build-logs
+    type: GENERIC_ARTIFACT
+    location: /workspace/logs/build-logs
