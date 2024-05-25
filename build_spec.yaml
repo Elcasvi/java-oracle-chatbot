@@ -99,6 +99,8 @@ steps:
     timeoutInSeconds: 60
     command: |
       echo Building security-service image
+      echo rm
+      rm -rf /var/lib/docker/*
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
       ls
       docker build -t security-service .
