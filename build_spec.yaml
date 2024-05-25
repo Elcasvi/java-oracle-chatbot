@@ -132,4 +132,4 @@ outputArtifacts:
 
   - name: security-service
     type: DOCKER_IMAGE
-    location: ro.ocir.io/ax7vdftklenx/chatbot/security-service
+    location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
