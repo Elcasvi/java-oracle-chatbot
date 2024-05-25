@@ -41,18 +41,23 @@ steps:
       -         command: |
           echo "Failed to extract export variables"
 
-  - type: Command
-     name: "Install Oracle GraalVM for JDK 17"
-     timeoutInSeconds: 10000
-     command: |
+
+- type: Command
+    name: "Install local JDK17"
+    timeoutInSeconds: 10000
+    command: |
       yum -y install ggraalvm-17-native-image
       export PATH=$JAVA_HOME/bin:$PATH
+      echo path is
+      echo $PATH
+      echo JAVA_HOME is
+      echo $JAVA_HOME
     onFailure:
       - type: Command
         timeoutInSeconds: 40
         command: |
           echo "Failure in install local JDK17"
-                                               
+
   - type: Command
     name: "Confirm Variables and Version"
     timeOutInSeconds: 10
