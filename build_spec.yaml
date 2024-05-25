@@ -94,10 +94,13 @@ steps:
 
   - type: Command
     name: "Build Docker Images"
+    shell: bash
+    user: root
     timeoutInSeconds: 60
     command: |
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
+      ls
       docker build -t security-service .
       cd ..
 
