@@ -91,7 +91,7 @@ steps:
       docker images
 
   - type: Command
-  -     name: "Install docker-compose"
+    name: "Install docker-compose"
     timeoutInSeconds: 60
     command: |
       echo docker version
