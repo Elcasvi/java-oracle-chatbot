@@ -7,6 +7,7 @@ failImmediatelyOnError: true
 env:
   variables:
     JAVA_HOME : "/usr/lib64/graalvm/graalvm-java17"
+    DOCKER_COMPOSE: "/usr/local/bin/docker-compose"
     JAVA_VERSION: "17"
   vaultVariables:
     OCIR_HOST_VALUT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaahf3fg56aijkgulajay5iqhaarc4ndk6f2wuz2z73li4q
@@ -98,9 +99,15 @@ steps:
       docker version
       echo Installing docker-compose
 
-      curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-      chmod +x /usr/local/bin/docker-compose
-      source $HOME/.docker/config.json
+      yum update
+      yum install -y yum-utils
+      yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      sudo yum update
+      yum install docker-ce docker-ce-cli containerd.io
+      systemctl start docker
+      systemctl enable docker
+      yum update
+      yum install docker-compose-plugin
 
       echo docker-compose version
       docker-compose version
