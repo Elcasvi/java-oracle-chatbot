@@ -42,7 +42,7 @@ steps:
           echo "Failed to extract export variables"
 
 
-- type: Command
+  - type: Command
     name: "Install local JDK17"
     timeoutInSeconds: 10000
     command: |
