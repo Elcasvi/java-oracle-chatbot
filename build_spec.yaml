@@ -6,7 +6,7 @@ failImmediatelyOnError: true
 
 env:
   variables:
-    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm-java17"
+    JAVA_HOME : "/usr/lib64/graalvm/graalvm-java17"
     JAVA_VERSION: "17"
   vaultVariables:
     OCIR_HOST_VALUT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaahf3fg56aijkgulajay5iqhaarc4ndk6f2wuz2z73li4q
