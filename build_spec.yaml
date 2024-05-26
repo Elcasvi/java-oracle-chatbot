@@ -135,7 +135,7 @@ steps:
       echo entering /chatbot/k8s/oke
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke
 
-      entering security folder
+      echo entering security folder
       cd security
       echo Performing helm package
       helm package .
