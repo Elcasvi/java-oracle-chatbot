@@ -135,7 +135,7 @@ steps:
       helm registry login -u $TENANCY_NAMESPACE/$OCIR_USERNAME ${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io -p $OCIR_AUTH_TOKEN_VAULT
       export HELM_EXPERIMENTAL_OCI=1
       echo Performing helm push
-      helm push ./*.tgz oci://qro.ocir.io/$TENANCY_NAMESPACE/helm
+      helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
 
 outputArtifacts:
   - name: users-service
