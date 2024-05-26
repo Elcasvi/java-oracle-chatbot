@@ -145,7 +145,7 @@ steps:
       cd tasks
       echo Performing helm package
       helm package .
-      cd..
+      cd ..
 
       echo entering users folder
       cd users
