@@ -17,7 +17,6 @@ env:
   exportedVariables:
     - OCIR_HOST
     - OCIR_STORAGE_NAMESPACE
-    - CHART_NAME
     - CHART_VERSION
 
 steps:
@@ -172,8 +171,7 @@ steps:
     name: "Export Helm Charts Variables"
     timeoutInSeconds: 1200
     command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}/mychart
-      CHART_NAME=`yq eval '.name' Chart.yaml`
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
       CHART_VERSION=`yq eval '.version' Chart.yaml`
 
 outputArtifacts:
