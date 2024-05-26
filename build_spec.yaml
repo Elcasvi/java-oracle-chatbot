@@ -124,16 +124,16 @@ steps:
       docker images
 
   - type: Command
-      timeoutInSeconds: 1200
-      name: "Helm Chart"
-      command: |
-        TENANCY_NAMESPACE=`oci os ns get --query data --raw-output`
-        cd ${OCI_PRIMARY_SOURCE_DIR}/k8s/oke
-        cd security
-        helm package .
-        helm registry login $OCIR_HOST_VALUT -u $OCIR_STORAGE_NAMESPACE_VAULT/OCIR_USERNAME -p $OCIR_AUTH_TOKEN_VAULT
-        export HELM_EXPERIMENTAL_OCI=1
-        helm push ./*.tgz oci://qro.ocir.io/$TENANCY_NAMESPACE/helm
+    name: "Helm Chart"
+    timeoutInSeconds: 1200
+    command: |
+      TENANCY_NAMESPACE=`oci os ns get --query data --raw-output`
+      cd ${OCI_PRIMARY_SOURCE_DIR}/k8s/oke
+      cd security
+      helm package .
+      helm registry login $OCIR_HOST_VALUT -u $OCIR_STORAGE_NAMESPACE_VAULT/OCIR_USERNAME -p $OCIR_AUTH_TOKEN_VAULT
+      export HELM_EXPERIMENTAL_OCI=1
+      helm push ./*.tgz oci://qro.ocir.io/$TENANCY_NAMESPACE/helm
 
 outputArtifacts:
   - name: users-service
