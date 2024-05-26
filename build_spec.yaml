@@ -17,6 +17,8 @@ env:
   exportedVariables:
     - OCIR_HOST
     - OCIR_STORAGE_NAMESPACE
+    - CHART_NAME
+    - CHART_VERSION
 
 steps:
   - type: Command
@@ -124,18 +126,48 @@ steps:
       docker images
 
   - type: Command
-    name: "Helm Chart"
+    name: "Push Helm Charts"
     timeoutInSeconds: 1200
     command: |
       TENANCY_NAMESPACE=`oci os ns get --query data --raw-output`
-      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
-      echo Performing helm package
-      helm package .
-      echo Performing helm registry login
       helm registry login -u $TENANCY_NAMESPACE/$OCIR_USERNAME ${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io -p $OCIR_AUTH_TOKEN_VAULT
       export HELM_EXPERIMENTAL_OCI=1
-      echo Performing helm push
+
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
+      //echo Performing helm package
+      helm package .
+      cd ..
+
+      cd tasks
+      helm package .
+      cd..
+
+      cd users
+      helm package .
+      cd ..
+
+      echo performing push to security repo
+      cd security
       helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
+      cd ..
+
+      echo performing push to security repo
+      cd tasks
+      helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
+      cd ..
+
+      echo performing push to security repo
+      cd users
+      helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
+      cd ..
+
+  - type: Command
+    name: "Export Helm Charts Variables"
+    timeoutInSeconds: 1200
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}/mychart
+      CHART_NAME=`yq eval '.name' Chart.yaml`
+      CHART_VERSION=`yq eval '.version' Chart.yaml`
 
 outputArtifacts:
   - name: users-service
