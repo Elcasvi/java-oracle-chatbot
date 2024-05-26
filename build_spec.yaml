@@ -132,7 +132,7 @@ steps:
       echo Performing helm package
       helm package .
       echo Performing helm registry login
-      helm registry login $OCIR_HOST_VALUT -u $OCIR_STORAGE_NAMESPACE_VAULT/OCIR_USERNAME -p $OCIR_AUTH_TOKEN_VAULT
+      helm registry login -u $TENANCY_NAMESPACE/$OCIR_USERNAME ${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io -p $OCIR_AUTH_TOKEN_VAULT
       export HELM_EXPERIMENTAL_OCI=1
       echo Performing helm push
       helm push ./*.tgz oci://qro.ocir.io/$TENANCY_NAMESPACE/helm
