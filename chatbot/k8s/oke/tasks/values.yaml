@@ -5,13 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: tasks-service
-  #repository: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+  #repository: tasks-service
+  repository: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: ocirsecret
 nameOverride: ""
 fullnameOverride: ""
 
@@ -30,7 +31,7 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
+# fsGroup: 2000
 
 securityContext: {}
   # capabilities:
@@ -38,7 +39,7 @@ securityContext: {}
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
-  # runAsUser: 1000
+# runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -71,7 +72,7 @@ resources: {}
   #   memory: 128Mi
   # requests:
   #   cpu: 100m
-  #   memory: 128Mi
+#   memory: 128Mi
 
 #livenessProbe:
 #  httpGet:

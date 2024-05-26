@@ -2,5 +2,5 @@
 $K8sDir = (Get-Location).Path + '\k8s\components'
 Set-Location $k8sDir
 
-Write-Host "Deleting minikube"
+Write-Host "Deleting minikube" -ForegroundColor Blue
 minikube delete
