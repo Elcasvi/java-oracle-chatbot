@@ -167,13 +167,6 @@ steps:
       helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
       cd ..
 
-  - type: Command
-    name: "Export Helm Charts Variables"
-    timeoutInSeconds: 1200
-    command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
-      CHART_VERSION=`yq eval '.version' Chart.yaml`
-
 outputArtifacts:
   - name: users-service
     type: DOCKER_IMAGE
