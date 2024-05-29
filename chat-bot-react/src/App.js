@@ -6,13 +6,14 @@ import EditTask from "./pages/EditTask";
 import PruebaUser from "./pages/PruebaUser";
 import ManagerHomePage from './pages/ManagerHomePage';
 import ManagerViewTaskDeveloper from './pages/ManagerViewTaskDeveloper'; // Importa el componente ManagerViewTaskDeveloper
+import DeveloperHomePage from './pages/DeveloperHomePage';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/homePage" element={<ManagerHomePage />} />
+        <Route path="/homePage" element={<DeveloperHomePage />} />
         <Route path="/task/:id" element={<EditTask />} />
         <Route path="/tasks/:userId" element={<ManagerViewTaskDeveloper />} /> {/* Agrega la ruta para ManagerViewTaskDeveloper */}
       </Routes>

@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
+import {Select, SelectItem} from "@nextui-org/react";
+import { EditIcon } from "../assets/icons/edit_icon.tsx";
+
+
 import '../HomePage.css'
+
+const animals = [
+    {key: "low", label: "Low"},
+    {key: "med", label: "Medium"},
+    {key: "high", label: "High"},
+    
+  ];
 
 function AllTasks({ tasks }) {
 
@@ -48,6 +59,7 @@ function AllTasks({ tasks }) {
                             <span className="dev-card-manager-numTask">State: {task.state}</span>    
                             <span className="dev-card-manager-numTask">Priority: {task.priority}</span>
                             <span className="dev-card-manager-numTask">Last Updated: {task.lastUpdated}</span>
+                            <EditIcon />
                             
                             
                         </div>
@@ -58,21 +70,27 @@ function AllTasks({ tasks }) {
                                 <h3>Status: </h3>
                             </div>
                             <div className="status-select">
-                                <select>
-                                    <option value="Pending">Pending</option>
-                                    <option value="OnGoing">OnGoing</option>
-                                    <option value="Done">Done</option>
-                                </select>
+                                <Select
+                                items={animals}
+                                size='sm'
+                                placeholder="Status"
+                            
+                                >
+                                {(animal) => <SelectItem>{animal.label}</SelectItem>}
+                                </Select>
                             </div>
                             <div className="status-label">
                                 <h3>Priority: </h3>
                             </div>
                             <div className="status-select">
-                                <select>
-                                    <option value="Low">Low</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="High">High</option>
-                                </select>
+                            <Select
+                                items={animals}
+                                size='sm'
+                                placeholder="Priority"
+                            
+                                >
+                                {(animal) => <SelectItem>{animal.label}</SelectItem>}
+                                </Select>
                             </div>
                                                 </div>
                                                 

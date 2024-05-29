@@ -4,6 +4,8 @@ import '../util/TaskModel';
 import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
 import FilterDropdown from '../components/filterDropdown';
+import {Select, SelectItem} from "@nextui-org/react";
+import {animals} from "./data";
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 export default function DeveloperHomePage() {
@@ -60,7 +62,7 @@ export default function DeveloperHomePage() {
         <div className="home-page-container">
             <h1>Developer Home Page</h1>
             <div className="icon-dropdown-container">
-                <div className="icon-dropdown" onClick={toggleDropdown}>
+                <div className="icon-filter-container" onClick={toggleDropdown}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="custom-icon" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -93,11 +95,16 @@ export default function DeveloperHomePage() {
                         </div>
                         <div className="input-row">
                             <span>Priority:  </span>
-                            <select>
-                                <option value="HIGH">HIGH</option>
-                                <option value="MEDIUM">MEDIUM</option>
-                                <option value="LOW">LOW</option>
-                            </select>
+                            
+                            <Select
+                            items={animals}
+                            size="sm"
+                            placeholder="Priority"
+                            className="max-w-xs"
+                            >
+                            {(animal) => <SelectItem>{animal.label}</SelectItem>}
+                            </Select>
+                           
                         </div>
                         <button className="add-button" onClick={handleAddTask}>Add</button>
                     </div>

@@ -89,6 +89,17 @@
     display: inline-block; 
 }
 
+.icon-filter-container {
+    text-align: center;
+    left: 58.5%;
+    max-width: fit-content;
+}
+
+/* En tu archivo CSS */
+.icon-filter-container {
+    position: relative; /* Cambia a posición relativa */
+    cursor: pointer;
+}
 .dropdown {
     position: absolute; /* Establece la posición absoluta para el dropdown */
     top: calc(100% + 5px); 
