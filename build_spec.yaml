@@ -41,9 +41,9 @@ steps:
       echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/a01640495@tec.mx/:latest
     onFailure:
      type: Command
-       timeoutInSeconds: 40
-       command: |
-          echo "Failed to extract export variables"
+     timeoutInSeconds: 40
+     command: |
+        echo "Failed to extract export variables"
 
   
 
