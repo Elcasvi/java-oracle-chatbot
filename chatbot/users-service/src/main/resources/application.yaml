@@ -17,13 +17,21 @@ spring:
   application:
     name: users-service
 
+
+#  datasource:
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
+#    username: USERS_DB
+#    password: VUeXKEsXEnr8cZW
+#  jpa:
+#    database: ORACLE
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
   datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
-    username: USERS_DB
-    password: VUeXKEsXEnr8cZW
+    url: jdbc:sqlserver://chatbotserveroci.database.windows.net:1433;database=chatbot;user=casvi@chatbotserveroci;password=Developer09+;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
-    database: ORACLE
     hibernate:
       ddl-auto: update
     show-sql: true

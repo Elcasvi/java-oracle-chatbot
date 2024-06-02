@@ -4,3 +4,4 @@ Set-Location $k8sDir
 
 Write-Host "Deleting minikube" -ForegroundColor Blue
 minikube delete
+Set-Location $microserviceDir

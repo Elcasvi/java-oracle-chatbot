@@ -40,11 +40,31 @@ steps:
       echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
       echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/a01640495@tec.mx/:latest
     onFailure:
-     - type: Command
+     type: Command
        timeoutInSeconds: 40
        command: |
           echo "Failed to extract export variables"
 
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Install Node Prereqs"
+    command: |
+      cd ${OCI_WORKSPACE_DIR}/node_express
+      # install nvm
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+     -       export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      nvm install lts/erbium
+      echo "NODE VERSION: $(node -v)"
+      echo "NPM VERSION: $(npm -v)"
+
+    onFailure:
+      - type: Command
+     -         command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
 
   - type: Command
     name: "Install local JDK17"
@@ -83,7 +103,7 @@ steps:
           
 
   - type: Command
-    name: "Build and Package Services"
+    name: "Build and Package Java Services"
     timeoutInSeconds: 1200
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
@@ -94,9 +114,23 @@ steps:
       mvn package
       docker images
 
+  - type: Command
+    timeoutInSeconds: 600
+    name: "NPM install"
+    command: |
+      cd ${OCI_WORKSPACE_DIR}/chat-bot-react
+      npm install
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
 
   - type: Command
-    name: "Build Docker Images"
+    name: "Build Java Docker Images"
     shell: bash
     user: root
     timeoutInSeconds: 60
@@ -124,8 +158,22 @@ steps:
       echo images with tags are
       docker images
 
+  - type: command
+    name: "Build React Docker Images"
+    shell: bash
+    user: root
+    timeoutInSeconds: 60
+    command: |
+      echo Building react project
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chat-bot-react
+      docker build -t UI-service .
+      cd ..
+
+      echo tag images
+      docker tag UI-service qro.ocir.io/ax7vdftklenx/chatbot/UI-service:latest
+
   - type: Command
-    name: "Push Helm Charts"
+    name: "Push Java Helm Charts"
     timeoutInSeconds: 1200
     command: |
       TENANCY_NAMESPACE=`oci os ns get --query data --raw-output`
@@ -167,6 +215,27 @@ steps:
       helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
       cd ..
 
+  - type: Command
+    name: "Push React Helm Chart"
+    timeoutInSeconds: 1200
+    command: |
+
+      TENANCY_NAMESPACE=`oci os ns get --query data --raw-output`
+      helm registry login -u $TENANCY_NAMESPACE/$OCIR_USERNAME ${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io -p $OCIR_AUTH_TOKEN_VAULT
+      export HELM_EXPERIMENTAL_OCI=1
+      echo entering /chatbot/k8s/oke
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chat-bot-react/k8s/oke
+
+      echo entering UI folder
+      cd ui
+      echo Performing helm package
+      helm package .
+
+      echo performing push to UI repo
+      helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
+      cd ..
+
+
 outputArtifacts:
   - name: users-service
     type: DOCKER_IMAGE
@@ -179,4 +248,7 @@ outputArtifacts:
   - name: security-service
     type: DOCKER_IMAGE
     location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
-    
+
+   - name: UI-service
+    type: DOCKER_IMAGE
+    location: qro.ocir.io/ax7vdftklenx/chatbot/UI-service

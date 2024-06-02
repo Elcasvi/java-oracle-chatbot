@@ -4,14 +4,14 @@ Set-Location $microserviceDir
 
 Write-Host "Runing mvn clean" -ForegroundColor Blue
 mvn clean
-if($LASTEXITCODE -ne 0){
+if($LastExitCode -ne 0){
     Write-Error "Error during mvn clean. Exiting..."
     exit
 }
 
 Write-Host "Runing mvn verify" -ForegroundColor Blue
 mvn verify
-if($LASTEXITCODE -ne 0){
+if($LastExitCode -ne 0){
     Write-Error "Error during mvn verify. Exiting..."
     exit
 }
@@ -36,7 +36,7 @@ minikube -p minikube docker-env | Invoke-Expression
 
 Write-Host "Running docker-compose build"
 docker-compose build
-if($LASTEXITCODE -ne 0){
+if($LastExitCode -ne 0){
     Write-Error "Error during docker-compose build. Exiting..."
     exit
 }
@@ -50,3 +50,4 @@ helm install users-service users
 
 Write-Host "Installing tasks-service..." -ForegroundColor Green
 helm install tasks-service tasks
+Set-Location $microserviceDir
