@@ -185,7 +185,3 @@ outputArtifacts:
   - name: security-service
     type: DOCKER_IMAGE
     location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
-
-   - name: UI-service
-    type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/UI-service
