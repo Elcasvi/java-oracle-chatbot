@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@CrossOrigin(origins = {"https://chatbot.sanchezapps.net","http://localhost:3000"})
+@CrossOrigin(origins = {"https://chatbot.sanchezapps.net","https://okeui.sanchezapps.net","http://localhost:3000"})
 public class UsersProjectsControllerImpl implements UsersProjectsController {
     private final UserProjectService service;
     @Autowired

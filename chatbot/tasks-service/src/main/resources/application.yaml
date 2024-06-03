@@ -17,23 +17,23 @@ spring:
   application:
     name: tasks-service
 
-#  datasource:
-#    driver-class-name: oracle.jdbc.OracleDriver
-#    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
-#    username: TASKS_DB
-#    password: 0zjPF83YwFx8Ge7
-#  jpa:
-#    database: ORACLE
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
   datasource:
-    url: jdbc:sqlserver://chatbotserveroci.database.windows.net:1433;database=chatbot;user=casvi@chatbotserveroci;password=Developer09+;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
+    username: TASKS_DB
+    password: 0zjPF83YwFx8Ge7
   jpa:
+    database: ORACLE
     hibernate:
       ddl-auto: update
     show-sql: true
+#  datasource:
+#    url: jdbc:sqlserver://chatbotserveroci.database.windows.net:1433;database=chatbot;user=casvi@chatbotserveroci;password=Developer09+;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
 
 ---
 spring:
