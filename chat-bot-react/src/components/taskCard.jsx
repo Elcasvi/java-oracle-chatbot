@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TaskModal from './taskModal'; // Importar el componente TaskModal
-import '../taskCard.css'
+
 
 function TaskCard({ tasks }) {
     const [selectedTask, setSelectedTask] = useState(null); // Estado para la tarea seleccionada

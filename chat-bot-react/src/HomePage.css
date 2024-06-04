@@ -29,22 +29,12 @@
     height: 35px;
 }
 
-.status-dropdown {
-    display: flex;
-    flex-direction: column; /* Para colocar los elementos en columnas */
-    align-items: center; /* Para centrar horizontalmente */
-    margin-left: 50px;
-}
 
 
-.status-label {
-    
-    margin: 5px; /* Espacio entre el texto "Status" y el select */
-}
 
-.status-select {
-    width: 100%; /* Para que el select ocupe todo el ancho disponible */
-}
+
+
+
 
 .modal-content {
     display: flex;
@@ -62,48 +52,47 @@
     margin-bottom: 10px; /* Espacio entre las filas */
 }
 
-.input-row input,
-.input-row select {
-    margin-right: 10px; /* Espacio entre los elementos en una fila */
-}
 
-.input-row select {
-    width: 150px;
-    height: 30px;
-    margin: 10px; /* Para que el select ocupe todo el espacio disponible */
-}
+.filter-dropdown {
+        position: absolute;
+        top: calc(10%+10px);
+        left: 65%;
+        transform: translateX(-50%);
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        min-width: 170px; /* Establece un ancho mínimo */
+    } 
 
-.custom-icon {
-    color: #b34545;
+    .filter-dropdown ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-    width: 35px; /* Ajusta el ancho del icono */
-    height: 35px; /* Ajusta la altura del icono */
-    margin-left: 900px; /* Mueve el icono hacia la derecha */
-    margin-top: 10px; /* Mueve el icono hacia abajo */
-}
+    .filter-dropdown li {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
 
-.icon-dropdown-container {
-    position: relative;
-    right: 120px; /* Mueve el icono 20px hacia la derecha */
-    top: 0px; /* Mueve el icono 10px hacia abajo */
-    display: inline-block; 
-}
+    .filter-dropdown li:hover {
+        background-color: #f0f0f0;
+    }
+    
 
-.icon-filter-container {
-    text-align: center;
-    left: 58.5%;
-    max-width: fit-content;
-}
+
+
+
+
+
+
 
 /* En tu archivo CSS */
 .icon-filter-container {
     position: relative; /* Cambia a posición relativa */
     cursor: pointer;
 }
-.dropdown {
-    position: absolute; /* Establece la posición absoluta para el dropdown */
-    top: calc(100% + 5px); 
-    left: 58.5%;/* Coloca el punto de referencia del dropdown en el centro horizontal */
-    
-    
-}
+
