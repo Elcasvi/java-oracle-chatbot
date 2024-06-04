@@ -128,8 +128,13 @@ steps:
     name: "Export Helm chart version"
     timeoutInSeconds: 1200
     command: |
+      mkdir -p ~/.local/bin
+      wget https://github.com/mikefarah/yq/releases/download/v4.25.1/yq_linux_amd64 -O ~/.local/bin/yq
+      chmod +x ~/.local/bin/yq
+      export PATH=$HOME/.local/bin:$PATH
+
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
-      CHART_VERSION=$(grep '^version:' Chart.yaml | awk '{print $2}')
+      CHART_VERSION=`yq eval '.version' Chart.yaml`
 
   - type: Command
     name: "Push Helm Charts"
