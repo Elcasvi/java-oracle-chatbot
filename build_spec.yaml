@@ -124,7 +124,7 @@ steps:
       echo images with tags are
       docker images
                    
-  -type: Command
+  - type: Command
     name: "Export Helm chart version"
     timeoutInSeconds: 1200
     command: |
