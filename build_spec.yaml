@@ -129,7 +129,7 @@ steps:
     timeoutInSeconds: 1200
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
-      CHART_VERSION=`yq eval '.version' Chart.yaml`
+      CHART_VERSION=$(grep '^version:' Chart.yaml | awk '{print $2}')
 
   - type: Command
     name: "Push Helm Charts"
