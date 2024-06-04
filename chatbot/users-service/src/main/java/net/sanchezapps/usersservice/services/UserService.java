@@ -1,5 +1,6 @@
 package net.sanchezapps.usersservice.services;
 
+import net.sanchezapps.api.core.projects.Project;
 import net.sanchezapps.api.core.tasks.Task;
 import net.sanchezapps.api.core.users.Status;
 import net.sanchezapps.api.core.users.User;
@@ -107,15 +108,16 @@ public class UserService {
         }).subscribeOn(jdbcScheduler);
     }
 
-
-    //Endpoint DELETE NOSTROS
     public void delete(Long userId) {
-        if(exists(userId)){
-            repository.deleteById(userId);
+        UserEntity userEntity = repository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        if(!userEntity.getProjects().isEmpty())
+        {
+            userEntity.setProjects(new HashSet<>());
+            repository.save(userEntity);
         }
+        repository.deleteById(userId);
     }
 
-    //Endpoint DELETE ENTREGA
     public Mono<User> suspend(Long userId) {
         if (exists(userId)) {
             return Mono.fromCallable(()->{

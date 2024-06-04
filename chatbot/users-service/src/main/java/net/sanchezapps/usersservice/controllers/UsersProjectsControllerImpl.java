@@ -3,9 +3,7 @@ package net.sanchezapps.usersservice.controllers;
 import net.sanchezapps.api.core.projects.Project;
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.api.core.users.UsersProjectsController;
-import net.sanchezapps.usersservice.services.ProjectService;
 import net.sanchezapps.usersservice.services.UserProjectService;
-import net.sanchezapps.usersservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +15,7 @@ import reactor.core.publisher.Mono;
 public class UsersProjectsControllerImpl implements UsersProjectsController {
     private final UserProjectService service;
     @Autowired
-    public UsersProjectsControllerImpl(UserService userService, ProjectService projectService, UserProjectService service)
+    public UsersProjectsControllerImpl(UserProjectService service)
     {
         this.service = service;
     }

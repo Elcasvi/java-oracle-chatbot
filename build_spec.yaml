@@ -123,6 +123,13 @@ steps:
       docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
       echo images with tags are
       docker images
+                   
+  -type: Command
+    name: "Export Helm chart version"
+    timeoutInSeconds: 1200
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
+      CHART_VERSION=`yq eval '.version' Chart.yaml`
 
   - type: Command
     name: "Push Helm Charts"
