@@ -1,24 +1,94 @@
-    import React from 'react';
-    import { Link } from 'react-router-dom';
+import React from "react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
+import { Link } from 'react-router-dom';
+import EyeIcon from "./eyeIcon"; // Importa el icono que creamos
+import "../styles/devCardManagerViewStyle.css"; // Asegúrate de importar el archivo CSS
 
-function DevCardManagerView({ user }) {
-    return (
-        <article className='dev-card-manager'>
-            <header className="dev-card-manger-header">
-                <img className="dev-card-manger-icon"
-                    alt="Dev Icon"
-                    src="https://unavatar.io/user"></img>
-                <div className="dev-card-manager-name">
-                    <strong>{user.name}</strong>
-                    <span className="dev-card-manager-numTask">Numero de Task Asignadas: {user.tasks.length}</span>
-                </div>
-            </header>
+const statusColorMap = {
+  active: "success",
+  paused: "danger",
+  vacation: "warning",
+};
 
-            <div className='dev-card-manager-button'>
-                <Link to={`/tasks/${user.id}`} className="dev-card-manager-showMore">Ver Más</Link>
-            </div>
-        </article>
-    );
+const columnLabels = {
+  name: "Name",
+  role: "Role",
+  tasks: "Tasks",
+  actions: "Actions"
+};
+
+const renderCell = (user, columnKey) => {
+  const cellValue = user[columnKey];
+
+  switch (columnKey) {
+    case "name":
+      return (
+        <User
+          description={user.email}
+          name={cellValue}
+        >
+          {user.email}
+        </User>
+      );
+    case "role":
+      return (
+        <div className="flex flex-col">
+          <p className="text-bold text-sm capitalize">{cellValue}</p>
+          <p className="text-bold text-sm capitalize text-default-400">Team</p>
+        </div>
+      );
+    case "tasks":
+      return (
+        <span>
+          Num Task: {user.tasks.length}
+        </span>
+      );
+    case "actions":
+      return (
+        <div className="relative flex items-center gap-2">
+          <Tooltip content="Details">
+            <Link to={`/tasks/${user.id}`} className="text-lg text-default-400 cursor-pointer active:opacity-50">
+              <EyeIcon />
+            </Link>
+          </Tooltip>
+        </div>
+      );
+    default:
+      return cellValue;
+  }
+};
+
+const columns = [
+  { name: "Name", uid: "name" },
+  { name: "Tasks", uid: "tasks" },
+  { name: "Ver Task", uid: "actions" }
+];
+
+export default function DevCardManagerView({ users }) {
+  return (
+    <div className="table-container">
+      <div className="table-wrapper">
+        <Table aria-label="Example table with custom cells">
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+                {column.name}
+              </TableColumn>
+            )}
+          </TableHeader>
+          <TableBody items={users}>
+            {(item) => (
+              <TableRow key={item.id} className="table-row">
+                {(columnKey) => (
+                  <TableCell data-label={columnLabels[columnKey]}>
+                    {renderCell(item, columnKey)}
+                  </TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  );
 }
-
-    export default DevCardManagerView;

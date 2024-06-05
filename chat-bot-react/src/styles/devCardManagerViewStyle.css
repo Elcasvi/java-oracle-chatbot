@@ -267,3 +267,57 @@
     .close-modal{
         background-color: #b82020;
     }
+
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Ajusta según sea necesario */
+        padding: 0 10px; /* Añade un poco de padding para los dispositivos móviles */
+      }
+      
+      .table-wrapper {
+        width: 100%;
+        max-width: 450px; /* Ajusta según sea necesario */
+        overflow-x: auto; /* Permite el desplazamiento horizontal en pantallas pequeñas */
+        border-collapse: collapse; /* Para asegurarse de que las celdas colapsen correctamente */
+      }
+      
+      .table-row {
+        border-bottom: 1px solid black;
+      }
+      
+      .table-row:last-child {
+        border-bottom: none; /* Evita que el último elemento tenga un borde extra */
+      }
+      
+      @media (max-width: 130px) {
+        .table-wrapper {
+          width: auto;
+        }
+      
+        .table-header, .table-body, .table-row, .table-cell {
+          display: block; /* Hacer que cada fila sea un bloque separado */
+          width: 100%;
+        }
+      
+        .table-row {
+          margin-bottom: 10px; /* Añadir espacio entre filas */
+        }
+      
+        .table-cell {
+          padding: 10px;
+          text-align: left; /* Alinear el texto a la izquierda */
+          border-bottom: 1px solid #eaeaea; /* Añadir borde a las celdas */
+        }
+      
+        .table-cell::before {
+          content: attr(data-label); /* Añadir etiqueta antes del contenido de la celda */
+          font-weight: bold;
+          display: block;
+        }
+      
+        .table-header .table-cell {
+          display: none; /* Ocultar encabezados de la tabla en dispositivos móviles */
+        }
+      }
+      

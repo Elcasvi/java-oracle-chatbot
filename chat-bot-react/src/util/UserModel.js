@@ -65,7 +65,7 @@ export const UserModel = [
     {
         id: 3,
         name: "Javier Perez",
-        email: "javier.Perez@example.com",
+        email: "javier.per@example.com",
         password: "another_secure_password",
         role: "Designer",
         tasks: [
@@ -101,7 +101,7 @@ export const UserModel = [
     {
         id: 4,
         name: "Emilio Tejeda",
-        email: "Emilio.Tejeda@example.com",
+        email: "emi.tejeda@example.com",
         password: "another_secure_password",
         role: "Aguador",
         tasks: [
@@ -133,6 +133,77 @@ export const UserModel = [
                 userId: 4
             }
         ]
+    },
+    {
+        id: 5,
+        name: "Sarah Johnson",
+        email: "sarah.johnson@example.com",
+        password: "password123",
+        role: "Project Manager",
+        tasks: [
+            {
+                id: 12,
+                name: "Schedule team meeting",
+                description: "Schedule a team meeting to discuss the project timeline",
+                lastUpdated: "2024-05-01T08:06:00.000Z",
+                priority: "HIGH",
+                state: "TODO",
+                userId: 5
+            },
+            {
+                id: 13,
+                name: "Review project requirements",
+                description: "Review the project requirements and ensure they are up-to-date",
+                lastUpdated: "2024-05-02T08:06:00.000Z",
+                priority: "MEDIUM",
+                state: "IN PROGRESS",
+                userId: 5
+            },
+            {
+                id: 14,
+                name: "Create project report",
+                description: "Create a report on the project progress and share it with stakeholders",
+                lastUpdated: "2024-05-05T08:06:00.000Z",
+                priority: "LOW",
+                state: "TODO",
+                userId: 5
+            }
+        ]
+    },
+    {
+        id: 6,
+        name: "Michael Brown",
+        email: "michael.brown@example.com",
+        password: "securepassword",
+        role: "Sales Representative",
+        tasks: [
+            {
+                id: 15,
+                name: "Follow up with leads",
+                description: "Follow up with potential leads and schedule meetings",
+                lastUpdated: "2024-05-03T08:06:00.000Z",
+                priority: "HIGH",
+                state: "IN PROGRESS",
+                userId: 6
+            },
+            {
+                id: 16,
+                name: "Prepare sales presentation",
+                description: "Prepare a sales presentation for a potential client",
+                lastUpdated: "2024-05-04T08:06:00.000Z",
+                priority: "MEDIUM",
+                state: "TODO",
+                userId: 6
+            },
+            {
+                id: 17,
+                name: "Attend networking event",
+                description: "Attend a networking event to meet potential clients",
+                lastUpdated: "2024-05-07T08:06:00.000Z",
+                priority: "LOW",
+                state: "DONE",
+                userId: 6
+            }
+        ]
     }
-    // Agrega más usuarios aquí si lo deseas
 ];

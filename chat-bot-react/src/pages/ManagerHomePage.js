@@ -12,7 +12,6 @@ export default function ManagerHomePage() {
         setSelectedOption(option);
     };
 
-    // Función para ordenar los usuarios según la opción seleccionada
     const sortUsers = (option) => {
         switch (option) {
             case 'Nombre (A-Z)':
@@ -30,13 +29,9 @@ export default function ManagerHomePage() {
         <>
             <div className="home-page-container">
                 <h2>Welcome ...</h2>
-                <div className="container-dropdown">
-                    <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-                </div>
             </div>
-            {sortedUsers.map(user => (
-                <DevCardManagerView key={user.id} user={user} />
-            ))}
+            <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+            <DevCardManagerView users={sortedUsers} />
         </>
     );
-};
+}

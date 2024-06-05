@@ -73,7 +73,7 @@ function TaskCard({ tasks }) {
                         <p><strong>State:</strong> {selectedTask ? selectedTask.state : ''}</p>
                         <p><strong>Priority:</strong> {selectedTask ? selectedTask.priority : ''}</p>
                     </ModalBody>
-                    <ModalFooter>
+                    <ModalFooter className='footer-modal'>
                         <Button color="danger" variant="light" onPress={closeModal}>
                             Close
                         </Button>
