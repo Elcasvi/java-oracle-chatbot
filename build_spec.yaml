@@ -117,11 +117,11 @@ steps:
       docker build -t users-service .
       cd ..
 
-      echo tag images
-      docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
-      docker tag tasks-service qro.ocir.io/ax7vdftklenx/chatbot/tasks-service:latest
-      docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
-      echo images with tags are
+      #echo tag images
+      #docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
+      #docker tag tasks-service qro.ocir.io/ax7vdftklenx/chatbot/tasks-service:latest
+      #docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
+      #echo images with tags are
       docker images
 
   - type: Command
@@ -182,12 +182,15 @@ steps:
 outputArtifacts:
   - name: users-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+    location: users-service
 
   - name: tasks-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+    location: tasks-service
 
   - name: security-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
+    location: security-service
