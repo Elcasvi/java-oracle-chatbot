@@ -9,7 +9,9 @@ image:
   repository: qro.ocir.io/ax7vdftklenx/chatbot/security-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  #tag: "latest"
+  tag: "1.0.0"
+
 
 imagePullSecrets:
   - name: ocirsecret
