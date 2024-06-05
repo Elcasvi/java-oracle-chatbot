@@ -1,13 +1,3 @@
-version: 0.1
-component: build
-timeoutInSeconds: 6000
-shell: bash
-failImmediatelyOnError: true
-
-env:
-  variables:
-    OCIR_AUTH_TOKEN_VAULT: "ybC#;7rk86m-S>HVL3Zz"
-    OCIR_USERNAME: "a01640495@tec.mx"
     JAVA_HOME : "/usr/lib64/graalvm/graalvm-java17"
     DOCKER_COMPOSE: "/usr/local/bin/docker-compose"
     JAVA_VERSION: "17"
@@ -18,7 +8,6 @@ env:
     - OCIR_HOST
     - OCIR_STORAGE_NAMESPACE
     - CHART_VERSION
-    - BUILD_VERSION
 
 steps:
   - type: Command
@@ -102,9 +91,6 @@ steps:
     user: root
     timeoutInSeconds: 60
     command: |
-      #BUILD_VERSION=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
-      VER="latest"
-      BUILD_VERSION="latest"
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
       ls
@@ -195,4 +181,3 @@ outputArtifacts:
   - name: security-service
     type: DOCKER_IMAGE
     location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
-    
