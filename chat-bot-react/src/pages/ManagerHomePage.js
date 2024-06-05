@@ -30,7 +30,7 @@ export default function ManagerHomePage() {
         <>
             <div className="home-page-container">
                 <h2>Welcome ...</h2>
-                <div>
+                <div className="container-dropdown">
                     <FilterDropdown options={options} onSelectOption={handleSelectOption} />
                 </div>
             </div>

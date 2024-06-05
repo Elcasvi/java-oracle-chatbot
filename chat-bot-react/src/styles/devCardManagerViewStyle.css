@@ -55,7 +55,7 @@
         font-weight: bold;
         border: 1px solid #000;
         transition: .3s ease background-color;
-        background-color: #007bff;
+        background-color: red;
         color: white;
         
     }
@@ -176,4 +176,94 @@
         color: black;
         text-decoration: none;
         cursor: pointer;
+    }
+
+    .icon-filter-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: -40px; /* Ajusta según sea necesario */
+        position: relative;
+        z-index: 1; /* Asegura que esté por encima del botón azul */
+    }
+    
+    .task-info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+        color: red;
+        font-size: 0.8rem;
+        position: relative; /* Añade esta línea */
+    }
+    
+    .dev-card-manager {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+        color: #b82020;
+        font-size: 0.8rem;
+        width: auto;
+        position: relative;
+    }
+    
+    .dev-card-manager-showMore {
+        cursor: pointer;
+        border: 0;
+        border-radius: 999px;
+        padding: 6px 16px;
+        font-weight: bold;
+        border: 1px solid #000;
+        transition: 0.3s ease background-color;
+        background-color: #007bff;
+        color: white;
+        position: relative;
+    }
+    
+    .dev-card-manager-showMore:hover {
+        opacity: 0.8;
+    }
+    
+
+    .ver-mas-button {
+        background-color: #007bff; /* Color llamativo */
+        color: white; /* Color del texto */
+        border-radius: 8px; /* Bordes redondeados */
+        padding: 10px 20px; /* Padding ajustado */
+        margin: 0 auto; /* Centrar el botón */
+        display: block;
+        font-weight: bold;
+    }
+    
+    .ver-mas-button:hover {
+        background-color: red; /* Color al pasar el cursor */
+        color: white;
+    }
+    
+    .dev-card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px; /* Espacio entre las tarjetas */
+        padding: 20px;
+    }
+    
+    .dev-card-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .card-footer {
+        padding: 8px 16px; /* Ajusta el padding para reducir el espacio gris */
+    }
+    
+    .card-body {
+        padding: 16px; /* Ajusta el padding para el contenido */
+    }
+
+    
+    .close-modal{
+        background-color: #b82020;
     }
