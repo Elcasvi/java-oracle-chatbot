@@ -18,7 +18,9 @@ env:
     - OCIR_HOST
     - OCIR_STORAGE_NAMESPACE
     - CHART_VERSION
-    - IMAGE_BUILD_VERSION
+    - SECURITY_SERVICE_IMAGE_BUILD_VERSION
+    - USERS_SERVICE_IMAGE_BUILD_VERSION
+    - TASKS_SERVICE_IMAGE_BUILD_VERSION
 
 steps:
   - type: Command
@@ -102,7 +104,10 @@ steps:
     user: root
     timeoutInSeconds: 60
     command: |
-      IMAGE_BUILD_VERSION="1.0.1"
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="1.0.0"
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="1.0.0"
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="1.0.0"
+
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
       ls
@@ -119,11 +124,7 @@ steps:
       docker build -t users-service .
       cd ..
 
-      #echo tag images
-      #docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
-      #docker tag tasks-service qro.ocir.io/ax7vdftklenx/chatbot/tasks-service:latest
-      #docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
-      #echo images with tags are
+      echo docker images:
       docker images
 
   - type: Command
