@@ -103,7 +103,7 @@ steps:
     timeoutInSeconds: 60
     command: |
       #BUILD_VERSION=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
-      BUILD_VERSION="1.0.0"
+      BUILD_VERSION="latest"
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
       ls
