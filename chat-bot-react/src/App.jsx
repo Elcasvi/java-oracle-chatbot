@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/homePage" element={<DeveloperHomePage />} />
+        <Route path="/homePage" element={<ManagerHomePage/>} />
         <Route path="/task/:id" element={<EditTask />} />
         <Route path="/tasks/:userId" element={<ManagerViewTaskDeveloper />} /> {/* Agrega la ruta para ManagerViewTaskDeveloper */}
       </Routes>
