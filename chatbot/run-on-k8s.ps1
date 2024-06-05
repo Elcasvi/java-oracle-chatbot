@@ -1,4 +1,5 @@
 #$microserviceDir = "C:\Java\Spring\micro-services\java-oracle-chatbot\chatbot"
+$workingDir=(Get-Location).Path
 $microserviceDir = (Get-Location).Path
 Set-Location $microserviceDir
 
@@ -18,7 +19,7 @@ if($LastExitCode -ne 0){
 
 
 #$k8sDir="C:\Java\Spring\micro-services\java-oracle-chatbot\chatbot\k8s\components"
-$K8sDir = (Get-Location).Path + '\k8s\components'
+$K8sDir = (Get-Location).Path + '\k8s\oke'
 Set-Location $k8sDir
 
 Write-Host "context defined as default" -ForegroundColor Blue
@@ -50,4 +51,4 @@ helm install users-service users
 
 Write-Host "Installing tasks-service..." -ForegroundColor Green
 helm install tasks-service tasks
-Set-Location $microserviceDir
+Set-Location $workingDir
