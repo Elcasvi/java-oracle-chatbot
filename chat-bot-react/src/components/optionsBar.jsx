@@ -1,79 +1,52 @@
 import React, { useState } from 'react';
-import { Button } from '@nextui-org/react';
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
-import { FilterIcon } from "../assets/icons/filter_icon.tsx";
-import FilterDropdown from "./filterDropdown.jsx";
-import "../styles/OptionsBar.css";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 
-function OptionsBar({ onSelectOption, onOpenModal }) {
 
-    const items = [
-        {
-          key: "new",
-          label: "New file",
-        },
-        {
-          key: "copy",
-          label: "Copy link",
-        },
-        {
-          key: "edit",
-          label: "Edit file",
-        },
-        {
-          key: "delete",
-          label: "Delete file",
-        }
-      ];
+function OptionsBar() {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
-
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
-
-    return (
-        <div className="options-bar-container">
-            <Button onClick={onOpenModal}>Add New Task</Button>
-
-            
-        <Dropdown style={{ 
-                    backgroundColor: '#fff',
-                    borderRadius: '10px',  }}>
-      <DropdownTrigger>
-        <Button 
-          variant="bordered" 
-        >
-          Open Menu
-        </Button>
-      </DropdownTrigger>
-      
-
-      <DropdownMenu aria-label="Dynamic Actions" items={items}>
-        {(item) => (
-          <DropdownItem
-          key={item.key}
-          color={item.key === "delete" ? "danger" : "default"}
-          className={`custom-dropdown-item ${item.key === "delete" ? "text-danger" : ""}`}
-      >
-            {item.label}
-          </DropdownItem>
-        )}
-      </DropdownMenu>
-      
-    </Dropdown>
-    
-
-            <div className="my-icon" onClick={toggleDropdown}>
-                <FilterIcon />
-            </div>
-            {isDropdownOpen && (
-                <FilterDropdown options={options} onSelectOption={onSelectOption} />
-            )}
-        </div>
-    );
+  return (
+    <>
+      <Button onPress={onOpen}>Add New Task</Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Add New Task</ModalHeader>
+              <ModalBody>
+                <p> 
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam pulvinar risus non risus hendrerit venenatis.
+                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                </p>
+                <p>
+                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
+                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
+                  Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
+                  Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
+                  proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Add
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
 }
-
 export default OptionsBar;
+
+
