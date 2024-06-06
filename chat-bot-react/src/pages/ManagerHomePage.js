@@ -1,39 +1,63 @@
+import React, { useState, useEffect } from 'react';
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
-import React, { useState } from 'react';
 import { UserModel } from "../util/UserModel";
+import { UserModel2 } from "../util/UserModel2";
 import FilterDropdown from "../components/filterDropdown";
 import BackButton from "../components/backButton";
+import AssignUserModal from '../components/assingUserModal';
+import projectUsers from '../icons/project-users-icon.PNG';
+import { Image } from '@nextui-org/react';
 
 export default function ManagerHomePage() {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [assignedUsers, setAssignedUsers] = useState([]);
 
-    const handleSelectOption = (option) => {
-        setSelectedOption(option);
-    };
+  const allUsers = [...UserModel, ...UserModel2];
+  const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
-    const sortUsers = (option) => {
-        switch (option) {
-            case 'Nombre (A-Z)':
-                return UserModel.slice().sort((a, b) => a.name.localeCompare(b.name));
-            case 'Nombre (Z-A)':
-                return UserModel.slice().sort((a, b) => b.name.localeCompare(a.name));
-            default:
-                return UserModel; // Por defecto, no se realiza ningún ordenamiento
-        }
-    };
+  const handleSelectOption = (option) => {
+    setSelectedOption(option);
+  };
 
-    const sortedUsers = selectedOption ? sortUsers(selectedOption) : UserModel;
+  const sortUsers = (users, option) => {
+    switch (option) {
+      case 'Nombre (A-Z)':
+        return users.slice().sort((a, b) => a.name.localeCompare(b.name));
+      case 'Nombre (Z-A)':
+        return users.slice().sort((a, b) => b.name.localeCompare(a.name));
+      default:
+        return users;
+    }
+  };
 
-    return (
-        <div>
-        <BackButton text="Salir"/>
-            <div className="home-page-container">
-                <h2>Welcome ...</h2>
-            </div>
-            <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-            <DevCardManagerView users={sortedUsers} />
-        </div>
-    );
+  const sortedUsers = selectedOption ? sortUsers(allUsers, selectedOption) : allUsers;
+
+  const handleAssignUsers = (userIds) => {
+    const newAssignedUsers = allUsers.filter(user => userIds.includes(user.id.toString()));
+    const updatedAssignedUsers = [...new Set([...assignedUsers, ...newAssignedUsers])];
+    setAssignedUsers(updatedAssignedUsers);
+  };
+
+  const displayedUsers = selectedOption ? sortUsers(assignedUsers.length ? assignedUsers : allUsers, selectedOption) : (assignedUsers.length ? assignedUsers : allUsers);
+
+  return (
+    <div>
+      <BackButton text="Salir" />
+      <div className='container-icon-image'>
+        <Image
+          isBlurred
+          width={150}
+          src={projectUsers}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+      </div>
+      <div className='buttons-manager-home-page'>
+        <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+        <AssignUserModal onAssignUsers={handleAssignUsers} />
+      </div>
+      <DevCardManagerView users={displayedUsers} />
+    </div>
+  );
 }

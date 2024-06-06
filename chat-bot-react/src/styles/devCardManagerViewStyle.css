@@ -1,111 +1,9 @@
-    .dev-card-manager {
-        display: flex;
-        align-items: center;
-        justify-content: center; /* Centrar el componente horizontalmente */
-        margin-top: 15px; /* Espacio superior */
-        color: #b82020;
-        font-size: .8rem;
-        width: auto;
+/* CSS para el modal */
+    
+    .body{
+        padding: 0;
+        margin: 0;
     }
-
-    .dev-card-manger-header {
-        display: flex;
-        align-items: flex-start; 
-        
-        gap: 4px;
-        color: #000000;
-    }
-
-    .dev-card-manager-name {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        margin-right: 16px;
-        
-        align-items: flex-start;  /* Ajuste de margen para espacio del botón */
-    }
-
-    .dev-card-manager-numTask {
-        opacity: .6;
-        color: #000;
-    }
-
-    .dev-card-manger-icon {
-        width: 36px;
-        height: 36px;
-        
-        border-radius: 1000px;
-    }
-
-    .dev-card-manger-icon-container {
-        width: 50px; /* Ajusta este valor según sea necesario */
-        display: inline-block;
-        vertical-align: top;
-        display: flex;
-        align-items: left;
-        color: #007bff;/* Alinea los círculos al principio */
-    }
-
-
-    .dev-card-manager-showMore {
-        cursor: pointer;
-        border: 0;
-        border-radius: 999px;
-        padding: 6px 16px;
-        font-weight: bold;
-        border: 1px solid #000;
-        transition: .3s ease background-color;
-        background-color: red;
-        color: white;
-        
-    }
-
-    .dev-card-manager-showMore:hover {
-        opacity: .8;
-    }
-
-    .dev-card-manager-text {
-        display: block;
-    }
-    /* CSS para el modal */
-    .modal {
-        display: block;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        overflow: auto;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        border-radius: 5px;
-        width: 80%;
-        max-width: 600px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #333; /* Cambiar el color del texto a negro */
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
     .icon-filter-container {
         text-align: center;
         
@@ -216,7 +114,7 @@
         font-weight: bold;
         border: 1px solid #000;
         transition: 0.3s ease background-color;
-        background-color: #007bff;
+        background-color: red;
         color: white;
         position: relative;
     }
@@ -329,17 +227,17 @@
     .developer-information-name{
         font-size: 35px;
         font-family:Georgia, 'Times New Roman', Times, serif;
-        color: #a61c1c;
+        color: #EE0004;
     }
 
     .developer-information-email{
         font-style: oblique;
-        color: #a63333;
+        color: #FF7376;
     }
 
     .developer-information-rol{
         font-style: oblique;
-        color: #a63333;
+        color: #FF7376;
     }
 
     .developer-information-container{
@@ -359,3 +257,21 @@
         margin-left: 75%;
         margin-bottom: -7%;
     }
+
+    .buttons-manager-home-page{
+        align-items: center;
+        display: flex;
+        margin-left: -20px;
+        gap: 200px;
+        margin-bottom: -25px;
+    }
+
+    .container-icon-image {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+      
+    .container-icon-image img {
+        margin: 0 auto;
+      }

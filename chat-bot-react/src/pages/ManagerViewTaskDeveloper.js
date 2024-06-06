@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserModel } from '../util/UserModel';
+import { UserModel2 } from '../util/UserModel2';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
 import BackButton from '../components/backButton';
+import userTasks from '../icons/user-tasks-icon.PNG';
+import { Image } from '@nextui-org/react';
+
+const findUserById = (id) => {
+    return UserModel.find(user => user.id === parseInt(id)) || UserModel2.find(user => user.id === parseInt(id));
+};
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
-
-    // Buscar el usuario correspondiente en UserModel utilizando el userId
-    const selectedUser = UserModel.find(user => user.id === parseInt(userId));
+    
+    // Buscar el usuario correspondiente en UserModel o UserModel2 utilizando el userId
+    const selectedUser = findUserById(userId);
     const [selectedOption, setSelectedOption] = useState(null);
     const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Prioridad (Low-High)', 'Prioridad (High-Low)'];
 
@@ -47,21 +54,30 @@ function ManagerViewTaskDeveloper() {
     const filteredAndSortedTasks = selectedOption ? sortTasks(selectedUser.tasks, selectedOption) : selectedUser.tasks;
 
     return (
-    <>   
-    <BackButton/>     
-        <div className="developer-information-container">
-            <div className="developer-information">
-                <h1 className="developer-information-name">{selectedUser.name}</h1>
-                <p className="developer-information-email">Email: {selectedUser.email}</p>
-                <p className="developer-information-rol">Rol: {selectedUser.role}</p>
+        <>   
+            <BackButton/>     
+            <div className='container-icon-image'>
+                <Image
+                isBlurred
+                width={150}
+                src={userTasks}
+                alt="NextUI Album Cover"
+                className="m-5"  
+                />
             </div>
-            <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-            <h2 className='tareas-asignadas-text'>Tareas Asignadas:</h2>
-            <div className='task-info-container'>
-                <TaskCard tasks={filteredAndSortedTasks} />
+            <div className="developer-information-container">
+                <div className="developer-information">
+                    <h1 className="developer-information-name">{selectedUser.name}</h1>
+                    <p className="developer-information-email">Email: {selectedUser.email}</p>
+                    <p className="developer-information-rol">Rol: {selectedUser.role}</p>
+                </div>
+                <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+                <h2 className='tareas-asignadas-text'>Tareas Asignadas:</h2>
+                <div className='task-info-container'>
+                    <TaskCard tasks={filteredAndSortedTasks} />
+                </div>
             </div>
-        </div>
-    </>
+        </>
     );
 }
 

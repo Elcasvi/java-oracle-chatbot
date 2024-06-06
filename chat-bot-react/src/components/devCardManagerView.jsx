@@ -1,8 +1,8 @@
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Tooltip } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
-import EyeIcon from "./eyeIcon"; // Importa el icono que creamos
-import "../styles/devCardManagerViewStyle.css"; // Asegúrate de importar el archivo CSS
+import EyeIcon from "./eyeIcon";
+import "../styles/devCardManagerViewStyle.css";
 
 const columnLabels = {
   name: "Name",
@@ -34,7 +34,7 @@ const renderCell = (user, columnKey) => {
     case "tasks":
       return (
         <span>
-          Num Task: {user.tasks.length}
+          Num Task: {user.tasks ? user.tasks.length : 0}
         </span>
       );
     case "actions":
