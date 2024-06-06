@@ -18,6 +18,9 @@ env:
     - OCIR_HOST
     - OCIR_STORAGE_NAMESPACE
     - CHART_VERSION
+    - SECURITY_SERVICE_IMAGE_BUILD_VERSION
+    - USERS_SERVICE_IMAGE_BUILD_VERSION
+    - TASKS_SERVICE_IMAGE_BUILD_VERSION
 
 steps:
   - type: Command
@@ -101,6 +104,10 @@ steps:
     user: root
     timeoutInSeconds: 60
     command: |
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+      TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
       ls
@@ -117,11 +124,7 @@ steps:
       docker build -t users-service .
       cd ..
 
-      echo tag images
-      docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
-      docker tag tasks-service qro.ocir.io/ax7vdftklenx/chatbot/tasks-service:latest
-      docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
-      echo images with tags are
+      echo docker images:
       docker images
 
   - type: Command
@@ -182,12 +185,15 @@ steps:
 outputArtifacts:
   - name: users-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+    location: users-service
 
   - name: tasks-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+    location: tasks-service
 
   - name: security-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
+    location: security-service
