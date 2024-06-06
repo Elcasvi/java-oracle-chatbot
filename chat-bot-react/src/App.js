@@ -6,6 +6,7 @@ import EditTask from "./pages/EditTask";
 import ManagerHomePage from './pages/ManagerHomePage';
 import ManagerViewTaskDeveloper from './pages/ManagerViewTaskDeveloper'; // Importa el componente ManagerViewTaskDeveloper
 import { useEffect } from 'react';
+import DeveloperHomePage from './pages/DeveloperHomePage';
 
 const tele = window.Telegram.WebApp
 
@@ -19,7 +20,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/homePage" element={<ManagerHomePage />} />
+        <Route path="/homePageManager" element={<ManagerHomePage />} />
+        <Route path="/homePageDeveloper" element={<DeveloperHomePage />} />
         <Route path="/task/:id" element={<EditTask />} />
         <Route path="/tasks/:userId" element={<ManagerViewTaskDeveloper />} /> {/* Agrega la ruta para ManagerViewTaskDeveloper */}
       </Routes>

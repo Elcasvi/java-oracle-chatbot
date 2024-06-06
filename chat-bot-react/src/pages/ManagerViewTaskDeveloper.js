@@ -11,25 +11,6 @@ const userService = new userServices();
 export default function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
 
-    /*
-    const [ user, setUser ] = useState();
-    useEffect( () => {
-        const fetchUser = async () => {
-            try {
-              const usuario = await userService.getById(userId);
-              setUser(usuario);
-              console.log("Usuario react ", user);
-            } catch (error) {
-              console.error("Error fetching user: ", error);
-            }
-          };
-        
-          console.log(userId);
-          if (userId) {
-            fetchUser();
-          } 
-    }, [userId])*/
-
     const [ users, setUsers ] = useState([]);
 
     useEffect(() => {

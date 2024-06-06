@@ -2,12 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px; /* Redondea los bordes */
+    margin-top: 150px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    
+    width: 400px;
+    background-color: #f6f6f6;
   }
   
   .login-form {
     display: grid;
     grid-template-columns: auto; /* Una columna */
     gap: 10px; /* Espacio entre elementos */
+    margin: 10px;
+    text-align: center; 
   }
   
   .form-group {
@@ -15,8 +25,9 @@
   }
   
   label {
+    align-items: center;
     margin-bottom: 5px;
-    font-size: 20px; /* Cambia el tamaño de fuente aquí */
+    font-size: 18px; /* Cambia el tamaño de fuente aquí */
   }
   
   input {
@@ -36,5 +47,6 @@
     color: #fff; /* Cambia el color del texto del botón */
     padding: 10px 20px; /* Ajusta el espaciado interno del botón */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 20px;
   }
   
