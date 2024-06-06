@@ -3,6 +3,7 @@ import "../styles/devCardManagerViewStyle.css";
 import React, { useState } from 'react';
 import { UserModel } from "../util/UserModel";
 import FilterDropdown from "../components/filterDropdown";
+import BackButton from "../components/backButton";
 
 export default function ManagerHomePage() {
     const [selectedOption, setSelectedOption] = useState(null);
@@ -26,12 +27,13 @@ export default function ManagerHomePage() {
     const sortedUsers = selectedOption ? sortUsers(selectedOption) : UserModel;
 
     return (
-        <>
+        <div>
+        <BackButton text="Salir"/>
             <div className="home-page-container">
                 <h2>Welcome ...</h2>
             </div>
             <FilterDropdown options={options} onSelectOption={handleSelectOption} />
             <DevCardManagerView users={sortedUsers} />
-        </>
+        </div>
     );
 }

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { UserModel } from '../util/UserModel';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
+import BackButton from '../components/backButton';
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
@@ -46,11 +47,13 @@ function ManagerViewTaskDeveloper() {
     const filteredAndSortedTasks = selectedOption ? sortTasks(selectedUser.tasks, selectedOption) : selectedUser.tasks;
 
     return (
-        <div>
-            <div className='developer-information'>
-                <h1>{selectedUser.name}</h1>
-                <p>Email: {selectedUser.email}</p>
-                <p>Rol: {selectedUser.role}</p>
+    <>   
+    <BackButton/>     
+        <div className="developer-information-container">
+            <div className="developer-information">
+                <h1 className="developer-information-name">{selectedUser.name}</h1>
+                <p className="developer-information-email">Email: {selectedUser.email}</p>
+                <p className="developer-information-rol">Rol: {selectedUser.role}</p>
             </div>
             <FilterDropdown options={options} onSelectOption={handleSelectOption} />
             <h2 className='tareas-asignadas-text'>Tareas Asignadas:</h2>
@@ -58,6 +61,7 @@ function ManagerViewTaskDeveloper() {
                 <TaskCard tasks={filteredAndSortedTasks} />
             </div>
         </div>
+    </>
     );
 }
 

@@ -1,14 +1,14 @@
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Tooltip } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
 import EyeIcon from "./eyeIcon"; // Importa el icono que creamos
 import "../styles/devCardManagerViewStyle.css"; // Asegúrate de importar el archivo CSS
 
-const statusColorMap = {
+/*const statusColorMap = {
   active: "success",
   paused: "danger",
   vacation: "warning",
-};
+};*/
 
 const columnLabels = {
   name: "Name",

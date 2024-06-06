@@ -240,6 +240,11 @@
         background-color: red; /* Color al pasar el cursor */
         color: white;
     }
+
+    .back-button:hover{
+        background-color: #a633a0;
+        color: black;
+    }
     
     .dev-card-container {
         display: flex;
@@ -320,4 +325,23 @@
           display: none; /* Ocultar encabezados de la tabla en dispositivos móviles */
         }
       }
-      
+
+    .developer-information-name{
+        font-size: 35px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        color: #a61c1c;
+    }
+
+    .developer-information-email{
+        font-style: oblique;
+        color: #a63333;
+    }
+
+    .developer-information-rol{
+        font-style: oblique;
+        color: #a63333;
+    }
+
+    .developer-information-container{
+        margin-top: -75px;
+    }
