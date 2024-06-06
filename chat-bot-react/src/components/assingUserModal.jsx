@@ -1,69 +1,70 @@
 import React, { useState } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Listbox, ListboxItem, Chip, ScrollShadow, Avatar } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
+import { UserModel } from "../util/UserModel";
 import { UserModel2 } from "../util/UserModel2";
-import { ListboxWrapper } from "./ListboxWrapper";
 
 const AssignUserModal = ({ onAssignUsers }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedUsers, setSelectedUsers] = useState(new Set());
+  const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userList, setUserList] = useState([]);
+  const [error, setError] = useState('');
 
-  const arrayValues = Array.from(selectedUsers);
+  const handleAddUser = () => {
+    const userIdNumber = parseInt(userId);
+    const allUsers = [...UserModel, ...UserModel2];
+    const matchedUser = allUsers.find(user => user.id === userIdNumber && user.name === userName);
 
-  const topContent = React.useMemo(() => {
-    if (!arrayValues.length) {
-      return null;
+    if (!matchedUser) {
+      setError('User ID and Name do not match.');
+      return;
     }
 
-    return (
-      <ScrollShadow
-        hideScrollBar
-        className="w-full flex py-0.5 px-2 gap-1"
-        orientation="horizontal"
-      >
-        {arrayValues.map((value) => (
-          <Chip key={value}>{UserModel2.find((user) => `${user.id}` === `${value}`).name}</Chip>
-        ))}
-      </ScrollShadow>
-    );
-  }, [arrayValues]);
+    setUserList([...userList, { id: userId, name: userName }]);
+    setUserId('');
+    setUserName('');
+    setError('');
+  };
 
   const handleAssign = () => {
-    onAssignUsers(arrayValues);
+    const userIds = userList.map(user => user.id);
+    onAssignUsers(userIds);
     onOpenChange(false);
   };
 
   return (
     <>
-      <Button onPress={onOpen} color="warning" >Add User</Button>
+      <Button onPress={onOpen} color="warning">Add User</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Assign Users to Project</ModalHeader>
               <ModalBody>
-                <ListboxWrapper>
-                  <Listbox
-                    topContent={topContent}
-                    classNames={{ base: "max-w-xs", list: "max-h-[300px] overflow-scroll" }}
-                    items={UserModel2}
-                    label="Select Users"
-                    selectionMode="multiple"
-                    onSelectionChange={setSelectedUsers}
-                    variant="flat"
-                  >
-                    {(item) => (
-                      <ListboxItem key={item.id} textValue={item.name}>
-                        <div className="flex gap-2 items-center">
-                          <Avatar alt={item.name} className="flex-shrink-0" size="sm" src={item.avatar} />
-                          <div className="flex flex-col">
-                            <span className="text-small">{item.name}</span>
-                            <span className="text-tiny text-default-400">{item.email}</span>
-                          </div>
-                        </div>
-                      </ListboxItem>
-                    )}
-                  </Listbox>
-                </ListboxWrapper>
+                <div className="flex flex-col gap-4">
+                  <Input 
+                    label="User ID"
+                    placeholder="Enter User ID"
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)}
+                  />
+                  <Input 
+                    label="User Name"
+                    placeholder="Enter User Name"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+                  <Button color="secondary" onPress={handleAddUser}>Add User</Button>
+                  {error && <span style={{ color: 'red' }}>{error}</span>}
+                </div>
+                <div className="mt-4">
+                  <h5>Users to be Assigned:</h5>
+                  <ul>
+                    {userList.map((user, index) => (
+                      <li key={index}>{user.name} (ID: {user.id})</li>
+                    ))}
+                  </ul>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>Close</Button>

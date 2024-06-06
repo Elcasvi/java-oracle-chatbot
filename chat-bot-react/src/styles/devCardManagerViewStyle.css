@@ -28,7 +28,7 @@
         text-align: center;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: 17.5px;
-        color: brown;
+        color: #EE0004;
     }
 
     .task-info-container{
@@ -36,7 +36,7 @@
         align-items: center;
         justify-content: center; /* Centrar el componente horizontalmente */
         margin-top: 15px; /* Espacio superior */
-        color: red;
+        color: #EE0004;
         font-size: .8rem;
     }
 
@@ -90,7 +90,7 @@
         align-items: center;
         justify-content: center;
         margin-top: 15px;
-        color: red;
+        color: #EE0004;
         font-size: 0.8rem;
         position: relative; /* Añade esta línea */
     }
@@ -100,7 +100,7 @@
         align-items: center;
         justify-content: center;
         margin-top: 15px;
-        color: #b82020;
+        color: #EE0004;
         font-size: 0.8rem;
         width: auto;
         position: relative;
@@ -114,7 +114,7 @@
         font-weight: bold;
         border: 1px solid #000;
         transition: 0.3s ease background-color;
-        background-color: red;
+        background-color: #EE0004;
         color: white;
         position: relative;
     }
@@ -168,7 +168,7 @@
 
     
     .close-modal{
-        background-color: #b82020;
+        background-color: #EE0004;
     }
 
     .table-container {
