@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, CardHeader, CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { Button, Card, CardHeader, CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Input, Select, SelectItem } from '@nextui-org/react';
 import { EditIcon } from "../assets/icons/edit_icon.tsx";
 
 function AllTasks({ tasks }) {
@@ -33,6 +33,26 @@ function AllTasks({ tasks }) {
     const handleViewMore = (task) => {
         setSelectedTask(task);
         onOpen();
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setSelectedTask((prevTask) => ({ ...prevTask, [name]: value }));
+    };
+
+    const handleSelectChange = (value) => {
+        setSelectedTask((prevTask) => ({ ...prevTask, state: value }));
+    };
+
+    const handleSaveChanges = () => {
+        const updatedTasks = taskList.map(task => {
+            if (task.id === selectedTask.id) {
+                return selectedTask;
+            }
+            return task;
+        });
+        setTaskList(updatedTasks);
+        onOpenChange(false); // Close the modal
     };
 
     return (
@@ -87,19 +107,41 @@ function AllTasks({ tasks }) {
                     <ModalContent>
                         {(onClose) => (
                             <>
-                                <ModalHeader className="flex flex-col gap-1">{selectedTask.name}</ModalHeader>
+                                <ModalHeader className="flex flex-col gap-1">Edit Task</ModalHeader>
                                 <ModalBody>
-                                    <p>State: {selectedTask.state}</p>
-                                    <p>Last Updated: {selectedTask.lastUpdated}</p>
-                                    <p>Description: {selectedTask.description}</p>
-                                    {/* Añade cualquier otro detalle de la tarea que desees mostrar */}
+                                    <Input
+                                        fullWidth
+                                        label="Name"
+                                        name="name"
+                                        value={selectedTask.name}
+                                        onChange={handleInputChange}
+                                    />
+                                    <Select
+                                        fullWidth
+                                        label="State"
+                                        placeholder="Select State"
+                                        value={selectedTask.state}
+                                        onChange={handleSelectChange}
+                                    >
+                                        <SelectItem value="TODO">TODO</SelectItem>
+                                        <SelectItem value="IN PROGRESS">IN PROGRESS</SelectItem>
+                                        <SelectItem value="DONE">DONE</SelectItem>
+                                    </Select>
+                                    <Input
+                                        fullWidth
+                                        label="Description"
+                                        name="description"
+                                        value={selectedTask.description}
+                                        onChange={handleInputChange}
+                                    />
+                                   
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="danger" variant="light" onPress={onClose}>
                                         Close
                                     </Button>
-                                    <Button color="primary" onPress={onClose}>
-                                        Action
+                                    <Button color="primary" onPress={handleSaveChanges}>
+                                        Save Changes
                                     </Button>
                                 </ModalFooter>
                             </>
@@ -112,3 +154,4 @@ function AllTasks({ tasks }) {
 }
 
 export default AllTasks;
+

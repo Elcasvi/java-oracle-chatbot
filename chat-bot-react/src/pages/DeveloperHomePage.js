@@ -60,39 +60,12 @@ export default function DeveloperHomePage() {
     };
 
     return (
-        <div className="home-page-container">
+        <div className="dev-home-page-container">
             <h1>Developer Home Page</h1>
             <OptionsBar></OptionsBar>
             <AllTasks tasks={filteredTasks} /> 
-            <div className='options-container'>
-                <button className="small-button" onClick={openModal}>Add New Task</button>
-            </div>
-            {isModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={closeModal}>&times;</span>
-                        <h1>Add New Task</h1>
-                        <div className="input-row">
-                            <input type="text" placeholder="Task Name" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
-                            <input type="text" placeholder="Task Description" value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} />
-                        </div>
-                        <div className="input-row">
-                            <span>Priorityyyy:  </span>
-                            
-                            <Select
-                            items={animals}
-                            size="sm"
-                            placeholder="Priority"
-                            className="max-w-xs"
-                            >
-                            {(animal) => <SelectItem>{animal.label}</SelectItem>}
-                            </Select>
-                           
-                        </div>
-                        <button className="add-button" onClick={handleAddTask}>Add</button>
-                    </div>
-                </div>
-            )}
+            
+            
         </div>
     );
 }
