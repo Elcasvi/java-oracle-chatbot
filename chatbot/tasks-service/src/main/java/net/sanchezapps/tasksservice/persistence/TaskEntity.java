@@ -1,6 +1,8 @@
 package net.sanchezapps.tasksservice.persistence;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +23,18 @@ import java.util.Date;
 public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(name = "id",unique = true, nullable = false)
     private Long id;
+    @NotBlank
+    @Size(max = 255)
     private String name;
+    @NotBlank
+    @Size(max = 255)
     private String description;
     private Date lastUpdated;
+    @Enumerated(EnumType.STRING)
     private TaskPriority priority;
+    @Enumerated(EnumType.STRING)
     private TaskState state;
     @Column(name = "USER_ID", nullable = false)
     private Long userId;

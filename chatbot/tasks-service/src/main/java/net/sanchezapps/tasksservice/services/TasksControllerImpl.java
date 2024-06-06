@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin(origins = {"https://chatbot.sanchezapps.net","http://localhost:3000"})
 public class TasksControllerImpl implements TasksController {
 
     private final TasksService service;

@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { Button, Card, CardHeader, CardBody, Modal } from '@nextui-org/react';
-import { EditIcon } from "../assets/icons/edit_icon.tsx";
+import React, { useState, useEffect } from 'react';
+import '../HomePage.css';
+import taskServices from '../services/taskServices';
+
+const taskService = new taskServices();
 
 function AllTasks({ tasks }) {
 
     const [taskList, setTaskList] = useState(tasks);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedTask, setSelectedTask] = useState(null);
+
+    // Actualizar taskList cuando cambie tasks
+    useEffect(() => {
+        setTaskList(tasks);
+    }, [tasks]);
 
     const handleChangeStatus = (taskId, newStatus) => {
         const updatedTasks = taskList.map(task => {
@@ -31,72 +36,76 @@ function AllTasks({ tasks }) {
         }
     };
 
-    const handleOpenModal = (task) => {
-        console.log("Abrir modal para la tarea:", task);
-        setSelectedTask(task);
-        setModalOpen(true);
-    };
-    
+    const updateTaskStatus = async (taskId, e) => {
+        const taskStatus = e;
+        const taskToUpdate = taskList.find(task => task.id === taskId); // Cambiado de tasks a taskList
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
+        taskToUpdate.state = taskStatus;
+
+        // Actualizar el estado de la tarea y volver a cargar las tareas actualizadas
+        await taskService.update(taskToUpdate, taskId);
+        setTaskList([...taskList]); // Forzar una actualización del estado
+    };
+
+    const updateTaskPriority = async (taskId, e) => {
+        const taskPriority = e;
+        const taskToUpdate = taskList.find(task => task.id === taskId); // Cambiado de tasks a taskList
+
+        taskToUpdate.priority = taskPriority;
+
+        // Actualizar la prioridad de la tarea y volver a cargar las tareas actualizadas
+        await taskService.update(taskToUpdate, taskId);
+        setTaskList([...taskList]); // Forzar una actualización del estado
     };
 
     return (
-        <div >
-            <h3>Your Tasksssss:</h3>
-            {tasks.map(task => (
-                <Card 
-                    className="border-none max-w-[310px]" 
-                    key={task.id} 
-                    style={{ 
-                        backgroundColor: '#E9E9E9', 
-                        borderRadius: '10px', 
-                        margin: '10px', 
-                        border: '1px solid black',
-                        padding: '15px',  
-                        display: 'flex', 
-                        flexDirection: 'column', 
-                        alignItems: 'stretch' 
-                    }} 
-                >
-                    <div style={{ flex: '1' }}>
-                        <CardHeader >
-                            <strong style={{ marginLeft: '50px' }}>{task.name}</strong>
-                            <EditIcon style={{ marginLeft: '10px' }} />
-                        </CardHeader>
-                    </div>
-                    <CardBody style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="tasks-container">
+            <h3>Your Tasks:</h3>
+            {taskList.map(task => ( // Cambiado de tasks a taskList
+                <article className='dev-card-manager' key={task.id}>
+                    <header className="dev-card-manger-header">
                         <div
+                            className="dev-card-manger-icon"
                             style={{
-                                width: '40px',
-                                height: '40px',
-                                borderRadius: '50%',
-                                backgroundColor: getCircleColor(task.state),
-                                marginRight: '10px'
+                                backgroundColor: getCircleColor(task.state)
                             }}
-                        />
-                        <div>
-                            <span>State: {task.state}</span>
-                            <br />
-                            <span>Last Updated: {task.lastUpdated}</span>
+                        >
+                            {/* Mostrar el círculo con el color adecuado */}
                         </div>
-                        <Button onClick={() => handleOpenModal(task)} style={{ marginLeft: 'auto' }}>
-                            Ver más
-                        </Button>
-                    </CardBody>
-                </Card>
+                        <div className="dev-card-manager-name">
+                            <strong>{task.name}</strong><br />
+                            <span className="dev-card-manager-numTask">Description: {task.description}</span>
+                            <span className="dev-card-manager-numTask">State: {task.state}</span>
+                            <span className="dev-card-manager-numTask">Priority: {task.priority}</span>
+                            <span className="dev-card-manager-numTask">Last Updated: {task.lastUpdated}</span>
+                        </div>
+
+                        {/* Dropdown para seleccionar el estado de la tarea */}
+                        <div className="status-dropdown">
+                            <div className="status-label">
+                                <h3>Status: </h3>
+                            </div>
+                            <div className="status-select">
+                                <select value={task.state} onChange={(e) => updateTaskStatus(task.id, e.target.value)}>
+                                    <option value="TODO">To Do</option>
+                                    <option value="IN_PROGRESS">In Progress</option>
+                                    <option value="DONE">Done</option>
+                                </select>
+                            </div>
+                            <div className="status-label">
+                                <h3>Priority: </h3>
+                            </div>
+                            <div className="status-select">
+                                <select value={task.priority} onChange={(e) => updateTaskPriority(task.id, e.target.value)}>
+                                    <option value="LOW">Low</option>
+                                    <option value="MEDIUM">Medium</option>
+                                    <option value="HIGH">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </header>
+                </article>
             ))}
-            <Modal open={modalOpen} onClose={handleCloseModal}>
-                {selectedTask && (
-                    <div>
-                        <h2>{selectedTask.name}</h2>
-                        <p>State: {selectedTask.state}</p>
-                        <p>Last Updated: {selectedTask.lastUpdated}</p>
-                        {/* Aquí puedes agregar más detalles de la tarea */}
-                    </div>
-                )}
-            </Modal>
         </div>
     );
 }

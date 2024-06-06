@@ -26,6 +26,7 @@ public interface TasksController {
     @PostMapping(value = "/task")
     Mono<Task> create(@RequestBody Task task);
 
+    // Esta se llamara para cambiar el status a delete para el DELETE del usuario para entrega
     @PutMapping(value = "/task/{taskId}")
     Mono<Task> update(@PathVariable("taskId") Long taskId, @RequestBody Task task);
 

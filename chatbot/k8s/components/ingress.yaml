@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubernetes-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - okeusersservice.sanchezapps.net
+        - oketasksservice.sanchezapps.net
+        - okesecurityservice.sanchezapps.net
+      secretName: oke-tls
+  rules:
+    - host: "okeusersservice.sanchezapps.net"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 80
+    - host: "oketasksservice.sanchezapps.net"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: tasks-service
+                port:
+                  number: 80
+    - host: "okesecurityservice.sanchezapps.net"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: security-service
+                port:
+                  number: 80

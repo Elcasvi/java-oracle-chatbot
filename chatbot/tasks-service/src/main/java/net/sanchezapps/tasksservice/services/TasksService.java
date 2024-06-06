@@ -26,6 +26,7 @@ import static java.util.logging.Level.FINE;
 @Service
 public class TasksService {
     private static final String USERS_SERVICE_URL = "http://users-service";
+    //private static final String USERS_SERVICE_URL = "http://localhost:7001";
     private static final Logger LOG = LoggerFactory.getLogger(TasksService.class);
 
     private final TasksRepository repository;

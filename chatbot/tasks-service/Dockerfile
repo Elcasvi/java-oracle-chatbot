@@ -6,10 +6,14 @@ RUN java -Djarmode=layertools -jar app.jar extract
 FROM eclipse-temurin:17.0.5_8-jre-focal
 WORKDIR application
 COPY ATP_Wallet ./ATP_Wallet
+RUN true
 COPY --from=builder extracted/dependencies/ ./
+RUN true
 COPY --from=builder extracted/spring-boot-loader/ ./
+RUN true
 COPY --from=builder extracted/snapshot-dependencies/ ./
+RUN true
 COPY --from=builder extracted/application/ ./
 
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
