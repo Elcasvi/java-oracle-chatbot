@@ -1,36 +1,42 @@
 import React, { useState } from 'react';
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import FilterDropdown from './filterDropdown';
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem} from "@nextui-org/react";
 
 
 function OptionsBar() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const options = ['Filter by Status', 'Filter by Priority'];
 
   return (
     <>
-      <Button onPress={onOpen}>Add New Task</Button>
+     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            
+            <Button style={{ width: '200px' }} onPress={onOpen}>Add New Task</Button>
+            <FilterDropdown options={options} />
+        </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Add New Task</ModalHeader>
               <ModalBody>
-                <p> 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
-                  Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
-                  Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
-                  proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <Input type="text"  placeholder="Task Name" />
+                <Input type="text"  placeholder="Task Description" />
+
+                
+                <Select
+                  size='md'
+                  className="max-w-xs"
+                  label="Task Priority"
+                  placeholder="Select Priority"
+          
+                >
+                  <SelectItem value="Low">Low</SelectItem>
+                  <SelectItem value="Medium">Medium</SelectItem>
+                  <SelectItem value="High">High</SelectItem>
+                </Select>
+
+
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
