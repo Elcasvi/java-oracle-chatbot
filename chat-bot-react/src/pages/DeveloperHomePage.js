@@ -6,6 +6,7 @@ import AllTasks from '../components/AllTaskList';
 import FilterDropdown from '../components/filterDropdown';
 import { Select, SelectItem } from '@nextui-org/react';
 import {animals} from "./data";
+import OptionsBar from '../components/optionsBar';
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 export default function DeveloperHomePage() {
@@ -61,12 +62,7 @@ export default function DeveloperHomePage() {
     return (
         <div className="home-page-container">
             <h1>Developer Home Page</h1>
-            <div className="icon-dropdown-container">
-                <div className="icon-filter-container">
-                <FilterDropdown/>
-                </div>
-            </div>
-            
+            <OptionsBar></OptionsBar>
             <AllTasks tasks={filteredTasks} /> 
             <div className='options-container'>
                 <button className="small-button" onClick={openModal}>Add New Task</button>
@@ -75,13 +71,13 @@ export default function DeveloperHomePage() {
                 <div className="modal">
                     <div className="modal-content">
                         <span className="close" onClick={closeModal}>&times;</span>
-                        <h2>Add New Task</h2>
+                        <h1>Add New Task</h1>
                         <div className="input-row">
                             <input type="text" placeholder="Task Name" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
                             <input type="text" placeholder="Task Description" value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} />
                         </div>
                         <div className="input-row">
-                            <span>Priority:  </span>
+                            <span>Priorityyyy:  </span>
                             
                             <Select
                             items={animals}
