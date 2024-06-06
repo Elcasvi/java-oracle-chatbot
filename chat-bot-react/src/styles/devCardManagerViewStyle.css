@@ -345,3 +345,17 @@
     .developer-information-container{
         margin-top: -75px;
     }
+
+    .projects-view-title{
+        font-size: 30px;
+        font-family:monospace;
+        color: #a61c1c;
+        text-align: center;
+    }
+
+    .create-project-container{
+        align-items: center;
+        justify-content: center;
+        margin-left: 75%;
+        margin-bottom: -7%;
+    }
