@@ -24,8 +24,6 @@
         <module>users-service</module>
         <module>security-service</module>
         <module>api</module>
-        <module>spring-cloud/config-server</module>
-        <module>spring-cloud/gateway</module>
     </modules>
     <properties>
         <java.version>17</java.version>
