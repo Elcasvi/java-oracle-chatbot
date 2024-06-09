@@ -1,74 +1,63 @@
+import React, { useState, useEffect } from 'react';
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
-import React, { useState, useEffect } from 'react';
 import { UserModel } from "../util/UserModel";
+import { UserModel2 } from "../util/UserModel2";
 import FilterDropdown from "../components/filterDropdown";
-import userServices from "../services/userServices";
+import BackButton from "../components/backButton";
+import AssignUserModal from '../components/assingUserModal';
+import projectUsers from '../icons/project-users-icon.PNG';
+import { Image } from '@nextui-org/react';
 
 export default function ManagerHomePage() {
-    
-    const [ users, setUsers ] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [assignedUsers, setAssignedUsers] = useState([]);
 
-    useEffect(() => {
-        const userService = new userServices();
-        userService.getAll().then(setUsers).catch(console.error);
-      }, []); 
+  const allUsers = [...UserModel, ...UserModel2];
+  const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
+  const handleSelectOption = (option) => {
+    setSelectedOption(option);
+  };
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+  const sortUsers = (users, option) => {
+    switch (option) {
+      case 'Nombre (A-Z)':
+        return users.slice().sort((a, b) => a.name.localeCompare(b.name));
+      case 'Nombre (Z-A)':
+        return users.slice().sort((a, b) => b.name.localeCompare(a.name));
+      default:
+        return users;
+    }
+  };
 
-    const handleSelectOption = (option) => {
-        setSelectedOption(option);
-        setIsDropdownOpen(false);
-    };
+  const sortedUsers = selectedOption ? sortUsers(allUsers, selectedOption) : allUsers;
 
-    // Función para ordenar los usuarios según la opción seleccionada
-    const sortUsers = (option) => {
-        switch (option) {
-            case 'Nombre (A-Z)':
-                return users.slice().sort((a, b) => a.name.localeCompare(b.name));
-            case 'Nombre (Z-A)':
-                return users.slice().sort((a, b) => b.name.localeCompare(a.name));
-            default:
-                return users; // Por defecto, no se realiza ningún ordenamiento
-        }
-    };
+  const handleAssignUsers = (userIds) => {
+    const newAssignedUsers = allUsers.filter(user => userIds.includes(user.id.toString()));
+    const updatedAssignedUsers = [...new Set([...assignedUsers, ...newAssignedUsers])];
+    setAssignedUsers(updatedAssignedUsers);
+  };
 
-    const sortedUsers = selectedOption ? sortUsers(selectedOption) : users;
+  const displayedUsers = selectedOption ? sortUsers(assignedUsers.length ? assignedUsers : allUsers, selectedOption) : (assignedUsers.length ? assignedUsers : allUsers);
 
-    return (
-        <>
-        <div className="home-page-container">
-            <h2>Welcome ...</h2>
-            <div className="icon-filter-container" onClick={toggleDropdown}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-adjustments-horizontal" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M4 6l8 0" />
-                    <path d="M16 6l4 0" />
-                    <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M4 12l2 0" />
-                    <path d="M10 12l10 0" />
-                    <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M4 18l11 0" />
-                    <path d="M19 18l1 0" />
-                </svg>
-            </div>
-            {isDropdownOpen && (
-                <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-            )}
-            {selectedOption && (
-                <p>Seleccionaste la opción: {selectedOption}</p>
-            )}
-        </div>
-        {sortedUsers.map(user => (
-                <DevCardManagerView key={user.id} user={user} />
-            ))}
-        </>
-    );
-};
+  return (
+    <div>
+      <BackButton text="Salir" />
+      <div className='container-icon-image'>
+        <Image
+          isBlurred
+          width={150}
+          src={projectUsers}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+      </div>
+      <div className='buttons-manager-home-page'>
+        <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+        <AssignUserModal onAssignUsers={handleAssignUsers} />
+      </div>
+      <DevCardManagerView users={displayedUsers} />
+    </div>
+  );
+}

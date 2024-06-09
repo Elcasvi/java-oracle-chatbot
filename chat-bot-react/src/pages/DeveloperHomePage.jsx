@@ -1,13 +1,14 @@
 import '../HomePage.css'
 import React, { useState } from 'react';
-import '../util/TaskModel';
-import { Tasks } from '../util/TaskModel';
-import AllTasks from '../components/AllTaskList';
-import FilterDropdown from '../components/filterDropdown';
-import { Select, SelectItem } from '@nextui-org/react';
-import {animals} from "./data";
-import OptionsBar from '../components/optionsBar';
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+import '../util/TaskModel.js';
+import { Tasks } from '../util/TaskModel.js';
+import AllTasks from '../components/AllTaskList.jsx';
+import {Button} from "@nextui-org/react";
+import OptionsBar from '../components/optionsBar.jsx';import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
+import {FilterIcon} from "../assets/icons/filter_icon.tsx";
+//import {Select, SelectItem} from "@nextui-org/react";
+import AddTaskModal from '../components/addTaskModal.jsx';
+
 
 export default function DeveloperHomePage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,11 +61,26 @@ export default function DeveloperHomePage() {
     };
 
     return (
-        <div className="dev-home-page-container">
+        <div className="home-page-container">
             <h1>Developer Home Page</h1>
-            <OptionsBar></OptionsBar>
+            <OptionsBar 
+                options={options} 
+                isDropdownOpen={isDropdownOpen} 
+                toggleDropdown={toggleDropdown} 
+                onSelectOption={handleSelectOption} 
+                onOpenModal={openModal}
+            />
+
+
             <AllTasks tasks={filteredTasks} /> 
             
+            {isModalOpen && (
+                <AddTaskModal 
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                onAddTask={handleAddTask}/>
+            )}
+
             
         </div>
     );
