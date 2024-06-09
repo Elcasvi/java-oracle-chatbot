@@ -53,21 +53,19 @@ public class UserProjectService {
         }).flatMapMany(Flux::fromIterable);
     }
 
-    public Flux<User>getUsersOfProject(Long projectId)
-    {
-        return Mono.fromCallable(()->
-        {
-            var projectEntity =projectRepository.findById(projectId);
-            if(projectEntity.isPresent())
-            {
-                List<UserEntity>userEntityList=projectEntity.get().getUsers().stream().toList();
+    public Flux<User> getUsersOfProject(Long projectId) {
+        return Mono.fromCallable(() -> {
+            var projectEntity = projectRepository.findById(projectId);
+            if (projectEntity.isPresent()) {
+                List<UserEntity> userEntityList = projectEntity.get().getUsers().stream().toList();
                 System.out.println("Inside getUsersOfProject");
                 System.out.println(userEntityList);
-                return userMapper.entityListToApiList(userEntityList);
+                return userMapper.entityListToApiListMinimal(userEntityList);
             }
             return null;
         }).flatMapMany(Flux::fromIterable);
     }
+    
 
     public void assignUserToProject(Long userId, Long projectId) {
         UserEntity userEntity = userRepository.findById(userId).get();

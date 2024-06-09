@@ -8,12 +8,12 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - okeusersservice.sanchezapps.net
-        - oketasksservice.sanchezapps.net
-        - okesecurityservice.sanchezapps.net
+        - okeusers.sanchezapps.net
+        - oketasks.sanchezapps.net
+        - okesecurity.sanchezapps.net
       secretName: oke-tls
   rules:
-    - host: "okeusersservice.sanchezapps.net"
+    - host: "okeusers.sanchezapps.net"
       http:
         paths:
           - pathType: Prefix
@@ -23,7 +23,7 @@ spec:
                 name: users-service
                 port:
                   number: 80
-    - host: "oketasksservice.sanchezapps.net"
+    - host: "oketasks.sanchezapps.net"
       http:
         paths:
           - pathType: Prefix
@@ -33,7 +33,7 @@ spec:
                 name: tasks-service
                 port:
                   number: 80
-    - host: "okesecurityservice.sanchezapps.net"
+    - host: "okesecurity.sanchezapps.net"
       http:
         paths:
           - pathType: Prefix

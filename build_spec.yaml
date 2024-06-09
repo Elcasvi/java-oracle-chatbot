@@ -18,6 +18,9 @@ env:
     - OCIR_HOST
     - OCIR_STORAGE_NAMESPACE
     - CHART_VERSION
+    - SECURITY_SERVICE_IMAGE_BUILD_VERSION
+    - USERS_SERVICE_IMAGE_BUILD_VERSION
+    - TASKS_SERVICE_IMAGE_BUILD_VERSION
 
 steps:
   - type: Command
@@ -80,7 +83,7 @@ steps:
         timeOutInSeconds: 40
         Command: |
           echo "Error in Confirm Variables and Version"
-          
+
 
   - type: Command
     name: "Build and Package Services"
@@ -101,6 +104,10 @@ steps:
     user: root
     timeoutInSeconds: 60
     command: |
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+      TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
       ls
@@ -116,13 +123,21 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/users-service
       docker build -t users-service .
       cd ..
-      
-      echo tag images
-      docker tag security-service qro.ocir.io/ax7vdftklenx/chatbot/security-service:latest
-      docker tag tasks-service qro.ocir.io/ax7vdftklenx/chatbot/tasks-service:latest
-      docker tag users-service qro.ocir.io/ax7vdftklenx/chatbot/users-service:latest
-      echo images with tags are
+
+      echo docker images:
       docker images
+
+  - type: Command
+    name: "Export Helm chart version"
+    timeoutInSeconds: 1200
+    command: |
+      mkdir -p ~/.local/bin
+      wget https://github.com/mikefarah/yq/releases/download/v4.25.1/yq_linux_amd64 -O ~/.local/bin/yq
+      chmod +x ~/.local/bin/yq
+      export PATH=$HOME/.local/bin:$PATH
+
+      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
+      CHART_VERSION=`yq eval '.version' Chart.yaml`
 
   - type: Command
     name: "Push Helm Charts"
@@ -167,23 +182,18 @@ steps:
       helm push ./*.tgz oci://${OCI_RESOURCE_PRINCIPAL_REGION}.ocir.io/$TENANCY_NAMESPACE/helm
       cd ..
 
-  - type: Command
-    name: "Export Helm Charts Variables"
-    timeoutInSeconds: 1200
-    command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
-      CHART_VERSION=`yq eval '.version' Chart.yaml`
-
 outputArtifacts:
   - name: users-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/users-service
+    location: users-service
 
   - name: tasks-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/tasks-service
+    location: tasks-service
 
   - name: security-service
     type: DOCKER_IMAGE
-    location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
-    
+    #location: qro.ocir.io/ax7vdftklenx/chatbot/security-service
+    location: security-service

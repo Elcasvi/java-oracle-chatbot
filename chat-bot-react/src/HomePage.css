@@ -96,3 +96,15 @@
     
     
 }
+
+.icon-filter-container {
+    text-align: center;
+    
+    max-width: fit-content;
+}
+
+/* En tu archivo CSS */
+.icon-filter-container {
+    position: relative; /* Cambia a posición relativa */
+    cursor: pointer;
+}
