@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://okeusersservice.sanchezapps.net";
+const API_BASE_URL = "https://okeusers.sanchezapps.net/";
 //const API_BASE_URL = "http://127.0.0.1:62918";
 
 const api = axios.create({
@@ -8,16 +8,6 @@ const api = axios.create({
 });
 
 export default class userServices {
-  
-    async getAll() {
-        try {
-            const response = await api.get("/users");
-            return response.data;
-        } catch (error) {
-            console.error("Error fetching all users:", error);
-            throw error; // Re-throw para manejarlo más arriba si es necesario
-        }
-    }
 
     async login(email, password) {
         try {
@@ -28,6 +18,29 @@ export default class userServices {
             throw error; // Permitir que el componente maneje el error
         }
     }
+
+    async getAllMangerProjects(userId){
+        try {
+            const response = await api.get(`/users/getProjects/${userId}`)
+            return response;
+        } catch (error) {
+            console.error("Error fetching projects: ", error);
+            throw error;
+        }
+    }
+    
+  
+    async getAll() {
+        try {
+            const response = await api.get(`/users`);
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching all users:", error);
+            throw error; // Re-throw para manejarlo más arriba si es necesario
+        }
+    }
+
+    
     
     async getByEmail(email) {
         try {

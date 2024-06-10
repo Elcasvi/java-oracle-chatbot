@@ -5,18 +5,14 @@ import ManagerViewProjects from './pages/ManagerViewProjects';
 import ManagerHomePage from './pages/ManagerHomePage';
 import EditTask from "./pages/EditTask";
 import ManagerViewTaskDeveloper from './pages/ManagerViewTaskDeveloper';
+import HomePage from './pages/HomePage';
 
 function App() {
-
-  useEffect(() => {
-    tele.ready();
-  })
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/homePage" element={<ManagerViewProjects />} />
+        <Route path="/homePage" element={<HomePage />} />
         <Route path="/task/:id" element={<EditTask />} />
         <Route path="/tasks/:userId" element={<ManagerViewTaskDeveloper />} />
         <Route path="/manager-home-page/:projectId" element={<ManagerHomePage />} /> {/* Nueva ruta */}

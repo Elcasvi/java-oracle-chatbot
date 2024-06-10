@@ -6,9 +6,15 @@ import CreateProjectModal from '../components/createProjectModal'; // Ajusta la 
 import { Image } from '@nextui-org/react';
 import "../styles/devCardManagerViewStyle.css"; // Asegúrate de importar el archivo CSS
 import yourProjectsIcon from '../icons/your-projects-icon.PNG';
+import userServices from '../services/userServices';
 
 function ManagerViewProjects() {
   const [projects, setProjects] = useState(ProjectModel);
+
+  const getAllProjects = () => {
+    const userService = new userServices();
+    
+  }
 
   const handleCreateProject = (projectName) => {
     const newProject = {

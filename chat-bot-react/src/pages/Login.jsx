@@ -6,6 +6,7 @@ import userServices from '../services/userServices';
 function Login() {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+    const navigate = useNavigate();
 
     function handleEmailChange(event) {
       setEmail(event.target.value);
@@ -15,23 +16,15 @@ function Login() {
       setPassword(event.target.value);
     }
 
-    const navigate = useNavigate();
-
-    function sendLoginRequest(event) {
+    const sendLoginRequest = (event) => {
+      
       event.preventDefault();
       const userService = new userServices();
       userService.login(email, password).then(exist => {
-          //console.log(exist);
           if(exist){
-            userService.getByEmail(email).then(data => {
-              if(data.role === "MANAGER"){
-                navigate('/homePageManager')
-              }else if (data.role === "DEVELOPER"){
-                navigate('/homePageDeveloper', { state: { email: email } });
-              }else{
-                console.error("No existe rol")
-              }
-            });
+            const data = userService.getByEmail(email);
+            console.log(data)
+            navigate('/homePage')
           }
       });
     }

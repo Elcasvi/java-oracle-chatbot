@@ -1,15 +1,15 @@
 import DeveloperHomePage from "./DeveloperHomePage";
-import ManagerHomePage from "./ManagerHomePage";
+import ManagerViewProjects from "./ManagerViewProjects";
 
 export default function HomePage() {
-    const user="Developer"
+    const user="Manager"
 
     return(
         <>
             {user === "Developer" ?
                 <DeveloperHomePage/>
                 :
-                <ManagerHomePage/>
+                <ManagerViewProjects/>
             }
         </>
     );
