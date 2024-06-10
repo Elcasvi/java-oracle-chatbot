@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Component
 public class ProjectMapper {
+    public ProjectMapper(){}
 
     public Project entityToApi(ProjectEntity projectEntity) {
         Project project = new Project();
@@ -32,5 +33,12 @@ public class ProjectMapper {
             projects.add(entityToApi(projectEntity));
         }
         return projects;
+    }
+    public List<ProjectEntity>apiListToEntityList(List<Project> projects) {
+        List<ProjectEntity> projectEntities = new ArrayList<>();
+        for (Project project : projects) {
+            projectEntities.add(apiToEntity(project));
+        }
+        return projectEntities;
     }
 }

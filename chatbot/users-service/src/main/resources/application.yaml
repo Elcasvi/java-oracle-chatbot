@@ -17,7 +17,6 @@ spring:
   application:
     name: users-service
 
-
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
