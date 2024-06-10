@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
+    public UserMapper() {}
     public User entityToApi(UserEntity userEntity) {
         User user = new User();
         user.setId(userEntity.getId());
@@ -38,6 +39,14 @@ public class UserMapper {
             users.add(entityToApi(userEntity));
         }
         return users;
+    }
+
+    public List<UserEntity> apiListToEntityList(List<User> users) {
+        List<UserEntity> userEntities = new ArrayList<>();
+        for (User user : users) {
+            userEntities.add(apiToEntity(user));
+        }
+        return userEntities;
     }
 
     // Hacer que el project solo regrese id, name, rol
