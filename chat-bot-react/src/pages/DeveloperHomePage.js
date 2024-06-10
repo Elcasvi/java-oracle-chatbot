@@ -1,48 +1,22 @@
-import '../HomePage.css'
 import React, { useState } from 'react';
 import '../util/TaskModel';
 import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
-import FilterDropdown from '../components/filterDropdown';
-import { Select, SelectItem } from '@nextui-org/react';
-import {animals} from "./data";
-import OptionsBar from '../components/optionsBar';
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+import OptionsBar from '../components/optionsBar.jsx';
+import '../HomePage.css';
 
 export default function DeveloperHomePage() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [taskName, setTaskName] = useState('');
-    const [taskDescription, setTaskDescription] = useState('');
-    const [taskPriority, setTaskPriority] = useState('');
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [filteredTasks, setFilteredTasks] = useState(Tasks); 
-    const options = ['Filter by Status', 'Filter by Priority'];
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleAddTask = () => {
-        closeModal();
-    };
+    const [filteredTasks, setFilteredTasks] = useState(Tasks);
 
     const handleSelectOption = (option) => {
         if (option === 'Filter by Status') {
             const statusOrder = {
-                'ONGOING': 3,
-                'TODO': 2,
+                'TODO': 3,
+                'IN PROGRESS': 2,
                 'DONE': 1
             };
             const sortedTasks = Tasks.slice().sort((a, b) => {
-                return statusOrder[b.status] - statusOrder[a.status];
+                return statusOrder[a.status] - statusOrder[b.status];
             });
             setFilteredTasks(sortedTasks);
         } else if (option === 'Filter by Priority') {
@@ -56,16 +30,16 @@ export default function DeveloperHomePage() {
             });
             setFilteredTasks(sortedTasks);
         }
-        setIsDropdownOpen(false);
     };
 
     return (
         <div className="dev-home-page-container">
-            <h1>Developer Home Page</h1>
-            <OptionsBar></OptionsBar>
+            <h1 style={{ fontFamily: 'Arial, sans-serif', color: 'black', fontSize: '2rem', textAlign: 'left' }}>
+                    Welcome Back "El fuckin nombre aqui"
+            </h1>            
+            <OptionsBar onSelectOption={handleSelectOption} />
             <AllTasks tasks={filteredTasks} /> 
-            
-            
         </div>
     );
 }
+
