@@ -45,8 +45,12 @@ function AllTasks({ tasks }) {
         setSelectedTask((prevTask) => ({ ...prevTask, [name]: value }));
     };
 
-    const handleSelectChange = (value) => {
+    const handleStateChange = (value) => {
         setSelectedTask((prevTask) => ({ ...prevTask, state: value }));
+    };
+
+    const handlePriorityChange = (value) => {
+        setSelectedTask((prevTask) => ({ ...prevTask, priority: value }));
     };
 
     const handleSaveChanges = () => {
@@ -97,6 +101,7 @@ function AllTasks({ tasks }) {
                             />
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <span>State: {task.state}</span>
+                                <span>Priority: {task.priority}</span>
                                 <span>Last Updated: {task.lastUpdated}</span>
                             </div>
                         </div>
@@ -121,24 +126,38 @@ function AllTasks({ tasks }) {
                                         value={selectedTask.name}
                                         onChange={handleInputChange}
                                     />
-                                    <Select
-                                        fullWidth
-                                        label="State"
-                                        placeholder="Select State"
-                                        value={selectedTask.state}
-                                        onChange={handleSelectChange}
-                                    >
-                                        <SelectItem value="TODO">TODO</SelectItem>
-                                        <SelectItem value="IN PROGRESS">IN PROGRESS</SelectItem>
-                                        <SelectItem value="DONE">DONE</SelectItem>
-                                    </Select>
-                                    <Input
+                                     <Input
                                         fullWidth
                                         label="Description"
                                         name="description"
                                         value={selectedTask.description}
                                         onChange={handleInputChange}
                                     />
+                                    <Select
+                                        fullWidth
+                                        label="State"
+                                        placeholder={selectedTask.state}
+                                        value={selectedTask.state} // Ensure the value is correctly set
+                                        onChange={(e) => handleStateChange(e.target.value)}
+                                        style={{ width: '70%', margin: '0 auto'  }}
+                                    >
+                                        <SelectItem key="TODO" value="TODO">TODO</SelectItem>
+                                        <SelectItem key="IN PROGRESS" value="IN PROGRESS">IN PROGRESS</SelectItem>
+                                        <SelectItem key="DONE" value="DONE">DONE</SelectItem>
+                                    </Select>
+                                    <Select
+                                        fullWidth
+                                        label="Priority"
+                                        placeholder={selectedTask.priority}
+                                        value={selectedTask.priority} // Ensure the value is correctly set
+                                        onChange={(e) => handlePriorityChange(e.target.value)}
+                                        style={{ width: '70%', margin: '0 auto'  }}
+                                    >
+                                        <SelectItem key="LOW" value="LOW">LOW</SelectItem>
+                                        <SelectItem key="MEDIUM" value="MEDIUM">MEDIUM</SelectItem>
+                                        <SelectItem key="HIGH" value="HIGH">HIGH</SelectItem>
+                                    </Select>
+                                   
                                    
                                 </ModalBody>
                                 <ModalFooter>
@@ -159,4 +178,5 @@ function AllTasks({ tasks }) {
 }
 
 export default AllTasks;
+
 
