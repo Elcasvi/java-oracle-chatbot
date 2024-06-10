@@ -8,7 +8,7 @@ const ProjectTable = ({ projects }) => {
   const navigate = useNavigate();
 
   const handleViewDetails = (projectId) => {
-    navigate(`/manager-home-page/${projectId}`);
+    navigate(`/manager-home-page/${encodeURIComponent(projectId)}`);
   };
 
   return (

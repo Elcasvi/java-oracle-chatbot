@@ -2,18 +2,27 @@ import React, { useState, useEffect } from 'react';
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
 import { UserModel } from "../util/UserModel";
-import { UserModel2 } from "../util/UserModel2";
 import FilterDropdown from "../components/filterDropdown";
 import BackButton from "../components/backButton";
 import AssignUserModal from '../components/assingUserModal';
 import projectUsers from '../icons/project-users-icon.PNG';
 import { Image } from '@nextui-org/react';
+import { useParams } from 'react-router-dom';
+import userServices from '../services/userServices';
 
 export default function ManagerHomePage() {
+  const { projectId } = useParams();
   const [selectedOption, setSelectedOption] = useState(null);
-  const [assignedUsers, setAssignedUsers] = useState([]);
+  //const [assignedUsers, setAssignedUsers] = useState([]);
+  const [allUsers, setAllusers] = useState(UserModel);
 
-  const allUsers = [...UserModel, ...UserModel2];
+  useEffect(()=>{
+    const userService = new userServices();
+    userService.getUsersOfProject(projectId).then(data =>{
+      setAllusers(data.data)
+    })
+  },[projectId])
+
   const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
   const handleSelectOption = (option) => {
@@ -32,14 +41,7 @@ export default function ManagerHomePage() {
   };
 
   const sortedUsers = selectedOption ? sortUsers(allUsers, selectedOption) : allUsers;
-
-  const handleAssignUsers = (userIds) => {
-    const newAssignedUsers = allUsers.filter(user => userIds.includes(user.id.toString()));
-    const updatedAssignedUsers = [...new Set([...assignedUsers, ...newAssignedUsers])];
-    setAssignedUsers(updatedAssignedUsers);
-  };
-
-  const displayedUsers = selectedOption ? sortUsers(assignedUsers.length ? assignedUsers : allUsers, selectedOption) : (assignedUsers.length ? assignedUsers : allUsers);
+  //const displayedUsers = selectedOption ? sortUsers(assignedUsers.length ? assignedUsers : allUsers, selectedOption) : (assignedUsers.length ? assignedUsers : allUsers);
 
   return (
     <div>
@@ -55,9 +57,9 @@ export default function ManagerHomePage() {
       </div>
       <div className='buttons-manager-home-page'>
         <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-        <AssignUserModal onAssignUsers={handleAssignUsers} />
+        <AssignUserModal projectId={projectId}/>
       </div>
-      <DevCardManagerView users={displayedUsers} />
+      <DevCardManagerView users={sortedUsers} />
     </div>
   );
 }

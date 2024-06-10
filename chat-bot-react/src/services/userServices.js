@@ -19,29 +19,6 @@ export default class userServices {
         }
     }
 
-    async getAllMangerProjects(userId){
-        try {
-            const response = await api.get(`/users/getProjects/${userId}`)
-            return response;
-        } catch (error) {
-            console.error("Error fetching projects: ", error);
-            throw error;
-        }
-    }
-    
-  
-    async getAll() {
-        try {
-            const response = await api.get(`/users`);
-            return response.data;
-        } catch (error) {
-            console.error("Error fetching all users:", error);
-            throw error; // Re-throw para manejarlo más arriba si es necesario
-        }
-    }
-
-    
-    
     async getByEmail(email) {
         try {
             const response = await api.get(`/users/search/byEmail?email=${encodeURIComponent(email)}`);
@@ -52,17 +29,50 @@ export default class userServices {
         }
     }
 
-    async getById(userId) {
+    async getAllMangerProjects(userId){
         try {
-            const response = await api.get(`/users/${userId}`);
-            return response.data;
+            const response = await api.get(`/users/getProjects/${userId}`)
+            return response;
         } catch (error) {
-            console.error("Error fetching user by ID:", error);
+            console.error("Error fetching projects: ", error);
             throw error;
         }
     }
 
+    async getUsersOfProject(projectId){
+        try {
+            const response = await api.get(`/projects/getUsers/${projectId}`)
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
 
+    async getUserById(userId){
+        try {
+            const response = await api.get(`/users/${userId}`)
+            return response
+        } catch (error) {
+            throw error;
+        }
+    }
 
+    async asignarUserToProject(userId,projectId){
+        try {
+            const response = await api.post(`/users/assignUserToProject/${userId}/${projectId}`)
+            return response
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async createProject(project) {
+        try {
+            const response = await api.post(`/projects`,project)
+            return response
+        } catch (error) {
+            throw error;
+        }
+    }
 }
   

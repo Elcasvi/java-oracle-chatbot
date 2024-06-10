@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { UserModel } from '../util/UserModel';
-import { UserModel2 } from '../util/UserModel2';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
 import BackButton from '../components/backButton';
 import userTasks from '../icons/user-tasks-icon.PNG';
 import { Image } from '@nextui-org/react';
-
-const findUserById = (id) => {
-    return UserModel.find(user => user.id === parseInt(id)) || UserModel2.find(user => user.id === parseInt(id));
-};
+import userServices from '../services/userServices';
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
-    
-    // Buscar el usuario correspondiente en UserModel o UserModel2 utilizando el userId
-    const selectedUser = findUserById(userId);
+    const [selectedUser, setSelectedUser] = useState();
     const [selectedOption, setSelectedOption] = useState(null);
+
+    useEffect(()=>{
+        const userService = new userServices();
+        userService.getUserById(userId).then(data=>{
+            setSelectedUser(data.data)
+        });
+    },[userId])
+
     const options = ['Nombre (A-Z)', 'Nombre (Z-A)', 'Prioridad (Low-High)', 'Prioridad (High-Low)'];
 
     const handleSelectOption = (option) => {

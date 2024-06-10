@@ -1,7 +1,18 @@
 import React, { useState } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
+import { 
+  Modal, 
+  ModalContent, 
+  ModalHeader, 
+  ModalBody, 
+  ModalFooter, 
+  Button, 
+  useDisclosure, 
+  Input 
+} from "@nextui-org/react";
+import userServices from "../services/userServices";
 
-const CreateProjectModal = ({ onCreate }) => {
+const CreateProjectModal = ({ userId }) => {
+  /*
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [projectName, setProjectName] = useState("");
 
@@ -11,7 +22,22 @@ const CreateProjectModal = ({ onCreate }) => {
       setProjectName("");
       onOpenChange(false);
     }
-  };
+  };*/
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [projectName, setProjectName] = useState('');
+
+  const createProject = async () => {
+    const project = {
+      "id": 0,
+      "name": projectName,
+      "managerId": userId
+    }
+
+    const userService = new userServices();
+    const data = await userService.createProject(project);
+    await userService.asignarUserToProject(userId,data.data.id);    
+  }
 
   return (
     <>
@@ -38,7 +64,7 @@ const CreateProjectModal = ({ onCreate }) => {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={handleCreate}>
+                <Button color="primary" onPress={createProject}>
                   Create
                 </Button>
               </ModalFooter>

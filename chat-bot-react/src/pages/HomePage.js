@@ -6,21 +6,23 @@ import userServices from "../services/userServices";
 
 export default function HomePage() {
     const { email } = useParams();
-    const [ user, setUser ] = useState('')
+    const [ user, setUser ] = useState('');
+    const [ userId, setUserId ] = useState();
 
     useEffect(() => {
         const userService = new userServices();
         userService.getByEmail(email).then( data => {
-            setUser(data.rol)
+            setUser(data.rol);
+            setUserId(data.id);
         })
-    },[]);
+    },[email]);
 
     return(
         <>
             {user === "Developer" ?
                 <DeveloperHomePage/>
                 :
-                <ManagerViewProjects/>
+                <ManagerViewProjects userId={userId}/>
             }
         </>
     );

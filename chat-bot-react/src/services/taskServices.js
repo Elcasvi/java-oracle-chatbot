@@ -8,12 +8,6 @@ const api = axios.create({
 });
 
 export default class taskServices{
-
-    async getall(){
-        const response = await api.get(`/tasks`);
-        return response.data
-    }
-
     async getAllByUserId(userId) {
         try {
             const response = await api.get(`/tasks/${userId}/tasks`);
