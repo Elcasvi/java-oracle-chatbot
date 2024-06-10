@@ -68,9 +68,9 @@ public class UserProjectService {
     
 
     public void assignUserToProject(Long userId, Long projectId) {
-        UserEntity userEntity = userRepository.findById(userId).get();
-        ProjectEntity projectEntity = projectRepository.findById(projectId).get();
-        Set<UserEntity> users = new HashSet<>();
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        ProjectEntity projectEntity = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
+        Set<UserEntity> users=projectEntity.getUsers();
         users.add(userEntity);
         projectEntity.setUsers(users);
         projectRepository.save(projectEntity);
