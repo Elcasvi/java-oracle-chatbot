@@ -60,7 +60,7 @@ public class UserProjectService {
                 List<UserEntity> userEntityList = projectEntity.get().getUsers().stream().toList();
                 System.out.println("Inside getUsersOfProject");
                 System.out.println(userEntityList);
-                return userMapper.entityListToApiListMinimal(userEntityList);
+                return userMapper.entityListToApiList(userEntityList);
             }
             return null;
         }).flatMapMany(Flux::fromIterable);
