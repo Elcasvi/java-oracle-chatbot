@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../Login.css'; // Asegúrate de que esta ruta sea correcta y esté apuntando al archivo CSS correcto
 import { Button } from '@nextui-org/react';
 import { useNavigate } from "react-router-dom";
+import {UserIcon} from "../assets/icons/user_icon.tsx"
 import userServices from '../services/userServices';
 
 function Login() {
@@ -34,7 +35,8 @@ function Login() {
     }
 
     return (
-        <div className="login-container">
+        <div className="login-container p-6">
+            <UserIcon></UserIcon>
             <h2 style={{ fontSize: '21px', fontWeight: 'bold' }}>Login</h2>
             <form className="login-form p-2">
                 <div className="form-group">
@@ -45,7 +47,7 @@ function Login() {
                     <label htmlFor="password">Contraseña</label>
                     <input type="password" id="password" name="password" value={password} onChange={handlePasswordChange} />
                 </div>
-                {error && <div style={{ color: 'red', marginBottom: '10px',fontStyle: 'italic' }}>Usuario o contraseña inválido</div>}
+                {error && <div style={{ color: 'red', marginBottom: '10px',fontStyle: 'italic',fontSize: '15px' }}>Usuario o contraseña inválido</div>}
                 <Button color="primary" type="submit" onClick={(event)=>sendLoginRequest(event)} >Iniciar Sesión</Button>
             </form>
         </div>
