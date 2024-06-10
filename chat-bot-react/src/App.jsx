@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/homePage" element={<HomePage />} />
+        <Route path="/homePage/:email" element={<HomePage />} />
         <Route path="/task/:id" element={<EditTask />} />
         <Route path="/tasks/:userId" element={<ManagerViewTaskDeveloper />} />
         <Route path="/manager-home-page/:projectId" element={<ManagerHomePage />} /> {/* Nueva ruta */}

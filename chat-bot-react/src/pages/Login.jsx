@@ -22,9 +22,9 @@ function Login() {
       const userService = new userServices();
       userService.login(email, password).then(exist => {
           if(exist){
-            const data = userService.getByEmail(email);
-            console.log(data)
-            navigate('/homePage')
+            navigate(`/homePage/${encodeURIComponent(email)}`);
+          } else {
+            console.log("No user")
           }
       });
     }
