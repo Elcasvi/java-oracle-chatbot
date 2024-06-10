@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@nextui-org/react';
+import { BackIcon } from '../assets/icons/back_icon.tsx';
 
 const BackButton = () => {
   const navigate = useNavigate();
@@ -10,8 +11,8 @@ const BackButton = () => {
   };
 
   return (
-    <Button className='back-button' auto flat color="danger" onClick={handleBack}>
-      Back
+    <Button variant="bordered" display="flex" css={{ position: 'relative' }} onClick={handleBack}>
+      <BackIcon></BackIcon>
     </Button>
   );
 };
