@@ -8,9 +8,9 @@ function TaskModal({ task, closeModal }) {
             <div className="modal-content">
                 <span className="close" onClick={closeModal}>&times;</span>
                 <h2>{task.name}</h2>
-                <p><strong>Descripción:</strong> {task.description}</p>
-                <p><strong>Estado:</strong> {task.state}</p>
-                <p><strong>Prioridad:</strong> {task.priority}</p>
+                <p><strong>Description:</strong> {task.description}</p>
+                <p><strong>State:</strong> {task.state}</p>
+                <p><strong>Priority:</strong> {task.priority}</p>
                 {/* Agrega más información de la tarea aquí según tus necesidades */}
             </div>
         </div>
