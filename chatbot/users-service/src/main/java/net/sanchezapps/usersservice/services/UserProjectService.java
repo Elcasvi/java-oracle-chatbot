@@ -13,10 +13,12 @@ import net.sanchezapps.usersservice.persistence.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
 
 import java.util.List;
 import java.util.Set;
@@ -26,21 +28,24 @@ import static java.util.logging.Level.FINE;
 @Service
 public class UserProjectService {
     private final String TASKS_SERVICE_URL="http://tasks-service";
-    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserProjectService.class);
     private final WebClient webClient;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
     private final UserMapper userMapper;
+    private final Scheduler jdbcScheduler;
 
     @Autowired
-    public UserProjectService(UserRepository userRepository, ProjectRepository projectRepository, WebClient.Builder webClientBuilder, ProjectMapper projectMapper, UserMapper userMapper) {
+    public UserProjectService(UserRepository userRepository, ProjectRepository projectRepository, WebClient.Builder webClientBuilder, ProjectMapper projectMapper, UserMapper userMapper,@Qualifier("jdbcScheduler") Scheduler jdbcScheduler) {
 
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.webClient=webClientBuilder.build();
         this.projectMapper = projectMapper;
         this.userMapper = userMapper;
+        this.jdbcScheduler = jdbcScheduler;
     }
 
     public Flux<Project>getProjectsOfUser(Long userId)
@@ -56,31 +61,31 @@ public class UserProjectService {
                 return projectMapper.entityListToApiList(projectEntityList);
             }
             return null;
-        }).flatMapMany(Flux::fromIterable);
+        }).flatMapMany(Flux::fromIterable).subscribeOn(jdbcScheduler);
     }
 
     public Flux<User> getUsersOfProject(Long projectId) {
         return Mono.fromCallable(() -> {
-            var projectEntity = projectRepository.findById(projectId);
-            if (projectEntity.isPresent()) {
-                List<UserEntity> userEntityList = projectEntity.get().getUsers().stream().toList();
-                List<User>userList=userMapper.entityListToApiList(userEntityList);
-                userList.forEach(user -> {
-                    String url=TASKS_SERVICE_URL+"/users/"+user.getId()+"/tasks";
-                    List<Task> taskList = webClient.get()
-                            .uri(url)
-                            .retrieve()
-                            .bodyToFlux(Task.class)
-                            .log(LOG.getName(), FINE)
-                            .onErrorResume(error -> Flux.empty())
-                            .collectList()
-                            .block();
-                    user.setTasks(taskList);
-                });
-                return userList;
-            }
-            return null;
-        }).flatMapMany(Flux::fromIterable);
+            ProjectEntity projectEntity = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
+            System.out.println("Inside getUsersOfProject");
+            List<UserEntity> userEntityList = projectEntity.getUsers().stream().toList();
+            List<User>userList=userMapper.entityListToApiList(userEntityList);
+            System.out.println("User List is empty: " + userList.isEmpty());
+            userList.forEach(user -> {
+                String url=TASKS_SERVICE_URL+"/users/"+user.getId()+"/tasks";
+                List<Task> taskList = webClient.get()
+                        .uri(url)
+                        .retrieve()
+                        .bodyToFlux(Task.class)
+                        .log(LOG.getName(), FINE)
+                        .onErrorResume(error -> Flux.empty())
+                        .collectList()
+                        .block();
+                user.setTasks(taskList);
+            });
+            System.out.println("Before return");
+            return userList;
+        }).flatMapMany(Flux::fromIterable).subscribeOn(jdbcScheduler);
     }
     
 
