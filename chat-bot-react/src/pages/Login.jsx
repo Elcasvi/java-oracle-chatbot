@@ -17,7 +17,6 @@ function Login() {
     }
 
     const sendLoginRequest = (event) => {
-      
       event.preventDefault();
       const userService = new userServices();
       userService.login(email, password).then(exist => {

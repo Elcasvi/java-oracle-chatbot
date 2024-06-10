@@ -15,7 +15,7 @@ function App() {
         <Route path="/homePage/:email" element={<HomePage />} />
         <Route path="/task/:id" element={<EditTask />} />
         <Route path="/tasks/:userId" element={<ManagerViewTaskDeveloper />} />
-        <Route path="/manager-home-page/:projectId" element={<ManagerHomePage />} /> {/* Nueva ruta */}
+        <Route path="/manager-home-page/:projectId" element={<ManagerHomePage />} />
       </Routes>
     </Router>
   );
