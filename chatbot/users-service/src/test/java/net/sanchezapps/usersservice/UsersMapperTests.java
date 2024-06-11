@@ -1,12 +1,16 @@
 package net.sanchezapps.usersservice;
 
+import net.sanchezapps.api.core.tasks.Task;
+import net.sanchezapps.api.core.tasks.TaskPriority;
+import net.sanchezapps.api.core.tasks.TaskState;
+import net.sanchezapps.api.core.users.Role;
+import net.sanchezapps.api.core.users.Status;
 import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.entities.UserEntity;
 import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,8 +21,8 @@ public class UsersMapperTests {
     void mapperTest()
     {
         assertNotNull(mapper);
-        //TODO: FILL API OBJECT WITH DATA
-        User api=new User();
+        List<Task> tasks= List.of(new Task(1L, "TestName", "TestDescription", new Date(), TaskPriority.HIGH, TaskState.IN_PROGRESS, 1L));
+        User api=new User(1L,"TestUserName","TestUserEmail","TestUserPassword",Role.DEVELOPER, Status.ACTIVE,tasks);
         UserEntity entity=mapper.apiToEntity(api);
 
         assertEquals(api.getId(),entity.getId());
@@ -36,7 +40,7 @@ public class UsersMapperTests {
         assertEquals(api.getRole(),api2.getRole());
         assertEquals(api.getStatus(),api2.getStatus());
 
-        assertNull(api.getTasks());
+        assertNull(api2.getTasks());
         assertNull(entity.getProjects());
     }
 

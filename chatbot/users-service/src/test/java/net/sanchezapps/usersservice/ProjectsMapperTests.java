@@ -37,8 +37,7 @@ public class ProjectsMapperTests {
     @Test
     void mapperList() {
         assertNotNull(mapper);
-        //TODO: FILL API OBJECT WITH DATA
-        Project api=new Project();
+        Project api=new Project(1L,"Test Project",1L);
         List<Project>apiList= Collections.singletonList(api);
 
         List<ProjectEntity> entityList=mapper.apiListToEntityList(apiList);
