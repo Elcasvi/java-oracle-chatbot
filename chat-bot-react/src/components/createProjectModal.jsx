@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 import userServices from "../services/userServices";
 
-const CreateProjectModal = ({ userId }) => {
+const CreateProjectModal = ({ userId, onCreateSuccess }) => {
   /*
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [projectName, setProjectName] = useState("");
@@ -32,11 +32,19 @@ const CreateProjectModal = ({ userId }) => {
       "id": 0,
       "name": projectName,
       "managerId": userId
+    };
+  
+    try {
+      const userService = new userServices();
+      const data = await userService.createProject(project);
+      await userService.asignarUserToProject(userId, data.data.id);
+      onOpenChange(false);
+      if (onCreateSuccess) {
+        onCreateSuccess();
+      }
+    } catch (error) {
+      console.error("Failed to create project:", error);
     }
-
-    const userService = new userServices();
-    const data = await userService.createProject(project);
-    await userService.asignarUserToProject(userId,data.data.id);    
   }
 
   return (
@@ -58,6 +66,7 @@ const CreateProjectModal = ({ userId }) => {
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   variant="bordered"
+                  style={{ border: 'none', boxShadow: 'none' }}
                 />
               </ModalBody>
               <ModalFooter>

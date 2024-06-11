@@ -11,27 +11,24 @@ function ManagerViewProjects({ userId }) {
   const [projects, setProjects] = useState(null);
 
   const getProjects = async () => {
-    const userService = new userServices()
-    await userService.getAllMangerProjects(userId).then(data => {
-      setProjects(data.data)
-    })
-    
+    const userService = new userServices();
+    const response = await userService.getAllMangerProjects(userId);
+    if (response && response.data) {
+      setProjects(response.data);
+    } else {
+      setProjects([]);
+    }
   }
 
   useEffect(() => {
     if (userId) {
       getProjects();
     }
-  }, [userId]); 
+  }, [userId]);
 
-/*
-  const handleCreateProject = (projectName) => {
-    const newProject = {
-      id: projects.length + 1, 
-      name: projectName,
-    };
-    setProjects([...projects, newProject]);
-  }; */
+  const handleCreateSuccess = () => {
+    getProjects(); 
+  };
 
   return (
     <div>
@@ -46,7 +43,10 @@ function ManagerViewProjects({ userId }) {
         />
       </div>
       <div className="create-project-container">
-        <CreateProjectModal userId={userId}/>
+      <CreateProjectModal 
+        userId={userId} 
+        onCreateSuccess={handleCreateSuccess} 
+      />
       </div>
       {projects === null ? (
         <p>Cargando proyectos...</p>
@@ -55,7 +55,6 @@ function ManagerViewProjects({ userId }) {
       )}
     </div>
   );
-  
 }
 
 export default ManagerViewProjects;

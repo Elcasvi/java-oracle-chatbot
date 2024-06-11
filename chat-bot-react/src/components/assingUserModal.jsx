@@ -11,46 +11,22 @@ import {
 } from "@nextui-org/react";
 import userServices from "../services/userServices";
 
-const AssignUserModal = ({ projectId }) => {
-  /*
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [userId, setUserId] = useState('');
-  const [userName, setUserName] = useState('');
-  const [userList, setUserList] = useState([]);
-  const [error, setError] = useState('');
-
-  const handleAddUser = () => {
-    
-    const userIdNumber = parseInt(userId);
-    const allUsers = [...UserModel, ...UserModel2];
-    const matchedUser = allUsers.find(user => user.id === userIdNumber && user.name === userName);
-
-    if (!matchedUser) {
-      setError('User ID and Name do not match.');
-      return;
-    }
-
-    setUserList([...userList, { id: userId, name: userName }]);
-    setUserId('');
-    setUserName('');
-    setError('');
-    
-
-    
-  };
-
-  const handleAssign = () => {
-    const userIds = userList.map(user => user.id);
-    onAssignUsers(userIds);
-    onOpenChange(false);
-  }; */
+const AssignUserModal = ({ projectId, onAssignSuccess }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [ userId, setUserId ] = useState();
   const [ userName, setUserName ] = useState();
 
   const addUserToProject = async () => {
-    const userService = new userServices();
-    await userService.asignarUserToProject(userId, projectId)
+    try {
+      const userService = new userServices();
+      await userService.asignarUserToProject(userId, projectId)
+      onOpenChange(false);
+      if(onAssignSuccess) {
+        onAssignSuccess();
+      }
+    } catch (error) {
+      console.error("Failed to create project:", error);
+    }
   }
 
   return (
@@ -67,11 +43,13 @@ const AssignUserModal = ({ projectId }) => {
                     placeholder="User ID"
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
+                    style={{ border: 'none', boxShadow: 'none' }}
                   />
                   <Input 
                     placeholder="User Name"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
+                    style={{ border: 'none', boxShadow: 'none' }}
                   />
                   <Button color="secondary" onPress={addUserToProject}>Add User</Button>
                   {/*{error && <span style={{ color: 'red' }}>{error}</span>}*/}
@@ -87,7 +65,6 @@ const AssignUserModal = ({ projectId }) => {
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>Close</Button>
-                <Button color="primary" onPress={addUserToProject}>Assign</Button>
               </ModalFooter>
             </>
           )}

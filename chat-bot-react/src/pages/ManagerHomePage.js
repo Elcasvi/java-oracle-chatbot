@@ -14,14 +14,27 @@ export default function ManagerHomePage() {
   const { projectId } = useParams();
   const [selectedOption, setSelectedOption] = useState(null);
   //const [assignedUsers, setAssignedUsers] = useState([]);
-  const [allUsers, setAllusers] = useState(UserModel);
+  const [allUsers, setAllusers] = useState(null);
+
+  const getAllUsers = async () => {
+    const userService = new userServices();
+    const response = await userService.getUsersOfProject(projectId);
+    if (response && response.data) {
+      setAllusers(response.data);
+    } else {
+      setAllusers([]);
+    }
+  }
 
   useEffect(()=>{
-    const userService = new userServices();
-    userService.getUsersOfProject(projectId).then(data =>{
-      setAllusers(data.data)
-    })
+    if(projectId){
+      getAllUsers();
+    }
   },[projectId])
+
+  const assignSuccess = () => {
+    getAllUsers();
+  }
 
   const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
@@ -57,9 +70,16 @@ export default function ManagerHomePage() {
       </div>
       <div className='buttons-manager-home-page'>
         <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-        <AssignUserModal projectId={projectId}/>
+        <AssignUserModal 
+          projectId={projectId}
+          onAssignSuccess={assignSuccess}
+        />
       </div>
-      <DevCardManagerView users={sortedUsers} />
+      {sortedUsers === null ? (
+        <p>Cargando Usuarios...</p>
+      ) : (
+        <DevCardManagerView users={sortedUsers} />
+      )}
     </div>
   );
 }
