@@ -35,8 +35,8 @@ function TaskCard({ tasks }) {
                         <div
                             className="dev-card-icon"
                             style={{
-                                width: 40,
-                                height: 40,
+                                width: 30,
+                                height: 30,
                                 borderRadius: '50%',
                                 backgroundColor: getCircleColor(task.state)
                             }}

@@ -61,7 +61,8 @@ function AllTasks({ tasks }) {
 
     return (
         <div>
-            <h3>Your Tasks:</h3>
+            <h3 style={{ fontFamily: 'Lato, sans-serif', color: 'black', fontSize: '24px', textAlign: 'left' }}>
+                Your Tasks:</h3>
             {taskList.map(task => (
                 <Card
                     className="border-none max-w-full"

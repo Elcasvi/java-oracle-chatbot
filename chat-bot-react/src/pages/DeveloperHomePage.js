@@ -3,6 +3,7 @@ import '../util/TaskModel';
 import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
 import OptionsBar from '../components/optionsBar.jsx';
+import LogoutButton from '../components/LogoutButton.jsx';
 import '../HomePage.css';
 
 export default function DeveloperHomePage() {
@@ -34,7 +35,8 @@ export default function DeveloperHomePage() {
 
     return (
         <div className="dev-home-page-container">
-            <h1 style={{ fontFamily: 'Arial, sans-serif', color: 'black', fontSize: '2rem', textAlign: 'left' }}>
+            <LogoutButton></LogoutButton>
+            <h1 style={{ fontFamily: 'Lato, sans-serif', color: 'black', fontSize: '30px', textAlign: 'left' }}>
                     Welcome Back "El fuckin nombre aqui"
             </h1>            
             <OptionsBar onSelectOption={handleSelectOption} />
