@@ -71,8 +71,9 @@ function AllTasks({ tasks }) {
                         backgroundColor: '#E9E9E9',
                         borderRadius: '10px',
                         margin: '10px',
-                        border: '1px solid black',
+                        border: '1px solid gray-300',
                         padding: '15px',
+                        marginBottom: '17px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'stretch'
@@ -101,7 +102,7 @@ function AllTasks({ tasks }) {
                                 <span>Last Updated: {task.lastUpdated}</span>
                             </div>
                         </div>
-                        <Button style={{ marginLeft: 'auto' }} onPress={() => handleViewMore(task)}>
+                        <Button style={{ marginLeft: 'auto',backgroundColor:'#BC5BC4' }} onPress={() => handleViewMore(task)}>
                             Ver más
                         </Button>
                     </CardBody>
