@@ -20,7 +20,7 @@ export default function HomePage() {
     return(
         <>
             {user === "DEVELOPER" ?
-                <DeveloperHomePage/>
+                <DeveloperHomePage userId={userId}/>
                 :
                 <ManagerViewProjects userId={userId}/>
             }

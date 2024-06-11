@@ -8,10 +8,6 @@ import { Image } from '@nextui-org/react';
 import userServices from '../services/userServices';
 import Logout from '../components/LogoutButton';
 
-const findUserById = (id) => {
-    return UserModel.find(user => user.id === parseInt(id)) || UserModel2.find(user => user.id === parseInt(id));
-};
-
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
     const [selectedUser, setSelectedUser] = useState();

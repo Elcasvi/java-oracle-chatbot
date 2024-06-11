@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../util/TaskModel';
 import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
 import OptionsBar from '../components/optionsBar.jsx';
 import LogoutButton from '../components/LogoutButton.jsx';
 import '../HomePage.css';
+import taskServices from '../services/taskServices.js';
+import userServices from '../services/userServices.js';
 
-export default function DeveloperHomePage() {
-    const [filteredTasks, setFilteredTasks] = useState(Tasks);
+export default function DeveloperHomePage({ userId }) {
+    const [filteredTasks, setFilteredTasks] = useState(null);
+
+    const getAllTask = async () => {
+        const userService = new userServices();
+        const response = await userService.getUserById(userId);
+        if (response && response.data){
+            setFilteredTasks(response.data.tasks);
+        } else {
+            setFilteredTasks([]);
+        }
+    }
+
+    useEffect(() => {
+        if(userId) {
+            getAllTask();
+        }
+    },[userId])
 
     const handleSelectOption = (option) => {
         if (option === 'Filter by Status') {
@@ -40,7 +58,11 @@ export default function DeveloperHomePage() {
                     Welcome Back "El fuckin nombre aqui"
             </h1>            
             <OptionsBar onSelectOption={handleSelectOption} />
-            <AllTasks tasks={filteredTasks} /> 
+            {filteredTasks === null ? (
+                <p>Cargando tareas...</p>
+            ):(
+                <AllTasks tasks={filteredTasks} />
+            )} 
         </div>
     );
 }
