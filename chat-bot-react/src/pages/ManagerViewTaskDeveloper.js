@@ -6,6 +6,11 @@ import BackButton from '../components/backButton';
 import userTasks from '../icons/user-tasks-icon.PNG';
 import { Image } from '@nextui-org/react';
 import userServices from '../services/userServices';
+import Logout from '../components/LogoutButton';
+
+const findUserById = (id) => {
+    return UserModel.find(user => user.id === parseInt(id)) || UserModel2.find(user => user.id === parseInt(id));
+};
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
@@ -55,7 +60,8 @@ function ManagerViewTaskDeveloper() {
     const filteredAndSortedTasks = selectedOption ? sortTasks(selectedUser.tasks, selectedOption) : selectedUser.tasks;
 
     return (
-        <>   
+        <>  
+            <Logout></Logout> 
             <BackButton/>     
             <div className='container-icon-image'>
                 <Image
@@ -72,7 +78,9 @@ function ManagerViewTaskDeveloper() {
                     <p className="developer-information-email">Email: {selectedUser.email}</p>
                     <p className="developer-information-rol">Rol: {selectedUser.role}</p>
                 </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+                </div>
                 <h2 className='tareas-asignadas-text'>Tareas Asignadas:</h2>
                 <div className='task-info-container'>
                     <TaskCard tasks={filteredAndSortedTasks} />

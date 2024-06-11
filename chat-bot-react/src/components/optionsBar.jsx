@@ -14,7 +14,7 @@ function OptionsBar({ onSelectOption }) {
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button style={{ width: '200px' }} onClick={onOpen}>Add New Task</Button>
+                <Button style={{ width: '200px', backgroundColor:'#BC5BC4' }} onClick={onOpen}>Add New Task</Button>
                 <FilterDropdown options={options} onSelectOption={handleSelectOption} />
             </div>
             <Modal isOpen={isOpen} onClose={onClose}>

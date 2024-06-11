@@ -9,6 +9,7 @@ import projectUsers from '../icons/project-users-icon.PNG';
 import { Image } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import userServices from '../services/userServices';
+import Logout from '../components/LogoutButton';
 
 export default function ManagerHomePage() {
   const { projectId } = useParams();
@@ -58,7 +59,7 @@ export default function ManagerHomePage() {
 
   return (
     <div>
-      <BackButton text="Salir" />
+      <Logout />
       <div className='container-icon-image'>
         <Image
           isBlurred
@@ -68,7 +69,7 @@ export default function ManagerHomePage() {
           className="m-5"
         />
       </div>
-      <div className='buttons-manager-home-page'>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <FilterDropdown options={options} onSelectOption={handleSelectOption} />
         <AssignUserModal 
           projectId={projectId}
