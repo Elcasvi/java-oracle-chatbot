@@ -48,8 +48,8 @@ public class UsersMapperTests {
     void mapperList()
     {
         assertNotNull(mapper);
-        //TODO: FILL API OBJECT WITH DATA
-        User api=new User();
+        List<Task> tasks= List.of(new Task(1L, "TestName", "TestDescription", new Date(), TaskPriority.HIGH, TaskState.IN_PROGRESS, 1L));
+        User api=new User(1L,"TestUserName","TestUserEmail","TestUserPassword",Role.DEVELOPER, Status.ACTIVE,tasks);
         List<User>apiList= Collections.singletonList(api);
 
         List<UserEntity>entityList=mapper.apiListToEntityList(apiList);
