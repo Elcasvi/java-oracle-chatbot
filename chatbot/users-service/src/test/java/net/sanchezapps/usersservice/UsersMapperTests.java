@@ -76,7 +76,7 @@ public class UsersMapperTests {
         assertEquals(api.getRole(),api2.getRole());
         assertEquals(api.getStatus(),api2.getStatus());
 
-        assertNull(api.getTasks());
+        assertNotNull(api.getTasks());
         assertNull(entity.getProjects());
     }
 }

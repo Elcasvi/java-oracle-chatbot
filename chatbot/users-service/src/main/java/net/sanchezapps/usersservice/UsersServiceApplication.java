@@ -1,5 +1,6 @@
 package net.sanchezapps.usersservice;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,6 @@ public class UsersServiceApplication {
         int taskQueueSize = 100;
         return Schedulers.newBoundedElastic(threadPoolSize, taskQueueSize, "jdbc-pool");
     }
-
 
     public static void main(String[] args) {
         SpringApplication.run(UsersServiceApplication.class, args);

@@ -1,4 +1,4 @@
-package net.sanchezapps.usersservice;
+package net.sanchezapps.tasksservice;
 
 import org.testcontainers.oracle.OracleContainer;
 
