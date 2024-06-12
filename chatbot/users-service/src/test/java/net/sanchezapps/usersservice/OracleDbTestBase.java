@@ -3,11 +3,10 @@ package net.sanchezapps.usersservice;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.oracle.OracleContainer;
 
+
 public abstract class OracleDbTestBase {
-    private static final OracleContainer oracle = new OracleContainer("gvenzl/oracle-free:slim-faststart")
-            .withDatabaseName("testDB")
-            .withUsername("testUser")
-            .withPassword("testPassword");
+    private static final OracleContainer oracle = new OracleContainer("gvenzl/oracle-free:23-slim-faststart").withStartupTimeoutSeconds(300);
+
     static{
         oracle.start();
     }
