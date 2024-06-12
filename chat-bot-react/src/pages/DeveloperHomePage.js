@@ -40,7 +40,7 @@ export default function DeveloperHomePage({ userId }) {
                 'DONE': 1
             };
             const sortedTasks = filteredTasks.slice().sort((a, b) => {
-                return statusOrder[a.status] - statusOrder[b.status];
+                return statusOrder[a.state] - statusOrder[b.state];
             });
             setFilteredTasks(sortedTasks);
         } else if (option === 'Filter by Priority') {
