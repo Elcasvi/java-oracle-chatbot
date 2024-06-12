@@ -10,6 +10,7 @@ import { Image } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import userServices from '../services/userServices';
 import Logout from '../components/LogoutButton';
+import LoadingSpinner from '../components/loadingSpinner';
 
 export default function ManagerHomePage() {
   const { projectId } = useParams();
@@ -59,7 +60,7 @@ export default function ManagerHomePage() {
 
   return (
     <div>
-      <Logout />
+      <BackButton />
       <div className='container-icon-image'>
         <Image
           isBlurred
@@ -77,7 +78,7 @@ export default function ManagerHomePage() {
         />
       </div>
       {sortedUsers === null ? (
-        <p>Cargando Usuarios...</p>
+        <LoadingSpinner />
       ) : (
         <DevCardManagerView users={sortedUsers} />
       )}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import BackButton from '../components/backButton';
 import ProjectTable from '../components/projectTable'; // Ajusta la ruta según sea necesario
 import CreateProjectModal from '../components/createProjectModal'; // Ajusta la ruta según sea necesario
 import { Image } from '@nextui-org/react';
 import "../styles/devCardManagerViewStyle.css"; // Asegúrate de importar el archivo CSS
 import yourProjectsIcon from '../icons/your-projects-icon.PNG';
 import userServices from '../services/userServices';
+import LoadingSpinner from '../components/loadingSpinner';
+import Logout from '../components/LogoutButton';
 
 function ManagerViewProjects({ userId }) {
   const [projects, setProjects] = useState(null);
@@ -32,7 +33,7 @@ function ManagerViewProjects({ userId }) {
 
   return (
     <div>
-      <BackButton />
+      <Logout/> 
       <div className="container-icon-image">
         <Image
           isBlurred
@@ -49,7 +50,7 @@ function ManagerViewProjects({ userId }) {
       />
       </div>
       {projects === null ? (
-        <p>Cargando proyectos...</p>
+        <LoadingSpinner />
       ) : (
         <ProjectTable projects={projects} />
       )}

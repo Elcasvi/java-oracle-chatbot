@@ -6,7 +6,7 @@ import BackButton from '../components/backButton';
 import userTasks from '../icons/user-tasks-icon.PNG';
 import { Image } from '@nextui-org/react';
 import userServices from '../services/userServices';
-import Logout from '../components/LogoutButton';
+import LoadingSpinner from '../components/loadingSpinner';
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
@@ -27,7 +27,7 @@ function ManagerViewTaskDeveloper() {
     };
 
     if (!selectedUser) {
-        return <div>User not found</div>;
+        return <LoadingSpinner />;
     }
 
     // Función para ordenar las tareas según la opción seleccionada
@@ -57,8 +57,7 @@ function ManagerViewTaskDeveloper() {
 
     return (
         <>  
-            <Logout></Logout> 
-            <BackButton/>     
+            <BackButton />    
             <div className='container-icon-image'>
                 <Image
                 isBlurred

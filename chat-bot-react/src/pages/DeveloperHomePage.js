@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../util/TaskModel';
-import { Tasks } from '../util/TaskModel';
 import AllTasks from '../components/AllTaskList';
 import OptionsBar from '../components/optionsBar.jsx';
 import LogoutButton from '../components/LogoutButton.jsx';
 import '../HomePage.css';
 import userServices from '../services/userServices.js';
+import LoadingSpinner from '../components/loadingSpinner.jsx';
 
 export default function DeveloperHomePage({ userId }) {
     const [filteredTasks, setFilteredTasks] = useState(null);
@@ -64,7 +64,7 @@ export default function DeveloperHomePage({ userId }) {
             </h1>            
             <OptionsBar onCreateSuccess={handleSuccess} onSelectOption={handleSelectOption} userId={userId} />
             {filteredTasks === null ? (
-                <p>Cargando tareas...</p>
+                <LoadingSpinner />
             ):(
                 <AllTasks tasks={filteredTasks} onUpdateSuccess={handleSuccess}/>
             )} 
