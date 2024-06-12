@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Input, Select, SelectItem } from '@nextui-org/react';
 import { EditIcon } from "../assets/icons/edit_icon.tsx";
+import taskServices from '../services/taskServices.js';
 
-function AllTasks({ tasks }) {
+function AllTasks({ tasks, onUpdateSuccess }) {
     const [taskList, setTaskList] = useState(tasks);
     const [selectedTask, setSelectedTask] = useState(null);
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -12,21 +13,11 @@ function AllTasks({ tasks }) {
         setTaskList(tasks);
     }, [tasks]);
 
-    const handleChangeStatus = (taskId, newStatus) => {
-        const updatedTasks = taskList.map(task => {
-            if (task.id === taskId) {
-                return { ...task, state: newStatus };
-            }
-            return task;
-        });
-        setTaskList(updatedTasks);
-    };
-
     const getCircleColor = (state) => {
         switch (state) {
             case 'DONE':
                 return 'green';
-            case 'IN PROGRESS':
+            case 'IN_PROGRESS':
                 return 'yellow';
             case 'TODO':
                 return 'red';
@@ -53,15 +44,21 @@ function AllTasks({ tasks }) {
         setSelectedTask((prevTask) => ({ ...prevTask, priority: value }));
     };
 
+    const newDate = () => {
+        const newTask = { ... selectedTask, lastUpdated: new Date().toISOString() };
+        setSelectedTask(newTask)
+    }
+
     const handleSaveChanges = () => {
-        const updatedTasks = taskList.map(task => {
-            if (task.id === selectedTask.id) {
-                return selectedTask;
-            }
-            return task;
-        });
-        setTaskList(updatedTasks);
-        onOpenChange(false); // Close the modal
+        const taskService = new taskServices();
+        newDate()
+        const response = taskService.update(selectedTask, selectedTask.id);
+        if(response) {
+            onOpenChange(false);
+            onUpdateSuccess();
+        } else {
+            console.log("ERROR")
+        }
     };
 
     return (
@@ -144,7 +141,7 @@ function AllTasks({ tasks }) {
                                         style={{ width: '70%', margin: '0 auto'  }}
                                     >
                                         <SelectItem key="TODO" value="TODO">TODO</SelectItem>
-                                        <SelectItem key="IN PROGRESS" value="IN PROGRESS">IN PROGRESS</SelectItem>
+                                        <SelectItem key="IN_PROGRESS" value="IN_PROGRESS">IN PROGRESS</SelectItem>
                                         <SelectItem key="DONE" value="DONE">DONE</SelectItem>
                                     </Select>
                                     <Select

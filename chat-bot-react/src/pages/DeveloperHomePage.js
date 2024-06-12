@@ -66,7 +66,7 @@ export default function DeveloperHomePage({ userId }) {
             {filteredTasks === null ? (
                 <p>Cargando tareas...</p>
             ):(
-                <AllTasks tasks={filteredTasks} />
+                <AllTasks tasks={filteredTasks} onUpdateSuccess={handleSuccess}/>
             )} 
         </div>
     );
