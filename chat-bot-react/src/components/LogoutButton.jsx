@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, ModalContent, ModalHeader, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalFooter, Button, useDisclosure, ModalBody } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { LogoutIcon } from "../assets/icons/logout_icon.tsx";
 
@@ -24,7 +24,10 @@ function Logout() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">¿Estás seguro de que quieres cerrar sesión?</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Logout</ModalHeader>
+              <ModalBody>
+              ¿Estás seguro de que quieres cerrar sesión?
+              </ModalBody>
 
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={handleLogout}>

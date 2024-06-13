@@ -53,7 +53,7 @@ function TaskCard({ tasks }) {
                     </CardBody>
                     <Divider />
                     <CardFooter className="flex justify-center">
-                        <Button auto flat color="primary" onClick={() => handleTaskClick(task)} className="ver-mas-button">
+                        <Button style={{backgroundColor:'#BC5BC4'}} auto flat  onClick={() => handleTaskClick(task)} className="ver-mas-button">
                             Ver Más
                         </Button>
                     </CardFooter>
