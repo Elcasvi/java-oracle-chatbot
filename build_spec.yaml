@@ -67,8 +67,7 @@ steps:
     command: |
       echo PATH is $PATH
       echo JAVA_HOME is $JAVA_HOME
-      echo OCIR_HOST is $OCIR_HOST
-      echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
+
       echo PRIMARY_SOURCE_DIR is ${OCI_PRIMARY_SOURCE_DIR}
       echo This is the java version, it should be java 17
       java -version
