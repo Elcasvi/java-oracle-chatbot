@@ -1,0 +1,30 @@
+.options-bar-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.options-bar-container > *:not(:last-child) {
+    margin-right: 10px;
+}
+
+.my-icon {
+   
+    cursor: pointer;
+}
+
+
+/* OptionsBar.css */
+.custom-dropdown-item {
+    list-style: none; /* Elimina los bullets */
+    cursor: pointer; /* Cambia el cursor a pointer */
+    padding-left: 0; /* Elimina el padding a la izquierda */
+    padding-right: 25px;
+    margin-left: 10px; /* Elimina el margin a la izquierda */
+}
+
+.custom-dropdown-item:hover {
+    background-color: #f0f0f0; /* Cambia el color de fondo en hover */
+    color: #333; /* Cambia el color del texto en hover */
+}
+

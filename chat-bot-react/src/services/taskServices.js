@@ -1,19 +1,13 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://oketasksservice.sanchezapps.net";
-//const API_BASE_URL = "http://127.0.0.1:62941";
+const API_BASE_URL = "https://oketasks.sanchezapps.net";
+//const API_BASE_URL = "http://127.0.0.1:55931";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
 });
 
 export default class taskServices{
-
-    async getall(){
-        const response = await api.get(`/tasks`);
-        return response.data
-    }
-
     async getAllByUserId(userId) {
         try {
             const response = await api.get(`/tasks/${userId}/tasks`);

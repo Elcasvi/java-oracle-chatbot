@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   #repository: security-service
-  repository: qro.ocir.io/ax7vdftklenx/chatbot/security-service
+  repository: qro.ocir.io/axs8ga6t2gzg/chatbot/security-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   #tag: "latest"

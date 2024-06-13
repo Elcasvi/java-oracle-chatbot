@@ -1,20 +1,16 @@
 package net.sanchezapps.usersservice.services;
 
-import net.sanchezapps.api.core.projects.Project;
 import net.sanchezapps.api.core.tasks.Task;
 import net.sanchezapps.api.core.users.Status;
 import net.sanchezapps.api.core.users.User;
-import net.sanchezapps.usersservice.persistence.entities.ProjectEntity;
 import net.sanchezapps.usersservice.persistence.entities.UserEntity;
 import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
-import net.sanchezapps.usersservice.persistence.repositories.ProjectRepository;
 import net.sanchezapps.usersservice.persistence.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,7 +19,6 @@ import reactor.core.scheduler.Scheduler;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static java.util.logging.Level.FINE;
 
@@ -35,14 +30,12 @@ public class UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private final UserRepository repository;
-    private final ProjectRepository prepository;
     private final WebClient webClient;
     private final UserMapper mapper;
     private final Scheduler jdbcScheduler;
     @Autowired
-    public UserService(UserRepository repository, ProjectRepository prepository, WebClient.Builder webClientBuilder, UserMapper mapper, @Qualifier("jdbcScheduler") Scheduler jdbcScheduler) {
+    public UserService(UserRepository repository, WebClient.Builder webClientBuilder, UserMapper mapper, @Qualifier("jdbcScheduler") Scheduler jdbcScheduler) {
         this.repository = repository;
-        this.prepository = prepository;
         this.webClient=webClientBuilder.build();
         this.mapper = mapper;
         this.jdbcScheduler = jdbcScheduler;

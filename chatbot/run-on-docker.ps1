@@ -8,7 +8,7 @@ mvn clean
 
 # Check for errors (optional)
 if ($LastExitCode -ne 0) {
-  Write-Error "Error during mvn clean. Exiting..." -ForegroundColor Red
+  Write-Error "Error during mvn clean. Exiting..."
   exit
 }
 
@@ -18,7 +18,7 @@ mvn verify
 
 # Check for errors (optional)
 if ($LastExitCode -ne 0) {
-  Write-Error "Error during mvn verify. Exiting..." -ForegroundColor Red
+  Write-Error "Error during mvn verify. Exiting..."
   exit
 }
 
@@ -28,7 +28,7 @@ docker-compose build
 
 # Check for errors (optional)
 if ($LastExitCode -ne 0) {
-  Write-Error "Error during docker-compose build. Exiting..." -ForegroundColor Red
+  Write-Error "Error during docker-compose build. Exiting..."
   exit
 }
 

@@ -2,10 +2,21 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    margin: 30px; 
-    margin-left: 95px;
-    padding-left: 30px;
+    margin-top: 10px; 
+    align-items: center;
 }
+
+.dev-home-page-container{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 30px; 
+    padding: 15px;
+    
+    
+    
+}
+
 
 .options-container {
     display: flex;
@@ -29,22 +40,24 @@
     height: 35px;
 }
 
-.status-dropdown {
+.full-height-container {
     display: flex;
-    flex-direction: column; /* Para colocar los elementos en columnas */
-    align-items: center; /* Para centrar horizontalmente */
-    margin-left: 50px;
+    flex-direction: column;
+    justify-content: space-between; /* Esto asegura que el contenido se distribuya de arriba a abajo */
+    height: 100vh; /* Esto hace que el contenedor tenga el alto de la ventana del navegador */
+}
+
+.version-container {
+    text-align: center; /* Centra el texto horizontalmente */
+    margin-bottom: 20px; /* Añade un poco de margen en la parte inferior */
 }
 
 
-.status-label {
-    
-    margin: 5px; /* Espacio entre el texto "Status" y el select */
-}
 
-.status-select {
-    width: 100%; /* Para que el select ocupe todo el ancho disponible */
-}
+
+
+
+
 
 .modal-content {
     display: flex;
@@ -62,49 +75,47 @@
     margin-bottom: 10px; /* Espacio entre las filas */
 }
 
-.input-row input,
-.input-row select {
-    margin-right: 10px; /* Espacio entre los elementos en una fila */
-}
 
-.input-row select {
-    width: 150px;
-    height: 30px;
-    margin: 10px; /* Para que el select ocupe todo el espacio disponible */
-}
+.filter-dropdown {
+        position: absolute;
+        top: calc(10%+10px);
+        left: 65%;
+        transform: translateX(-50%);
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        min-width: 170px; /* Establece un ancho mínimo */
+    } 
 
-.custom-icon {
-    color: #b34545;
+    .filter-dropdown ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-    width: 35px; /* Ajusta el ancho del icono */
-    height: 35px; /* Ajusta la altura del icono */
-    margin-left: 900px; /* Mueve el icono hacia la derecha */
-    margin-top: 10px; /* Mueve el icono hacia abajo */
-}
+    .filter-dropdown li {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
 
-.icon-dropdown-container {
-    position: relative;
-    right: 120px; /* Mueve el icono 20px hacia la derecha */
-    top: 0px; /* Mueve el icono 10px hacia abajo */
-    display: inline-block; 
-}
-
-.dropdown {
-    position: absolute; /* Establece la posición absoluta para el dropdown */
-    top: calc(100% + 5px); 
-    left: 58.5%;/* Coloca el punto de referencia del dropdown en el centro horizontal */
+    .filter-dropdown li:hover {
+        background-color: #f0f0f0;
+    }
     
-    
-}
 
-.icon-filter-container {
-    text-align: center;
-    
-    max-width: fit-content;
-}
+
+
+
+
+
+
 
 /* En tu archivo CSS */
 .icon-filter-container {
     position: relative; /* Cambia a posición relativa */
     cursor: pointer;
 }
+
