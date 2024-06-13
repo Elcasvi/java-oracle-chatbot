@@ -30,7 +30,7 @@ function TaskCard({ tasks }) {
     return (
         <div className="dev-card-container">
             {tasks && tasks.map(task => (
-                <Card key={task.id} className="max-w-[400px] mb-4">
+                <Card  style={{ width:600}}key={task.id} className="max-w-full mb-4">
                     <CardHeader className="flex gap-3">
                         <div
                             className="dev-card-icon"

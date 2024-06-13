@@ -57,16 +57,9 @@ function ManagerViewTaskDeveloper() {
 
     return (
         <>  
-            <BackButton />    
-            <div className='container-icon-image'>
-                <Image
-                isBlurred
-                width={150}
-                src={userTasks}
-                alt="NextUI Album Cover"
-                className="m-5"  
-                />
-            </div>
+            <Logout></Logout> 
+            <BackButton/>     
+          
             <div className="developer-information-container">
                 <div className="developer-information">
                     <h1 className="developer-information-name">{selectedUser.name}</h1>

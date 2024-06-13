@@ -176,6 +176,7 @@
         justify-content: center;
         margin-top: 20px; /* Ajusta según sea necesario */
         padding: 0 10px; /* Añade un poco de padding para los dispositivos móviles */
+      
       }
       
       .table-wrapper {
@@ -227,17 +228,17 @@
     .developer-information-name{
         font-size: 35px;
         font-family:Georgia, 'Times New Roman', Times, serif;
-        color: #EE0004;
+        color: #000000;
     }
 
     .developer-information-email{
         font-style: oblique;
-        color: #FF7376;
+        color: #000000;
     }
 
     .developer-information-rol{
         font-style: oblique;
-        color: #FF7376;
+        color: #000000;
     }
 
     .developer-information-container{

@@ -31,7 +31,7 @@ const AssignUserModal = ({ projectId, onAssignSuccess }) => {
 
   return (
     <>
-      <Button onPress={onOpen} color="warning">Add User</Button>
+      <Button style={{ width: '150px', backgroundColor:'#BC5BC4' }} onPress={onOpen} color="warning">Add User</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
