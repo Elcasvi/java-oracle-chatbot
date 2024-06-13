@@ -3,10 +3,9 @@ import { useParams } from 'react-router-dom';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
 import BackButton from '../components/backButton';
-import userTasks from '../icons/user-tasks-icon.PNG';
-import { Image } from '@nextui-org/react';
 import userServices from '../services/userServices';
 import LoadingSpinner from '../components/loadingSpinner';
+import Logout from '../components/LogoutButton';
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
