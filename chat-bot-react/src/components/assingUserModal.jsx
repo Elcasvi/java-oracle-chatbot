@@ -10,6 +10,7 @@ import {
   Input 
 } from "@nextui-org/react";
 import userServices from "../services/userServices";
+import { AddIcon } from "../assets/icons/add_icon.tsx";
 
 const AssignUserModal = ({ projectId, onAssignSuccess }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -31,7 +32,10 @@ const AssignUserModal = ({ projectId, onAssignSuccess }) => {
 
   return (
     <>
-      <Button style={{ width: '150px', backgroundColor:'#BC5BC4' }} onPress={onOpen} color="warning">Add User</Button>
+      <Button style={{ width: '150px', backgroundColor:'#BC5BC4' }} onPress={onOpen} >
+        Add User
+        <AddIcon></AddIcon>
+        </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
