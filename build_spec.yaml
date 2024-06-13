@@ -6,17 +6,18 @@ failImmediatelyOnError: true
 
 env:
   variables:
-    OCIR_AUTH_TOKEN_VAULT: "ybC#;7rk86m-S>HVL3Zz"
-    OCIR_USERNAME: "a01640495@tec.mx"
+    OCIR_AUTH_TOKEN_VAULT: "DO>ZG5]hwhYNabN_+.Wh"
+    #OCIR_USERNAME: "a01640495@tec.mx"
+    OCIR_USERNAME: "a01662438@tec.mx"
     JAVA_HOME : "/usr/lib64/graalvm/graalvm-java17"
     DOCKER_COMPOSE: "/usr/local/bin/docker-compose"
     JAVA_VERSION: "17"
   vaultVariables:
-    OCIR_HOST_VALUT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaahf3fg56aijkgulajay5iqhaarc4ndk6f2wuz2z73li4q
-    OCIR_STORAGE_NAMESPACE_VAULT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaajyqtytzl57umlknxmwdi72ltmdtpq4zlz4o7evs2atwa
+    #OCIR_HOST_VALUT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaahf3fg56aijkgulajay5iqhaarc4ndk6f2wuz2z73li4q
+    #OCIR_STORAGE_NAMESPACE_VAULT: ocid1.vaultsecret.oc1.mx-queretaro-1.amaaaaaat7x4woaajyqtytzl57umlknxmwdi72ltmdtpq4zlz4o7evs2atwa
   exportedVariables:
-    - OCIR_HOST
-    - OCIR_STORAGE_NAMESPACE
+    #- OCIR_HOST
+    #- OCIR_STORAGE_NAMESPACE
     - CHART_VERSION
     - SECURITY_SERVICE_IMAGE_BUILD_VERSION
     - USERS_SERVICE_IMAGE_BUILD_VERSION
@@ -36,12 +37,7 @@ steps:
       echo $JAVA_VERSION
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot
       echo Extracting export variables -Working in 'pwd'
-      echo transferring the OCIR_HOST and OCIR_STORAGE_NAMESPACE variables to the workspace
-      export OCIR_HOST=$OCIR_HOST_VALUT
-      echo OCIR_HOST is $OCIR_HOST
-      export OCIR_STORAGE_NAMESPACE=$OCIR_STORAGE_NAMESPACE_VAULT
-      echo OCIR_STORAGE_NAMESPACE is $OCIR_STORAGE_NAMESPACE
-      echo image will be stored to  ${OCIR_HOST}/${OCIR_STORAGE_NAMESPACE}/a01640495@tec.mx/:latest
+
     onFailure:
      - type: Command
        timeoutInSeconds: 40
