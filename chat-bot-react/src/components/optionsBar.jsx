@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FilterDropdown from './filterDropdown';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Select, SelectItem } from "@nextui-org/react";
 import taskServices from '../services/taskServices';
+import { AddIcon } from '../assets/icons/add_icon.tsx';
 
 function OptionsBar({ onCreateSuccess, onSelectOption, userId }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,7 +49,10 @@ function OptionsBar({ onCreateSuccess, onSelectOption, userId }) {
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button style={{ width: '200px', backgroundColor:'#BC5BC4' }} onClick={onOpen}>Add New Task</Button>
+                <Button style={{ width: '200px', backgroundColor:'#BC5BC4' }} onClick={onOpen}>
+                  Add New Task
+                  <AddIcon></AddIcon>
+                </Button>
                 <FilterDropdown options={options} onSelectOption={handleSelectOption} />
             </div>
             <Modal isOpen={isOpen} onClose={onClose}>

@@ -10,6 +10,8 @@ import {
   Input 
 } from "@nextui-org/react";
 import userServices from "../services/userServices";
+import EyeIcon from "./eyeIcon";
+import { AddIcon } from "../assets/icons/add_icon.tsx";
 
 const CreateProjectModal = ({ userId, onCreateSuccess }) => {
   /*
@@ -49,7 +51,13 @@ const CreateProjectModal = ({ userId, onCreateSuccess }) => {
 
   return (
     <>
-      <Button onPress={onOpen} color="secondary">+</Button>
+    
+      <Button onPress={onOpen} color="secondary">
+        
+        New Project
+        <AddIcon></AddIcon>
+        </Button>
+
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}

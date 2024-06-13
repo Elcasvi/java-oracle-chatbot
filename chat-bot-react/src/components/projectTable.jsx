@@ -26,9 +26,10 @@ const ProjectTable = ({ projects }) => {
                 <TableCell data-label="ACTIONS">
                   <Tooltip content="View Details">
                     <Button
+                    style={{backgroundColor:'#BC5BC4'}}
                       auto
                       flat
-                      color="warning"
+                      
                       onClick={() => handleViewDetails(project.id)}
                       icon={<EyeIcon />}
                       variant="shadow"

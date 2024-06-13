@@ -37,16 +37,8 @@ function ManagerViewProjects({ userId }) {
   return (
     <div>
       <Logout/> 
-      <div className="container-icon-image">
-        <Image
-          isBlurred
-          width={150}
-          src={yourProjectsIcon}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
-      </div>
-      <div className="create-project-container">
+      
+      <div style={{ display: 'flex', justifyContent: 'flex-end', width:1250 }}>
       <CreateProjectModal 
         userId={userId} 
         onCreateSuccess={handleCreateSuccess} 
