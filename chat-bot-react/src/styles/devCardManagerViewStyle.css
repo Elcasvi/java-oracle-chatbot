@@ -1,207 +1,291 @@
-.dev-card-manager {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centrar el componente horizontalmente */
-    margin-top: 15px; /* Espacio superior */
-    color: #b82020;
-    font-size: .8rem;
-    width: auto;
-}
-
-.dev-card-manger-header {
-    display: flex;
-    align-items: flex-start; 
-    
-    gap: 4px;
-    color: #000000;
-}
-
-.dev-card-manager-name {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    margin-right: 16px;
-    
-    align-items: flex-start;  /* Ajuste de margen para espacio del botón */
-}
-
-.dev-card-manager-numTask {
-    opacity: .6;
-    color: #000;
-}
-
-.dev-card-manger-icon {
-    width: 36px;
-    height: 36px;
-    
-    border-radius: 1000px;
-}
-
-.dev-card-manger-icon-container {
-    width: 50px; /* Ajusta este valor según sea necesario */
-    display: inline-block;
-    vertical-align: top;
-    display: flex;
-    align-items: left;
-    color: #007bff;/* Alinea los círculos al principio */
-}
-
-
-.dev-card-manager-showMore {
-    cursor: pointer;
-    border: 0;
-    border-radius: 999px;
-    padding: 6px 16px;
-    font-weight: bold;
-    border: 1px solid #000;
-    transition: .3s ease background-color;
-    background-color: #007bff;
-    color: white;
-    
-}
-
-.dev-card-manager-showMore:hover {
-    opacity: .8;
-}
-
-.dev-card-manager-text {
-    display: block;
-}
 /* CSS para el modal */
-.modal {
-    display: block;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto;
-}
+    
+    .body{
+        padding: 0;
+        margin: 0;
+    }
+    .icon-filter-container {
+        text-align: center;
+        
+        max-width: fit-content;
+    }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: #333; /* Cambiar el color del texto a negro */
-}
+    /* En tu archivo CSS */
+    .icon-filter-container {
+        position: relative; /* Cambia a posición relativa */
+        cursor: pointer;
+    }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+    
+    .developer-information{
+        text-align: center;
+        margin: auto;
+        margin-top: 70px;
+        max-width: fit-content;
+    }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .tareas-asignadas-text{
+        text-align: center;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 17.5px;
+        color: #EE0004;
+    }
 
-.icon-filter-container {
-    text-align: center;
-    left: 58.5%;
-    max-width: fit-content;
-}
+    .task-info-container{
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Centrar el componente horizontalmente */
+        margin-top: 15px; /* Espacio superior */
+        color: #EE0004;
+        font-size: .8rem;
+    }
 
-/* En tu archivo CSS */
-.icon-filter-container {
-    position: relative; /* Cambia a posición relativa */
-    cursor: pointer;
-}
+    .task-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    }
 
-.filter-dropdown {
-    position: absolute;
-    top: calc(10%+10px);
-    left: 65%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    min-width: 170px; /* Establece un ancho mínimo */
-}
+    .modal-content {
+        background-color: #fefefe;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 80%;
+        max-height: 80%;
+        overflow: auto;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
 
-.filter-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-.filter-dropdown li {
-    padding: 5px 10px;
-    cursor: pointer;
-}
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-.filter-dropdown li:hover {
-    background-color: #f0f0f0;
-}
+    .icon-filter-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: -40px; /* Ajusta según sea necesario */
+        position: relative;
+        z-index: 1; /* Asegura que esté por encima del botón azul */
+    }
+    
+    .task-info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+        color: #EE0004;
+        font-size: 0.8rem;
+        position: relative; /* Añade esta línea */
+    }
+    
+    .dev-card-manager {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+        color: #EE0004;
+        font-size: 0.8rem;
+        width: auto;
+        position: relative;
+    }
+    
+    .dev-card-manager-showMore {
+        cursor: pointer;
+        border: 0;
+        border-radius: 999px;
+        padding: 6px 16px;
+        font-weight: bold;
+        border: 1px solid #000;
+        transition: 0.3s ease background-color;
+        background-color: #EE0004;
+        color: white;
+        position: relative;
+    }
+    
+    .dev-card-manager-showMore:hover {
+        opacity: 0.8;
+    }
+    
 
-.developer-information{
-    text-align: center;
-    margin: auto;
-    margin-top: 70px;
-    max-width: fit-content;
-}
+    .ver-mas-button {
+        background-color: #007bff; /* Color llamativo */
+        color: white; /* Color del texto */
+        border-radius: 8px; /* Bordes redondeados */
+        padding: 10px 20px; /* Padding ajustado */
+        margin: 0 auto; /* Centrar el botón */
+        display: block;
+        font-weight: bold;
+    }
+    
+    .ver-mas-button:hover {
+        background-color: red; /* Color al pasar el cursor */
+        color: white;
+    }
 
-.tareas-asignadas-text{
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 17.5px;
-    color: brown;
-}
+    .back-button:hover{
+        background-color: #a633a0;
+        color: black;
+    }
+    
+    .dev-card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px; /* Espacio entre las tarjetas */
+        padding: 20px;
+    }
+    
+    .dev-card-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .card-footer {
+        padding: 8px 16px; /* Ajusta el padding para reducir el espacio gris */
+    }
+    
+    .card-body {
+        padding: 16px; /* Ajusta el padding para el contenido */
+    }
 
-.task-info-container{
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centrar el componente horizontalmente */
-    margin-top: 15px; /* Espacio superior */
-    color: red;
-    font-size: .8rem;
-}
+    
+    .close-modal{
+        background-color: #EE0004;
+    }
 
-.task-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
-}
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Ajusta según sea necesario */
+        padding: 0 10px; /* Añade un poco de padding para los dispositivos móviles */
+        
+      
+      }
+      
+      .table-wrapper {
+        width: 100%;
+        max-width: 450px; /* Ajusta según sea necesario */
+        overflow-x: auto; /* Permite el desplazamiento horizontal en pantallas pequeñas */
+        border-collapse: collapse; /* Para asegurarse de que las celdas colapsen correctamente */
+      }
+      
+      .table-row {
+        border-bottom: 1px solid black;
+      }
+      
+      .table-row:last-child {
+        border-bottom: none; /* Evita que el último elemento tenga un borde extra */
+      }
+      
+      @media (max-width: 130px) {
+        .table-wrapper {
+          width: auto;
+        }
+      
+        .table-header, .table-body, .table-row, .table-cell {
+          display: block; /* Hacer que cada fila sea un bloque separado */
+          width: 100%;
+        }
+      
+        .table-row {
+          margin-bottom: 10px; /* Añadir espacio entre filas */
+        }
+      
+        .table-cell {
+          padding: 10px;
+          text-align: left; /* Alinear el texto a la izquierda */
+          border-bottom: 1px solid #eaeaea; /* Añadir borde a las celdas */
+        }
+      
+        .table-cell::before {
+          content: attr(data-label); /* Añadir etiqueta antes del contenido de la celda */
+          font-weight: bold;
+          display: block;
+        }
+      
+        .table-header .table-cell {
+          display: none; /* Ocultar encabezados de la tabla en dispositivos móviles */
+        }
+      }
 
-.modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 80%;
-    max-height: 80%;
-    overflow: auto;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
+    .developer-information-name{
+        font-size: 35px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        color: #000000;
+    }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+    .developer-information-email{
+        font-style: oblique;
+        color: #000000;
+    }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .developer-information-rol{
+        font-style: oblique;
+        color: #000000;
+    }
+
+    .developer-information-container{
+        margin-top: -75px;
+    }
+
+    .projects-view-title{
+        font-size: 30px;
+        font-family:monospace;
+        color: #a61c1c;
+        text-align: center;
+    }
+
+    .create-project-container{
+        align-items: center;
+        justify-content: center;
+        margin-left: 75%;
+        margin-bottom: -7%;
+    }
+
+    .buttons-manager-home-page{
+        align-items: center;
+        display: flex;
+        margin-left: -20px;
+        gap: 200px;
+        margin-bottom: -25px;
+    }
+
+    .container-icon-image {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+      
+    .container-icon-image img {
+        margin: 0 auto;
+    }
+    
+    .full-height-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Esto asegura que el contenido se distribuya de arriba a abajo */
+        height: 100vh; /* Esto hace que el contenedor tenga el alto de la ventana del navegador */
+    }
+
+    .version-container {
+        text-align: center; /* Centra el texto horizontalmente */
+        margin-bottom: 20px; /* Añade un poco de margen en la parte inferior */
+    }

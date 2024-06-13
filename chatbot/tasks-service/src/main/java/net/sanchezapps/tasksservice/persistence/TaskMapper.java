@@ -1,6 +1,7 @@
 package net.sanchezapps.tasksservice.persistence;
 
 import net.sanchezapps.api.core.tasks.Task;
+import net.sanchezapps.api.core.users.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -37,6 +38,13 @@ public class TaskMapper {
             tasks.add(entityToApi(taskEntity));
         }
         return tasks;
+    }
+    public List<TaskEntity> apiListToEntityList(List<Task> tasks) {
+        List<TaskEntity> taskEntities = new ArrayList<>();
+        for (Task task : tasks) {
+            taskEntities.add(apiToEntity(task));
+        }
+        return taskEntities;
     }
 }
 

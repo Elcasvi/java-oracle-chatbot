@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import TaskModal from './taskModal'; // Importar el componente TaskModal
-import '../taskCard.css'
+import { Card, CardHeader, CardBody, CardFooter, Divider, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/react';
 
 function TaskCard({ tasks }) {
-    const [selectedTask, setSelectedTask] = useState(null); // Estado para la tarea seleccionada
+    const [selectedTask, setSelectedTask] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getCircleColor = (state) => {
         switch (state) {
@@ -20,34 +20,66 @@ function TaskCard({ tasks }) {
 
     const handleTaskClick = (task) => {
         setSelectedTask(task);
+        setIsModalOpen(true);
     };
 
     const closeModal = () => {
-        setSelectedTask(null);
+        setIsModalOpen(false);
     };
 
     return (
         <div className="dev-card-container">
-            {tasks && tasks.map(task => ( // Verificar que tasks no sea undefined antes de mapearlo
-                <div className='dev-card' key={task.id}>
-                    <div className="dev-card-header">
+            {tasks && tasks.map(task => (
+                <Card  style={{ width:600}}key={task.id} className="max-w-full mb-4">
+                    <CardHeader className="flex gap-3">
                         <div
                             className="dev-card-icon"
                             style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: '50%',
                                 backgroundColor: getCircleColor(task.state)
                             }}
-                            onClick={() => handleTaskClick(task)} // Manejador de clic para mostrar el modal
+                            onClick={() => handleTaskClick(task)}
                         />
-                        <div className="dev-card-info">
-                            <strong>{task.name}</strong>
-                            <span className="dev-card-numTask">Priority Task: {task.priority}</span>
+                        <div className="flex flex-col">
+                            <p className="text-md">{task.name}</p>
+                            <p className="text-small text-default-500">Priority Task: {task.priority}</p>
                         </div>
-                    </div>
-                    <button className="dev-card-showMore" onClick={() => handleTaskClick(task)}>Ver Más</button>
-                </div>
+                    </CardHeader>
+                    <Divider />
+                    <CardBody>
+                        <p>{task.description}</p>
+                    </CardBody>
+                    <Divider />
+                    <CardFooter className="flex justify-center">
+                        <Button style={{backgroundColor:'#BC5BC4'}} auto flat  onClick={() => handleTaskClick(task)} className="ver-mas-button">
+                            Ver Más
+                        </Button>
+                    </CardFooter>
+                </Card>
             ))}
-            {/* Integrar el componente TaskModal */}
-            <TaskModal task={selectedTask} closeModal={closeModal} />
+            <Modal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                placement="center"
+            >
+                <ModalContent>
+                    <ModalHeader>
+                        <h2>{selectedTask ? selectedTask.name : ''}</h2>
+                    </ModalHeader>
+                    <ModalBody>
+                        <p><strong>Description:</strong> {selectedTask ? selectedTask.description : ''}</p>
+                        <p><strong>State:</strong> {selectedTask ? selectedTask.state : ''}</p>
+                        <p><strong>Priority:</strong> {selectedTask ? selectedTask.priority : ''}</p>
+                    </ModalBody>
+                    <ModalFooter className='footer-modal'>
+                        <Button color="danger" variant="light" onPress={closeModal}>
+                            Close
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </div>
     );
 }

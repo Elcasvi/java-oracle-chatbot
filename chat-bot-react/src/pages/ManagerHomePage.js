@@ -1,74 +1,77 @@
+import React, { useState, useEffect } from 'react';
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
-import React, { useState, useEffect } from 'react';
-import { UserModel } from "../util/UserModel";
 import FilterDropdown from "../components/filterDropdown";
-import userServices from "../services/userServices";
+import BackButton from "../components/backButton";
+import AssignUserModal from '../components/assingUserModal';
+import { useParams } from 'react-router-dom';
+import userServices from '../services/userServices';
+import Logout from '../components/LogoutButton';
+import LoadingSpinner from '../components/loadingSpinner';
 
 export default function ManagerHomePage() {
-    
-    const [ users, setUsers ] = useState([]);
+  const { projectId } = useParams();
+  const [selectedOption, setSelectedOption] = useState(null);
+  //const [assignedUsers, setAssignedUsers] = useState([]);
+  const [allUsers, setAllusers] = useState(null);
 
-    useEffect(() => {
-        const userService = new userServices();
-        userService.getAll().then(setUsers).catch(console.error);
-      }, []); 
+  const getAllUsers = async () => {
+    const userService = new userServices();
+    const response = await userService.getUsersOfProject(projectId);
+    if (response && response.data) {
+      setAllusers(response.data);
+    } else {
+      setAllusers([]);
+    }
+  }
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
-    const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
+  useEffect(()=>{
+    if(projectId){
+      getAllUsers();
+    }
+  },[projectId])
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+  const assignSuccess = () => {
+    getAllUsers();
+  }
 
-    const handleSelectOption = (option) => {
-        setSelectedOption(option);
-        setIsDropdownOpen(false);
-    };
+  const options = ['Nombre (A-Z)', 'Nombre (Z-A)'];
 
-    // Función para ordenar los usuarios según la opción seleccionada
-    const sortUsers = (option) => {
-        switch (option) {
-            case 'Nombre (A-Z)':
-                return users.slice().sort((a, b) => a.name.localeCompare(b.name));
-            case 'Nombre (Z-A)':
-                return users.slice().sort((a, b) => b.name.localeCompare(a.name));
-            default:
-                return users; // Por defecto, no se realiza ningún ordenamiento
-        }
-    };
+  const handleSelectOption = (option) => {
+    setSelectedOption(option);
+  };
 
-    const sortedUsers = selectedOption ? sortUsers(selectedOption) : users;
+  const sortUsers = (users, option) => {
+    switch (option) {
+      case 'Nombre (A-Z)':
+        return users.slice().sort((a, b) => a.name.localeCompare(b.name));
+      case 'Nombre (Z-A)':
+        return users.slice().sort((a, b) => b.name.localeCompare(a.name));
+      default:
+        return users;
+    }
+  };
 
-    return (
-        <>
-        <div className="home-page-container">
-            <h2>Welcome ...</h2>
-            <div className="icon-filter-container" onClick={toggleDropdown}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-adjustments-horizontal" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M4 6l8 0" />
-                    <path d="M16 6l4 0" />
-                    <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M4 12l2 0" />
-                    <path d="M10 12l10 0" />
-                    <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M4 18l11 0" />
-                    <path d="M19 18l1 0" />
-                </svg>
-            </div>
-            {isDropdownOpen && (
-                <FilterDropdown options={options} onSelectOption={handleSelectOption} />
-            )}
-            {selectedOption && (
-                <p>Seleccionaste la opción: {selectedOption}</p>
-            )}
-        </div>
-        {sortedUsers.map(user => (
-                <DevCardManagerView key={user.id} user={user} />
-            ))}
-        </>
-    );
-};
+  const sortedUsers = selectedOption ? sortUsers(allUsers, selectedOption) : allUsers;
+  //const displayedUsers = selectedOption ? sortUsers(assignedUsers.length ? assignedUsers : allUsers, selectedOption) : (assignedUsers.length ? assignedUsers : allUsers);
+
+  return (
+    <div>
+      <Logout />
+      <BackButton/>
+      
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <FilterDropdown options={options} onSelectOption={handleSelectOption} />
+        <AssignUserModal 
+          projectId={projectId}
+          onAssignSuccess={assignSuccess}
+        />
+      </div>
+      {sortedUsers === null ? (
+        <LoadingSpinner />
+      ) : (
+        <DevCardManagerView users={sortedUsers} />
+      )}
+    </div>
+  );
+}
