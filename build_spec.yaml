@@ -103,7 +103,7 @@ steps:
     command: |
       SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
       TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
-      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.1"
+      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.2"
 
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
@@ -135,15 +135,15 @@ steps:
 
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
       SECURITY_CHART_VERSION=`yq eval '.version' Chart.yaml`
-      cd..
+      cd ..
 
       cd tasks
       TASKS_CHART_VERSION=`yq eval '.version' Chart.yaml`
-      cd..
+      cd ..
 
       cd users
       USERS_CHART_VERSION=`yq eval '.version' Chart.yaml`
-      cd..
+      cd ..
 
   - type: Command
     name: "Push Helm Charts"
