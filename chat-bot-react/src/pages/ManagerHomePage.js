@@ -45,15 +45,7 @@ export default function ManagerHomePage() {
   return (
     <div>
       <Logout />
-      <div className='container-icon-image'>
-        <Image
-          isBlurred
-          width={150}
-          src={projectUsers}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
-      </div>
+      
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <FilterDropdown options={options} onSelectOption={handleSelectOption} />
         <AssignUserModal onAssignUsers={handleAssignUsers} />
