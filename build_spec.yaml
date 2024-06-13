@@ -103,7 +103,7 @@ steps:
     command: |
       SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
       TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
-      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.3"
+      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.4"
 
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
