@@ -28,9 +28,13 @@ function TaskCard({ tasks }) {
     };
 
     return (
-        <div className="dev-card-container">
+        <div >
             {tasks && tasks.map(task => (
-                <Card  style={{ width:600}}key={task.id} className="max-w-full mb-4">
+                <Card   className="border-none max-w-full"
+                style={{  padding: '15px',marginBottom: '17px', display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch'}}
+                key={task.id} >
                     <CardHeader className="flex gap-3">
                         <div
                             className="dev-card-icon"
