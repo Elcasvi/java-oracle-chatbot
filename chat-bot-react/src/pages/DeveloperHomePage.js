@@ -10,13 +10,16 @@ import LoadingSpinner from '../components/loadingSpinner.jsx';
 export default function DeveloperHomePage({ userId }) {
     const [filteredTasks, setFilteredTasks] = useState(null);
     const [ nombre, setNombre ] = useState(null);
+    const [ version, setVersion ] = useState(null);
 
     const getAllTask = async () => {
         const userService = new userServices();
         const response = await userService.getUserById(userId);
+        const response2 = await userService.getVersion();
         if (response && response.data){
             setFilteredTasks(response.data.tasks)
             setNombre(response.data.name)
+            setVersion(response2.data)
         } else {
             setFilteredTasks([]);
         }
@@ -67,7 +70,8 @@ export default function DeveloperHomePage({ userId }) {
                 <LoadingSpinner />
             ):(
                 <AllTasks tasks={filteredTasks} onUpdateSuccess={handleSuccess}/>
-            )} 
+            )}
+            <div className="version-container">Version: {version}</div>
         </div>
     );
 }

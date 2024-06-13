@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //const API_BASE_URL = "https://okeusers.sanchezapps.net/";
-const API_BASE_URL = "http://127.0.0.1:54951";
+const API_BASE_URL = "http://127.0.0.1:55923";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -72,6 +72,16 @@ export default class userServices {
             return response
         } catch (error) {
             throw error;
+        }
+    }
+
+    async getVersion() {
+        try {
+            const response = await api.get(`/version`)
+            console.log(response)
+            return response;
+        } catch (error) {
+            throw error
         }
     }
 }

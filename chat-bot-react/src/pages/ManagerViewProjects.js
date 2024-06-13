@@ -10,12 +10,15 @@ import Logout from '../components/LogoutButton';
 
 function ManagerViewProjects({ userId }) {
   const [projects, setProjects] = useState(null);
+  const [ version, setVersion ] = useState(null);
 
   const getProjects = async () => {
     const userService = new userServices();
     const response = await userService.getAllMangerProjects(userId);
+    const response2 = await userService.getVersion();
     if (response && response.data) {
       setProjects(response.data);
+      setVersion(response2.data)
     } else {
       setProjects([]);
     }
@@ -54,6 +57,8 @@ function ManagerViewProjects({ userId }) {
       ) : (
         <ProjectTable projects={projects} />
       )}
+
+      <div className="version-container">Version: {version}</div>
     </div>
   );
 }

@@ -5,7 +5,9 @@ import net.sanchezapps.api.core.users.UsersController;
 import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
 import net.sanchezapps.usersservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +15,8 @@ import reactor.core.publisher.Mono;
 @RestController
 @CrossOrigin(origins = {"https://chatbot.sanchezapps.net","https://okeui.sanchezapps.net","http://localhost:3000"})
 public class UsersControllerImpl implements UsersController {
+    @Value("${api.common.version}")
+    private String apiVersion;
     private final UserService service;
     @Autowired
     public UsersControllerImpl(UserService userService, UserMapper mapper) {
@@ -59,5 +63,10 @@ public class UsersControllerImpl implements UsersController {
     @Override
     public Mono<User> suspend(Long userId) {
         return service.suspend(userId);
+    }
+
+    @GetMapping("/version")
+    public String appVersion() {
+        return apiVersion;
     }
 }

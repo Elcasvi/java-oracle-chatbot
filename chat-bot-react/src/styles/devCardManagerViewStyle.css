@@ -270,8 +270,20 @@
         align-items: center;
         justify-content: center;
         display: flex;
-      }
+    }
       
     .container-icon-image img {
         margin: 0 auto;
-      }
+    }
+    
+    .full-height-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Esto asegura que el contenido se distribuya de arriba a abajo */
+        height: 100vh; /* Esto hace que el contenedor tenga el alto de la ventana del navegador */
+    }
+
+    .version-container {
+        text-align: center; /* Centra el texto horizontalmente */
+        margin-bottom: 20px; /* Añade un poco de margen en la parte inferior */
+    }
