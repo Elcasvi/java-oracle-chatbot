@@ -3,10 +3,9 @@ import { useParams } from 'react-router-dom';
 import TaskCard from '../components/taskCard';
 import FilterDropdown from '../components/filterDropdown';
 import BackButton from '../components/backButton';
-import userTasks from '../icons/user-tasks-icon.PNG';
-import { Image } from '@nextui-org/react';
 import userServices from '../services/userServices';
 import LoadingSpinner from '../components/loadingSpinner';
+import Logout from '../components/LogoutButton';
 
 function ManagerViewTaskDeveloper() {
     const { userId } = useParams();
@@ -57,16 +56,9 @@ function ManagerViewTaskDeveloper() {
 
     return (
         <>  
-            <BackButton />    
-            <div className='container-icon-image'>
-                <Image
-                isBlurred
-                width={150}
-                src={userTasks}
-                alt="NextUI Album Cover"
-                className="m-5"  
-                />
-            </div>
+            <Logout></Logout> 
+            <BackButton/>     
+          
             <div className="developer-information-container">
                 <div className="developer-information">
                     <h1 className="developer-information-name">{selectedUser.name}</h1>
