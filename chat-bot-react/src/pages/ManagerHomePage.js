@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DevCardManagerView from "../components/devCardManagerView";
 import "../styles/devCardManagerViewStyle.css";
-import { UserModel } from "../util/UserModel";
 import FilterDropdown from "../components/filterDropdown";
 import BackButton from "../components/backButton";
 import AssignUserModal from '../components/assingUserModal';
-import projectUsers from '../icons/project-users-icon.PNG';
-import { Image } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import userServices from '../services/userServices';
 import Logout from '../components/LogoutButton';
@@ -60,7 +57,8 @@ export default function ManagerHomePage() {
 
   return (
     <div>
-      <Logout />      
+      <Logout />
+      
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <FilterDropdown options={options} onSelectOption={handleSelectOption} />
         <AssignUserModal 
