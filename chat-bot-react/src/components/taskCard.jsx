@@ -9,7 +9,7 @@ function TaskCard({ tasks }) {
         switch (state) {
             case 'DONE':
                 return 'green';
-            case 'IN PROGRESS':
+            case 'IN_PROGRESS':
                 return 'yellow';
             case 'TODO':
                 return 'red';

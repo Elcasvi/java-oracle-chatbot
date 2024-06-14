@@ -58,7 +58,7 @@ export default function ManagerHomePage() {
   return (
     <div>
       <Logout />
-      
+      <BackButton/>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <FilterDropdown options={options} onSelectOption={handleSelectOption} />
         <AssignUserModal 
