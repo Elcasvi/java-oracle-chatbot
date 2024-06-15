@@ -19,7 +19,7 @@ spring:
 
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@test_high?TNS_ADMIN=ATP_Wallet
+    url: jdbc:oracle:thin:@db_high?TNS_ADMIN=Wallet_db
     username: TASKS_DB
     password: 0zjPF83YwFx8Ge7
   jpa:
