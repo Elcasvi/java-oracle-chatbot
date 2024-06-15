@@ -99,9 +99,9 @@ steps:
     user: root
     timeoutInSeconds: 60
     command: |
-      SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
-      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
-      TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.5"
+      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.5"
+      TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.5"
 
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
