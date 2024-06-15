@@ -9,12 +9,11 @@ import net.sanchezapps.api.core.users.User;
 import net.sanchezapps.usersservice.persistence.entities.UserEntity;
 import net.sanchezapps.usersservice.persistence.mappers.UserMapper;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest
 public class UsersMapperTests {
     private final UserMapper mapper=new UserMapper();
 
