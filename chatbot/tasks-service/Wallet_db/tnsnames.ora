@@ -1,0 +1,12 @@
+db_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.mx-queretaro-1.oraclecloud.com))(connect_data=(service_name=gfa861e9e169cfb_db_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+db_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.mx-queretaro-1.oraclecloud.com))(connect_data=(service_name=gfa861e9e169cfb_db_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+db_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.mx-queretaro-1.oraclecloud.com))(connect_data=(service_name=gfa861e9e169cfb_db_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+db_tp = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.mx-queretaro-1.oraclecloud.com))(connect_data=(service_name=gfa861e9e169cfb_db_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+db_tpurgent = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.mx-queretaro-1.oraclecloud.com))(connect_data=(service_name=gfa861e9e169cfb_db_tpurgent.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+
+

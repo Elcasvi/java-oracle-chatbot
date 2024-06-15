@@ -18,9 +18,7 @@ env:
   exportedVariables:
     #- OCIR_HOST
     #- OCIR_STORAGE_NAMESPACE
-    - SECURITY_CHART_VERSION
-    - TASKS_CHART_VERSION
-    - USERS_CHART_VERSION
+    - CHART_VERSION
     - SECURITY_SERVICE_IMAGE_BUILD_VERSION
     - USERS_SERVICE_IMAGE_BUILD_VERSION
     - TASKS_SERVICE_IMAGE_BUILD_VERSION
@@ -101,9 +99,9 @@ steps:
     user: root
     timeoutInSeconds: 60
     command: |
-      SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
-      TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.0"
-      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.4"
+      SECURITY_SERVICE_IMAGE_BUILD_VERSION="2.0.5"
+      USERS_SERVICE_IMAGE_BUILD_VERSION="2.0.5"
+      TASKS_SERVICE_IMAGE_BUILD_VERSION="2.0.5"
 
       echo Building security-service image
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/security-service
@@ -134,16 +132,7 @@ steps:
       export PATH=$HOME/.local/bin:$PATH
 
       cd ${OCI_PRIMARY_SOURCE_DIR}/chatbot/k8s/oke/security
-      SECURITY_CHART_VERSION=`yq eval '.version' Chart.yaml`
-      cd ..
-
-      cd tasks
-      TASKS_CHART_VERSION=`yq eval '.version' Chart.yaml`
-      cd ..
-
-      cd users
-      USERS_CHART_VERSION=`yq eval '.version' Chart.yaml`
-      cd ..
+      CHART_VERSION=`yq eval '.version' Chart.yaml`
 
   - type: Command
     name: "Push Helm Charts"
