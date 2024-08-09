@@ -35,8 +35,3 @@ if ($LastExitCode -ne 0) {
 # Run docker-compose up
 Write-Host "Starting microservices with docker-compose up..." -ForegroundColor Green
 docker-compose up
-
-# Keep the console open (optional)
-# While (!$host.EOF) {
-#   Start-Sleep -Seconds 1
-# }
