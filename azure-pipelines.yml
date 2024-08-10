@@ -13,6 +13,7 @@ variables:
   dockerRegistryServiceConnection: '1d1cde7a-cd3a-4e6a-aad7-3f0f981c4d17'
   imageRepository: 'elcasvijavaoraclechatbot'
   containerRegistry: 'chatbotmsacr.azurecr.io'
+  workingdirjava: '$(Build.SourcesDirectory)/chatbot'
   dockercomposefilePath: '$(Build.SourcesDirectory)/chatbot/docker-compose.yaml'
   tag: '$(Build.BuildId)'
 
@@ -24,6 +25,18 @@ stages:
     displayName: Build
     pool: Carlos Pool
     steps:
+    - task: Maven@4
+      inputs:
+        mavenPomFile: '$(workingdirjava)/pom.xml'
+        goals: 'verify'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
     - task: DockerCompose@1
       inputs:
         containerregistrytype: 'Azure Container Registry'
@@ -31,15 +44,5 @@ stages:
         azureSubscription: 'Azure subscription 1(b01abb94-ddeb-44ee-a283-e1cd3f97edf7)'
         azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
         dockerComposeFile: '$(dockercomposefilepath)'
-        workingDirectory: '$(Build.SourcesDirectory)/chatbot'
+        workingDirectory: '$(workingdirjava)'
         action: 'Build services'
-    
-#    - task: Docker@2
-#      displayName: Build and push an image to container registry
-#      inputs:
-#        command: buildAndPush
-#        repository: $(imageRepository)
-#        dockerfile: $(dockerfilePath)
-#        containerRegistry: $(dockerRegistryServiceConnection)
-#        tags: |
-#          $(tag)
