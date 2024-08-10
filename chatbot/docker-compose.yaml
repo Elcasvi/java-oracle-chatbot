@@ -1,25 +1,22 @@
-version: '2.1'
+version: '3.8'
 services:
   task:
     build: tasks-service
-    image: tasks-service:1.0.0
-    mem_limit: 512m
+    #image: tasks-service:1.0.0
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8000:80"
   user:
     build: users-service
-    image: users-service:1.0.0
-    mem_limit: 512m
+    #image: users-service:1.0.0
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - "8001:80"
   security:
     build: security-service
-    image: security-service:1.0.0
-    mem_limit: 512m
+    #image: security-service:1.0.0
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
