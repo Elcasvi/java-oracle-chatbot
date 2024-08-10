@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '1d1cde7a-cd3a-4e6a-aad7-3f0f981c4d17'
   imageRepository: 'elcasvijavaoraclechatbot'
   containerRegistry: 'chatbotmsacr.azurecr.io'
-  dockercomposefilePath: '$(Build.SourcesDirectory)/chatbot/docker-compose.yaml'
+  dockercomposefilePath: '$(Build.SourcesDirectory)/chatbot'
   tag: '$(Build.BuildId)'
 
 stages:
