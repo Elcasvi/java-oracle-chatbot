@@ -13,11 +13,8 @@ variables:
   dockerRegistryServiceConnection: '1d1cde7a-cd3a-4e6a-aad7-3f0f981c4d17'
   imageRepository: 'elcasvijavaoraclechatbot'
   containerRegistry: 'chatbotmsacr.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/chat-bot-react/Dockerfile'
+  dockercomposefilePath: '$(Build.SourcesDirectory)/chatbot'
   tag: '$(Build.BuildId)'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
@@ -25,15 +22,23 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: $(vmImageName)
+    pool: Carlos Pool
     steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
+    - task: DockerCompose@1
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        containerregistrytype: 'Azure Container Registry'
+        projectName: 'elcasvi-java-oracle-chatbot'
+        azureSubscription: 'Azure subscription 1(b01abb94-ddeb-44ee-a283-e1cd3f97edf7)'
+        azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
+        dockerComposeFile: '$(dockercomposefilepath)'
+        action: 'Build services'
+
+#    - task: Docker@2
+#      displayName: Build and push an image to container registry
+#      inputs:
+#        command: buildAndPush
+#        repository: $(imageRepository)
+#        dockerfile: $(dockerfilePath)
+#        containerRegistry: $(dockerRegistryServiceConnection)
+#        tags: |
+#          $(tag)
