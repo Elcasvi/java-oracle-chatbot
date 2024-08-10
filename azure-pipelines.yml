@@ -27,6 +27,7 @@ stages:
     - task: DockerCompose@1
       inputs:
         containerregistrytype: 'Azure Container Registry'
+        projectName: 'elcasvi-java-oracle-chatbot'
         azureSubscription: 'Azure subscription 1(b01abb94-ddeb-44ee-a283-e1cd3f97edf7)'
         azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
         dockerComposeFile: '$(dockercomposefilepath)'
