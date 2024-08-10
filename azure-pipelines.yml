@@ -28,15 +28,13 @@ stages:
     - task: Maven@4
       inputs:
         mavenPomFile: '$(workingdirjava)/pom.xml'
-        goals: 'verify'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        mavenOptions: '-Xmx3072m'
         javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
+        jdkVersionOption: 'default'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        goals: 'package'
     - task: DockerCompose@1
       inputs:
         containerregistrytype: 'Azure Container Registry'
