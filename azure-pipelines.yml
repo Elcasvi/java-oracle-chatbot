@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '1d1cde7a-cd3a-4e6a-aad7-3f0f981c4d17'
   imageRepository: 'elcasvijavaoraclechatbot'
-  containerRegistry: 'chatbotmsacr.azurecr.io'
+  containerRegistry: 'chatbotmsacr'
   workingdirjava: '$(Build.SourcesDirectory)/chatbot'
   dockercomposefilePath: '$(Build.SourcesDirectory)/chatbot/docker-compose.yaml'
   tag: '$(Build.BuildId)'
@@ -35,6 +35,24 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml'
         goals: 'package'
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '19.03.12'
+
+    - script: |
+        docker-compose -f $(dockerComposeFile) build
+        docker-compose -f $(dockerComposeFile) push
+      displayName: 'Build and Push Docker Image'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: '$(containerRegistry)' # Service connection to your Azure Container Registry
+        repository: '$(imageRepository)'
+        command: 'buildAndPush'
+        tags: |
+          $(imageTag)
+        buildContext: '.'
+      displayName: 'Build and Push Docker Image using Docker Compose'
 #   - task: DockerCompose@1
 #     displayName: Push services
 #      inputs:
@@ -46,14 +64,4 @@ stages:
         #qualifyImageNames: true
         #additionalImageTags: $(Build.BuildId)
 #        additionalImageTags: '1.0.0'
-    - task: DockerCompose@1
-      inputs:
-        containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'Azure subscription 1(b01abb94-ddeb-44ee-a283-e1cd3f97edf7)'
-        azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
-        dockerComposeFile: '$(dockercomposefilepath)'
-        projectName: 'elcasvi-java-oracle-chatbot'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'buildAndPush'
-        #includeLatestTag: false
-        #additionalImageTags: '1.0.0'
+   
