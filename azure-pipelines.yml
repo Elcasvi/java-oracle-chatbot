@@ -14,7 +14,6 @@ variables:
   imageRepository: 'elcasvijavaoraclechatbot'
   containerRegistry: 'chatbotmsacr'
   workingdirjava: '$(Build.SourcesDirectory)/chatbot'
-  dockercomposefilePath: '$(Build.SourcesDirectory)/chatbot/docker-compose.yaml'
   tag: '$(Build.BuildId)'
 
 stages:
@@ -35,33 +34,31 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml'
         goals: 'package'
-    - task: DockerInstaller@0
-      inputs:
-        dockerVersion: '19.03.12'
-
-    - script: |
-        docker-compose -f $(dockerComposeFile) build
-        docker-compose -f $(dockerComposeFile) push
-      displayName: 'Build and Push Docker Image'
 
     - task: Docker@2
+      displayName: Build and push security microservice to container registry
       inputs:
-        containerRegistry: '$(containerRegistry)' # Service connection to your Azure Container Registry
-        repository: '$(imageRepository)'
-        command: 'buildAndPush'
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(workingdirjava/security-service/Dockerfile)
+        containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(imageTag)
-        buildContext: '.'
-      displayName: 'Build and Push Docker Image using Docker Compose'
-#   - task: DockerCompose@1
-#     displayName: Push services
-#      inputs:
-#        action: Push services
-#        azureSubscription: 'Azure subscription 1(b01abb94-ddeb-44ee-a283-e1cd3f97edf7)'
-#        azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
-#        dockerComposeFile: '$(dockercomposefilepath)'
-#        projectName: 'elcasvi-java-oracle-chatbot'
-        #qualifyImageNames: true
-        #additionalImageTags: $(Build.BuildId)
-#        additionalImageTags: '1.0.0'
-   
+          '1.0.0'
+    - task: Docker@2
+      displayName: Build and push users microservice to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(workingdirjava/users-service/Dockerfile)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          '1.0.0'
+    - task: Docker@2
+      displayName: Build and push tasks microservice to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(workingdirjava/tasks-service/Dockerfile)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          '1.0.0'
