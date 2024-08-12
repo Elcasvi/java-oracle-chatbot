@@ -43,7 +43,7 @@ stages:
         dockerfile: '$(workingdirjava)/security-service/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          '1.0.0'
+          1.0.0
     - task: Docker@2
       displayName: Build and push users microservice to container registry
       inputs:
@@ -52,7 +52,7 @@ stages:
         dockerfile: '$(workingdirjava)/users-service/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          '1.0.0'
+          1.0.0
     - task: Docker@2
       displayName: Build and push tasks microservice to container registry
       inputs:
@@ -61,4 +61,4 @@ stages:
         dockerfile: '$(workingdirjava)/tasks-service/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          '1.0.0'
+          1.0.0
