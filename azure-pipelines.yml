@@ -40,7 +40,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(workingdirjava/security-service/Dockerfile)
+        dockerfile: $(workingdirjava)/security-service/Dockerfile
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           '1.0.0'
@@ -49,7 +49,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(workingdirjava/users-service/Dockerfile)
+        dockerfile: $(workingdirjava)/users-service/Dockerfile
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           '1.0.0'
@@ -58,7 +58,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(workingdirjava/tasks-service/Dockerfile)
+        dockerfile: $(workingdirjava)/tasks-service/Dockerfile
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           '1.0.0'
