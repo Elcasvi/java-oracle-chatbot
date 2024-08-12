@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '1d1cde7a-cd3a-4e6a-aad7-3f0f981c4d17'
+  dockerRegistryServiceConnection: '168936e8-7de9-4862-acf7-e5e5dd272e35'
   imageRepository: 'elcasvijavaoraclechatbot'
   containerRegistry: 'chatbotmsacr'
   workingdirjava: '$(Build.SourcesDirectory)/chatbot'
