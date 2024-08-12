@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '168936e8-7de9-4862-acf7-e5e5dd272e35'
   imageRepository: 'elcasvijavaoraclechatbot'
-  containerRegistry: 'chatbotmsacr'
+  containerRegistry: 'chatbotmsacr.azurecr.io'
   workingdirjava: '$(Build.SourcesDirectory)/chatbot'
   tag: '$(Build.BuildId)'
 
@@ -39,7 +39,7 @@ stages:
       displayName: Build and push security microservice to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: 'security-service'
         dockerfile: '$(workingdirjava)/security-service/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -48,7 +48,7 @@ stages:
       displayName: Build and push users microservice to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: 'users-service'
         dockerfile: '$(workingdirjava)/users-service/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
@@ -57,7 +57,7 @@ stages:
       displayName: Build and push tasks microservice to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: 'tasks-service'
         dockerfile: '$(workingdirjava)/tasks-service/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
