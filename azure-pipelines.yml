@@ -35,16 +35,6 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml'
         goals: 'package'
-#    - task: DockerCompose@1
-#      displayName: Build Services
-#      inputs:
-#        containerregistrytype: 'Azure Container Registry'
-#        projectName: 'elcasvi-java-oracle-chatbot'
-#        azureSubscription: 'Azure subscription 1(b01abb94-ddeb-44ee-a283-e1cd3f97edf7)'
-#        azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
-#        dockerComposeFile: '$(dockercomposefilepath)'
-#        workingDirectory: '$(workingdirjava)'
-#        action: 'Build services'
     - task: DockerCompose@1
       displayName: Push services
       inputs:
@@ -53,5 +43,6 @@ stages:
         azureContainerRegistry: '{"loginServer":"chatbotmsacr.azurecr.io", "id" : "/subscriptions/b01abb94-ddeb-44ee-a283-e1cd3f97edf7/resourceGroups/chatbot-rg/providers/Microsoft.ContainerRegistry/registries/chatbotmsacr"}'
         dockerComposeFile: '$(dockercomposefilepath)'
         projectName: 'elcasvi-java-oracle-chatbot'
-        qualifyImageNames: true
-        additionalImageTags: $(Build.BuildId)
+        #qualifyImageNames: true
+        #additionalImageTags: $(Build.BuildId)
+        additionalImageTags: '1.0.0'
